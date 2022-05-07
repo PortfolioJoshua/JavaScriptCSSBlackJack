@@ -69,8 +69,10 @@
 <script>
 
 
-
-
+//amt between cards 
+const CARDGAP = 70;
+//five decks
+const AMTOFCARDS = (52*5 - 1);
 
 document.getElementById('canvasPlayer2').style.visibility = 'hidden';
 document.getElementById('messageLower').style.visibility = 'hidden';
@@ -81,7 +83,7 @@ document.getElementById('split').style.visibility = 'hidden';
 var canvasDealer = document.getElementById("canvasDealer");
 let canvasPlayer1 = document.getElementById("canvasPlayer1");
 let canvasPlayer2 = document.getElementById("canvasPlayer2");
-const cardGap = 70;
+
 let multiplierRow1 = -1;
 let initialXRow1 = 150;
 
@@ -108,7 +110,7 @@ function drawDealerCard(){
     while (dealerHandTotal <= 17)
     {
         multiplierRow1++;
-        let mark  = getMarkOfCard(52*5-1);
+        let mark  = getMarkOfCard(AMTOFCARDS);
 
         if (mark == "Q" || mark == "K" || mark == "Q" || mark == "J" || mark == "10")
         {
@@ -282,7 +284,7 @@ function drawPlayerCards1()
     }
     else
     {
-        mark  = getMarkOfCard((52*5)-1);
+        mark  = getMarkOfCard(AMTOFCARDS);
     }
 
 
@@ -449,7 +451,7 @@ if( gWasASplit == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 >
 
 if(mark === 0){
 
-    mark  = getMarkOfCard(52*5-1);
+    mark  = getMarkOfCard(AMTOFCARDS);
 }
 
     
@@ -683,19 +685,19 @@ let decks =
 function getMarkOfCard()
 {
     let flagFoundCard = false;
-    let index = Math.floor((Math.random() * (52*5)));
-    const card = decks[index];
-    if(deckUseage[card] == 0)
+    let index = Math.floor((Math.random() * (AMTOFCARDS)));
+    //const card = decks[index];
+    if(deckUseage[index] == 0)
     {
-        deckUseage[card] = 1;
+        deckUseage[index] = 1;
     }
     else
     {
-        for(let i = card ; i >= 0; i-- )
+        for(let i = index - 1; i >= 0; i-- )
         {
-            if (card[i] == 0)
+            if (decks[i] == 0)
             {
-                card[i] =  1;
+                decks[i] =  1;
                 flagFounCard = true;
                 break;
             }
@@ -704,18 +706,18 @@ function getMarkOfCard()
         }
         if (flagFoundCard == false)
         {
-            for(let i = card + 1 ; i < 54*4*5 ; i++)
+            for(let i = index + 1 ; i < AMTOFCARDS ; i++)
             {
-                if (card[i] = 0)
+                if (decks[i] = 0)
                 {
-                    card[i] = 1;
+                    decks[i] = 1;
                     break;
                 }
             }
         }
     }
-    
-return card;
+cosole.log("card", decks[i]);    
+return decks[i];
 }
  
 
