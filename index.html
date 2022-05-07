@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onunload = "deleteArray()">
+    <!-- Script -->
+    <script src="script.js"></script>
+    
+
+<div id="title">BLACKJACK</div>
+<div id="container">
+   
+        
+        
+    <canvas id="canvasDealer" width="1000" height="78" ></canvas>
+    <div>&nbsp</div>
+    <div>&nbsp</div>
+    
+    <div>
+        <canvas id="canvasPlayer1" width="1000" height="78"></canvas> 
+    
+        <div id = "interfaceRow2">
+            
+            <div id = "messageUpper"><b>-</div>
+            <div id = "scoreUpper"><b>-</div>
+            
+                <input id = "drawCardBtnUpper" type="button" value="Draw Card" >
+                <input id = "dealCard" type="button" value="Deal" >
+                <input id = "newRoundBtn" type="button" value="New Round" >
+                <input id = "wagerButtonOne" type="button" value="Wager 1" onclick="wager(1)" >
+                
+                <input id = "wagerButtonFive" type="button" value="Wager 5" onclick="wager(5)" >
+                
+                <input id = "wagerButtonFifteen" type="button" value="Wager 15" onclick="wager(15)" >
+             
+                <input id = "wagerButtonTwentyfive" type="button" value="Wager 25" onclick="wager(25)" >
+
+            
+        </div>
+    </div>
+    <canvas id="canvasPlayer2" width="1000" height="102" ></canvas>
+
+    <div>
+        <div id = "messageLower" ><b>-</div>
+    </div>
+        
+    <div>
+        <input id = "drawCardBtnLower" type="button" value="Draw Card" onclick = "drawPlayerCards2(0)"  >
+
+        
+       
+        
+    </div>
+
+    <input id = "split" type="button" value="Split" >
+        
+       
+        
+</div>
+
+    <div id="playerSectionsOne">
+        
+      
+
+
+    </div>
+    <div id="playerSectionTwo">
+
+        
+    </div>
+    <div id="buttonContainer">
+
+        
+    </div>
+
+
+<script>
+
+
+
+
+
+document.getElementById('canvasPlayer2').style.visibility = 'hidden';
+document.getElementById('messageLower').style.visibility = 'hidden';
+document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+document.getElementById('split').style.visibility = 'hidden';
+
+
+var canvasDealer = document.getElementById("canvasDealer");
+let canvasPlayer1 = document.getElementById("canvasPlayer1");
+let canvasPlayer2 = document.getElementById("canvasPlayer2");
+
+
+let amtDealerCards = 0;
+let amtPlayerCards1 = 0;
+let amtPlayerCards2 = 0;
+const dealerY = 100;
+const playerY1 = 300;
+const playerY2 = 500;
+let dealerX = 10;
+let playerX1 = 10;
+let playerX2 = 10;
+//let stackY = 0;
+const cardGap = 70;
+
+
+let multiplierRow1 = -1;
+let initialXRow1 = 150;
+
+let dealerTotal = 0;
+let globalClearRect = false;
+let alreadyDealt = false;
+   
+
+
+
+function drawDealerCard(){
+
+    document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+    drawCardBtnUpper.disabled = true;
+    
+    drawCardBtnUpper.disabled = true;
+    
+    newRoundBtn.disabled = false;
+
+    
+
+
+    let ctx1 = canvasDealer.getContext("2d");
+    gIsASplit = false;
+    
+    globalClearRect = true;
+    alert("in dealer function");
+
+    
+    
+    
+    while (dealerTotal <= 17)
+    {
+        multiplierRow1++;
+        let mark  = getMarkOfCard(52*5-1);
+
+        if (mark == "Q" || mark == "K" || mark == "Q" || mark == "J" || mark == "10")
+        {
+            dealerTotal = dealerTotal + 10;
+        }
+        else if (mark == "A")
+        {
+            dealerTotal = dealerTotal + 1;
+        }
+        else
+        {
+            dealerTotal = dealerTotal + parseInt(mark);
+        }
+        console.log("dealertotal", dealerTotal);
+
+        ctx1.beginPath();
+        ctx1.fillStyle='red';
+        ctx1.rect((initialXRow1) +  multiplierRow1 * cardGap, 7 , 50, 64);
+        ctx1.stroke();
+        ctx1.font = "50px Arial";
+
+
+        if(mark == "10"){
+            ctx1.fillText(mark, initialXRow1 + multiplierRow1 * cardGap-4,  60 );
+        }
+        else{
+            ctx1.fillText(mark, initialXRow1 + multiplierRow1 * cardGap+10,  60 );
+        }
+
+
+    }
+
+    if (dealerTotal > 21)
+    {
+        //BUST
+        pointsHave = pointsHave + (pointsWagered);
+        let text = `DEALER BUSTS!  YOU WIN ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        document.getElementById("messageUpper").textContent = text;
+    }
+    
+    else if (dealerTotal > playerScoreRow1)
+    {
+        //DEALER WINS
+        pointsHave = pointsHave - (pointsWagered);
+        let text = `DEALER WINS!  YOU LOSE ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        document.getElementById("messageUpper").textContent = text;
+    
+    }
+    else 
+    {
+        //PLAYER WINS
+        pointsHave = pointsHave + (pointsWagered);
+        let text = `YOU WIN!  ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        document.getElementById("messageUpper").textContent = text;
+    
+    }
+
+
+    
+
+    //dealer
+    amtDealerCards = 0;
+    multiplierRow1 = -1;
+    initialXRow1 = 150;
+    dealerTotal = 0;
+
+    //player
+    amtPlayerCards1 = 0;
+    amtPlayerCards2 = 0;
+    multiplierRow2 = -1;
+    
+    counterAcesRow1 = -1;
+    totalAcesChanged = 0;
+    totalCardsDeltRow1 = 0;
+    playerScoreRow1 = 0;
+    
+  
+   //Done with dealing
+   alreadyDealt = true;
+
+}
+
+let upperCardAmountAces = ["no ace","no ace","no ace","no ace"]; 
+let multiplierRow2 = -1;
+let initialXRow2 = 150;
+let lowerCardAmountAces = ["no ace","no ace","no ace","no ace"]; 
+//let upperCardAmount2Aces = [0,0,0,0];
+let playerScoreRow1 = 0;
+let playerScoreRow2 = 0;
+//var acesRow1 = [false,false,false,false];
+var counterAcesRow2 = -1;
+var totalAcesChanged = 0;
+let totalCardsDeltRow2 = 0;
+
+let pointsHave = 30;
+let pointsWagered = 0;
+let globvar = 1;
+//this can change
+let gTotalPoints = 3;
+let counterAcesRow3 = 0;
+let gIsASplit = false;
+let numberOfIterationsRow2 = 0;
+let turnNoReset = 0;
+let  gWasASplit = false;
+        
+function drawPlayerCards1()
+{
+
+    
+
+    turnNoReset++;
+    numberOfIterationsRow2++;
+    
+    if( gWasASplit == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
+    {
+        document.getElementById('dealCard').style.visibility = 'visible';
+        
+    }
+    else{
+        document.getElementById('dealCard').style.visibility = 'hidden';
+    }
+    console.log("1:",gWasASplit, numberOfIterationsRow2, numberOfIterationsRow3);
+
+    document.getElementById('split').style.visibility = 'hidden';
+    
+   
+
+   
+    //let ctx1 = 
+    let ctx2 = canvasPlayer1.getContext("2d");
+   
+    //two tens dealt, and chose to display two stacks of decks
+   if (gIsASplit === true )
+   {
+    ctx2.clearRect(0,0,1000,78);
+    totalCardsDeltRow2 = 0;
+    multiplierRow2 = - 1;
+    playerScoreRow2 = 0;
+    gIsASplit = false;
+
+   }
+    
+
+   
+    if (globalClearRect == true)
+    {
+
+        //messageLower.style.hidden = 'true';
+        //canvasPlayer2.style.hidden = 'true';
+        //drawCardBtnLower.style.hidden = 'true';
+        //split.style.hidden = 'true';
+        document.getElementById('messageLower').style.visibility = 'hidden';
+        document.getElementById('canvasPlayer2').style.visibility = 'hidden';
+        document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+        document.getElementById('split').style.visibility = 'hidden';
+
+
+
+
+        ctx1.clearRect(0,0,1000,78);
+        ctx2.clearRect(0,0,1000,78);
+
+        globalClearRect = false;
+    }
+   
+    multiplierRow2++;
+    
+    
+    //for testing - SOME OF THIS IS NEEDED!!!!
+    let mark = "";
+    if(globvar == 1 || globvar == 2 || globvar == 3 )
+    {
+        mark = "10";
+        globvar++;
+       
+    }
+    else
+    {
+        mark  = getMarkOfCard((52*5)-1);
+    }
+
+
+    gDisplayATen = false;
+
+    //ctx2 = canvasPlayer2.getContext("2d");
+    ctx2.beginPath();
+    ctx2.fillStyle='blue';
+    ctx2.rect((initialXRow2) +  multiplierRow2 * cardGap, 7 , 50, 64);
+    console.log("log:", (initialXRow2) +  multiplierRow2 * cardGap, multiplierRow2);
+    ctx2.stroke();
+    ctx2.font = "50px Arial";
+    
+    if (mark == "Q" || mark == "K" || mark == "Q" || mark == "J" || mark == "10")
+    {
+        totalCardsDeltRow2++;
+        playerScoreRow2 = playerScoreRow2 + 10;
+    }
+    else if (mark == "A")
+    {
+        totalCardsDeltRow2++;
+        counterAcesRow2 = counterAcesRow2 + 1;
+        playerScoreRow2 = playerScoreRow2 + 11;
+        upperCardAmountAces[counterAcesRow2] = "is ace";
+    }
+    else
+    {
+        playerScoreRow2 = playerScoreRow2 + parseInt(mark);
+        totalCardsDeltRow2++;
+    }
+
+
+    
+
+    
+
+    //two cards dealt and both are tens - not split yet
+    if(totalCardsDeltRow2 == 2 && playerScoreRow2 == 20 && turnNoReset == 2)
+    {
+        
+        dealCard.disabled = false;
+        //split.style.hidden = true;
+        document.getElementById('split').style.visibility = 'visible';
+        gIsASplit = false;
+        gWasASplit = true;
+        
+        
+
+
+    }
+
+
+    if(playerScoreRow2 < 22 && totalCardsDeltRow2 == 5)
+    {
+        console.log("5 Card Charlie");
+        pointsHave = pointsHave + (pointsWagered);
+
+        gTotalPoints = gTotalPoints + pointsWagered;
+
+        let text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
+        let text2 = `Total Points: ${gTotalPoints}.`;
+        document.getElementById("messageUpper").textContent = text;
+        document.getElementById("scoreUpper").textContent = text2;
+    }
+    
+    else if (playerScoreRow2 > 21)
+    {
+        for(let i = 0 ; i < 4; i++)
+        {
+                if(upperCardAmountAces[i] == "is ace")
+                {
+                    upperCardAmountAces[i] == "used ace";
+                    playerScoreRow2 = playerScoreRow2 - 10;
+                    break;
+                }
+        }
+    }
+
+        if(playerScoreRow2 > 21)
+        {
+                    
+                    pointsHave = pointsHave - pointsWagered;
+
+                    gTotalPoints = gTotalPoints - pointsWagered;
+
+                    let text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
+                    document.getElementById("messageUpper").textContent = text;
+                    document.getElementById("scoreUpper").textContent = gTotalPoints; 
+                    
+                    console.log("BUST!");
+                   
+                    //drawCardBtnUpper.disabled = true;
+
+        }
+            
+        
+    
+    
+    
+    else if(playerScoreRow2 == 21)
+    {
+        console.log("Blackjack");
+        dealCard.disabled = true;
+        pointsHave = pointsHave + (pointsWagered*2)
+
+        gTotalPoints = gTotalPoints + pointsWagered * 2;
+
+        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
+        document.getElementById("messageUpper").textContent = text;
+        document.getElementById("scoreUpper").textContent = gTotalPoints; 
+    }
+
+    console.log("PlayerScore2", playerScoreRow2);
+
+
+
+
+    if(mark == "10"){
+        ctx2.fillText(mark, initialXRow2 + multiplierRow2 * cardGap-4,  60 );
+    }
+    else{
+        ctx2.fillText(mark, initialXRow2 + multiplierRow2 * cardGap+10,  60 );
+    }
+
+   
+
+}
+
+let multiplierRow3 = -1;
+let initialXRow3 = 150;
+let playerScoreRow3 = 0;
+let totalCardsDeltRow3 = 0;
+let numberOfIterationsRow3 = 0;
+
+
+
+function drawPlayerCards2(mark)
+{
+
+    let ctx3 = canvasPlayer2.getContext("2d");
+
+    //document.getElementById('split').style.visibility = 'hidden';
+    
+
+//////////////////////////////////
+//////////////////////////////////
+
+numberOfIterationsRow3++;
+
+if( gWasASplit == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
+    {
+        document.getElementById('dealCard').style.visibility = 'visible';
+        
+    }
+    else{
+        document.getElementById('dealCard').style.visibility = 'hidden';
+    }
+
+    console.log("2:",gWasASplit, numberOfIterationsRow2, numberOfIterationsRow3);
+
+
+if(mark === 0){
+
+    mark  = getMarkOfCard(52*5-1);
+}
+
+    
+
+   
+    
+
+   
+    //if (globalClearRect == true)
+    //{
+
+        //messageLower.style.hidden = 'true';
+        //canvasPlayer2.style.hidden = 'true';
+        //drawCardBtnLower.style.hidden = 'true';
+        //split.style.hidden = 'true';
+        document.getElementById('messageLower').style.visibility = 'visible';
+        document.getElementById('canvasPlayer2').style.visibility = 'visible';
+        document.getElementById('drawCardBtnLower').style.visibility = 'visible';
+        //document.getElementById('split').style.visibility = 'visible';
+
+
+
+
+    //    ctx1.clearRect(0,0,1000,78);
+    //    ctx.clearRect(0,0,1000,78);
+    //    globalClearRect = false;
+    //}
+   
+    multiplierRow3++;
+    
+    gDisplayATen = false;
+
+    ctx3 = canvasPlayer2.getContext("2d");
+    ctx3.beginPath();
+    ctx3.fillStyle='blue';
+    ctx3.rect((initialXRow3) +  multiplierRow3 * cardGap, 7 , 50, 64);
+    console.log("log:", (initialXRow3) +  multiplierRow3 * cardGap, multiplierRow3);
+    ctx3.stroke();
+    ctx3.font = "50px Arial";
+    
+    if (mark == "Q" || mark == "K" || mark == "Q" || mark == "J" || mark == "10")
+    {
+        totalCardsDeltRow3++;
+        playerScoreRow3 = playerScoreRow3 + 10;
+    }
+    else if (mark == "A")
+    {
+        totalCardsDeltRow3++;
+        counterAcesRow3 = counterAcesRow3 + 1;
+        playerScoreRow3 = playerScoreRow3 + 11;
+        lowerCardAmountAces[counterAcesRow3] = "is ace";
+    }
+    else
+    {
+        playerScoreRow3 = playerScoreRow3 + parseInt(mark);
+        totalCardsDeltRow3++;
+    }
+
+    if(totalCardsDeltRow3 == 2)
+    {
+        dealCard.disabled = false;
+    }
+
+    
+
+
+    if(playerScoreRow3 < 22 && totalCardsDeltRow3 == 5)
+    {
+        console.log("5 Card Charlie");
+        pointsHave = pointsHave + (pointsWagered);
+        
+        gTotalPoints = gTotalPoints + pointsWagered;
+
+        let text = `5 CARDS!  YOU WIN ${pointsWagered}`;
+        document.getElementById("messageLower").textContent = text;
+        document.getElementById("scoreUpper").textContent = gTotalPoints;
+        document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+
+    }
+    
+    else if (playerScoreRow3 > 21)
+    {
+        for(let i = 0 ; i < 4; i++)
+        {
+                if(lowerCardAmountAces[i] == "is ace")
+                {
+                    lowerCardAmountAces[i] == "used ace";
+                    playerScoreRow3 = playerScoreRow3 - 10;
+                    break;
+                }
+        }
+    }
+
+        if(playerScoreRow3 > 21)
+        {
+                    
+                    pointsHave = pointsHave - pointsWagered;
+                    gTotalPoints = gTotalPoints - pointsWagered;
+
+                    let text = `BUST!  YOU LOSE ${pointsWagered}`;
+                    document.getElementById("messageLower").textContent = text;
+                    document.getElementById("scoreUpper").textContent = gTotalPoints;
+ 
+                    
+                    console.log("BUST!");
+                   
+                    
+                    
+                    
+                    if (!gIsASplit){
+                    //drawCardBtnUpper.disabled = true;
+                    }
+
+                    document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+
+        }
+            
+        
+    
+    
+    
+    else if(playerScoreRow3 == 21)
+    {
+        console.log("Blackjack");
+        dealCard.disabled = true;
+        pointsHave = pointsHave + (pointsWagered*2);
+
+        gTotalPoints = gTotalPoints + pointsWagered*2;
+        
+        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2}`;
+        document.getElementById("messageLower").textContent = text;
+        document.getElementById("scoreUpper").textContent = gTotalPoints;
+        document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+ 
+    }
+
+    console.log("PlayerScore", playerScoreRow3);
+
+
+
+
+    if(mark == "10"){
+        ctx3.fillText(mark, initialXRow3 + multiplierRow3 * cardGap-4,  60 );
+    }
+    else{
+        ctx3.fillText(mark, initialXRow3 + multiplierRow3 * cardGap+10,  60 );
+    }
+
+///////////////////////////////////
+///////////////////////////////////
+
+
+}
+
+
+function drawInitialCards()
+{
+    drawCardBtnUpper.disabled = true;
+    dealCard.disabled = true;
+    //document.getElementById('newRoundBtn').style.visibility = 'hidden';
+    drawCardBtnUpper.disabled = true;
+    
+    //amtPlayerCards1++;
+}
+
+
+let deckUseage = 
+[
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0
+
+
+];
+
+let decks = 
+[
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+"A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+];
+
+
+
+
+
+
+//finds a card as long as at least one card remains
+function getMarkOfCard()
+{
+    let flagFoundCard = false;
+    let index = Math.floor((Math.random() * (52*5)));
+    const card = decks[index];
+    if(deckUseage[card] == 0)
+    {
+        deckUseage[card] = 1;
+    }
+    else
+    {
+        for(let i = card ; i >= 0; i-- )
+        {
+            if (card[i] == 0)
+            {
+                card[i] =  1;
+                flagFounCard = true;
+                break;
+            }
+            
+
+        }
+        if (flagFoundCard == false)
+        {
+            for(let i = card + 1 ; i < 54*4*5 ; i++)
+            {
+                if (card[i] = 0)
+                {
+                    card[i] = 1;
+                    break;
+                }
+            }
+        }
+    }
+    
+return card;
+}
+ 
+
+function dealDealer(){
+
+} 
+
+function wager(points_Wagered){
+
+if(points_Wagered > pointsHave)
+{
+    return(1);
+}
+pointsWagered =  points_Wagered;
+
+drawCardBtnUpper.disabled = false;
+wagerButtonOne.disabled=true;
+wagerButtonFive.disabled=true;
+wagerButtonFifteen.disabled=true;
+wagerButtonTwentyfive.disabled=true;
+
+}
+
+function unhidePlayerRow2(){
+   
+    gIsASplit = true;
+    document.getElementById('split').style.visibility = 'hidden';
+    document.getElementById('canvasPlayer2').style.visibility = 'visible';
+    document.getElementById('messageLower').style.visibility = 'visible';
+    document.getElementById('drawCardBtnLower').style.visibility = 'visible';
+    
+    wasASplit = true;
+    drawPlayerCards2(10);
+    drawPlayerCards1();
+    
+}
+
+function newRound(){
+
+
+
+}
+drawInitialCards();
+
+
+document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCards1);
+document.getElementById("dealCard").addEventListener("click", drawDealerCard);
+document.getElementById("split").addEventListener("click", unhidePlayerRow2);
+document.getElementById("newRoundBtn").addEventListener("click", newRound);
+
+
+
+</script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
