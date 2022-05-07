@@ -50,7 +50,7 @@
     </div>
         
     <div>
-        <input id = "drawCardBtnLower" type="button" value="Draw Card" onclick = "drawPlayerCards2(0)"  >
+        <input id = "drawCardBtnLower" type="button" value="Draw Card" onclick = "drawPlayerCardRow2(0)"  >
 
         
        
@@ -90,7 +90,7 @@ let initialXRow1 = 150;
 let dealerHandTotal = 0;
 let clearRectFlag = false;
 
-function drawDealerCard(){
+function drawDealerCards(){
 
     document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
     drawCardBtnUpper.disabled = true;
@@ -199,7 +199,7 @@ let globvar = 1;
 let IsASplitFlag = false;
 
 let turnNoReset = 0;
-let  gWasASplit = false;
+let  gWasASplitFlag = false;
   
 let multiplierRow2 = -1;
 let initialXRow2 = 150;
@@ -209,7 +209,7 @@ let numberOfIterationsRow2 = 0;
 let numberOfCardsDeltRow2 = 0;
 
 
-function drawPlayerCards1()
+function drawPlayerCardRow1()
 {
 
     
@@ -217,7 +217,7 @@ function drawPlayerCards1()
     turnNoReset++;
     numberOfIterationsRow2++;
     
-    if( gWasASplit == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
+    if( gWasASplitFlag == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
     {
         
         dealCardsBtn.disabled = false;
@@ -227,7 +227,7 @@ function drawPlayerCards1()
        
         dealCardsBtn.disabled = true;
     }
-    console.log("1:",gWasASplit, numberOfIterationsRow2, numberOfIterationsRow3);
+    console.log("1:",gWasASplitFlag, numberOfIterationsRow2, numberOfIterationsRow3);
 
     document.getElementById('split').style.visibility = 'hidden';
     
@@ -328,7 +328,7 @@ function drawPlayerCards1()
         dealCardsBtn.disabled = false;
         document.getElementById('split').style.visibility = 'visible';
         IsASplitFlag = false;
-        gWasASplit = true;
+        gWasASplitFlag = true;
         
         
 
@@ -422,7 +422,7 @@ let numberOfIterationsRow3 = 0;
 
 
 
-function drawPlayerCards2(mark)
+function drawPlayerCardRow2(mark)
 {
 
     let ctx3 = canvasPlayer2.getContext("2d");
@@ -435,7 +435,7 @@ function drawPlayerCards2(mark)
 
 numberOfIterationsRow3++;
 
-if( gWasASplit == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
+if( gWasASplitFlag == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
     {
         //document.getElementById('dealCardsBtn').style.visibility = 'visible';
         dealCardsBtn.disabled = true;
@@ -446,7 +446,7 @@ if( gWasASplit == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 >
         dealCardsBtn.disabled = true;
     }
 
-    console.log("2:",gWasASplit, numberOfIterationsRow2, numberOfIterationsRow3);
+    console.log("2:",gWasASplitFlag, numberOfIterationsRow2, numberOfIterationsRow3);
 
 
 if(mark === 0){
@@ -607,14 +607,14 @@ if(mark === 0){
 }
 
 
-function drawInitialCards()
+
+function setsUpGame()
 {
     drawCardBtnUpper.disabled = true;
     dealCardsBtn.disabled = true;
-    //document.getElementById('newRoundBtn').style.visibility = 'hidden';
     drawCardBtnUpper.disabled = true;
     
-    //amtPlayerCards1++;
+    
 }
 
 
@@ -744,12 +744,14 @@ wagerButtonTwentyfive.disabled=true;
 function unhidePlayerRow2(){
    
     IsASplitFlag = true;
+    WasASplitFlag = true;
+
     document.getElementById('split').style.visibility = 'hidden';
     document.getElementById('canvasPlayer2').style.visibility = 'visible';
     document.getElementById('messageLower').style.visibility = 'visible';
     document.getElementById('drawCardBtnLower').style.visibility = 'visible';
     
-    wasASplit = true;
+    
     drawPlayerCards2(10);
     drawPlayerCards1();
     
@@ -760,11 +762,11 @@ function newRound(){
 
 
 }
-drawInitialCards();
+setsUpGame();
 
 
-document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCards1);
-document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCard);
+document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow1);
+document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
 document.getElementById("split").addEventListener("click", unhidePlayerRow2);
 document.getElementById("newRoundBtn").addEventListener("click", newRound);
 
