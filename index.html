@@ -27,8 +27,7 @@
 <div id="container">
     <div id = "headerContainer" > 
         <div id="title">BLACKJACK</div>
-        <div id = "scoreHere">SCORE : 1000</div>
-    
+        <div id = "ScoreAtTop">"${pointsHave}"</div>    
     </div>   
         
         
@@ -42,11 +41,12 @@
         <div id = "interfaceRow2">
             
             <div id = "MessageUnderRow2"><b>-</div>
-            <div id = "ScoreAtTop"><b>-</div>
+           
             
                 <input id = "drawCardBtnUpper" type="button" value="Draw Card" >
                 <input id = "dealCardsBtn" type="button" value="Deal" >
                 <input id = "newRoundBtn" type="button" value="New Round" >
+                
                 <input id = "wagerButtonOne" type="button" value="Wager 1" onclick="wager(1)" >
                 
                 <input id = "wagerButtonFive" type="button" value="Wager 5" onclick="wager(5)" >
@@ -70,10 +70,10 @@
         
        
         
-    </div>
+    
 
     <input id = "split" type="button" value="Split" >
-        
+    </div>    
        
         
     </div>
@@ -238,10 +238,17 @@ function drawPlayerCardRow2()
     turnNoReset++;
     numberOfIterationsRow2++;
     
+    console.log("logging1");
+    console.log(numberOfIterationsRow2);
+    console.log(numberOfIterationsRow3);
+
     if( gWasASplitFlag == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
     {
         
         dealCardsBtn.disabled = false;
+        console.log("logging2");
+        console.log(numberOfIterationsRow2);
+        console.log(numberOfIterationsRow3);
         
     }
     else{
@@ -460,7 +467,7 @@ numberOfIterationsRow3++;
 if( gWasASplitFlag == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
     {
         //document.getElementById('dealCardsBtn').style.visibility = 'visible';
-        dealCardsBtn.disabled = true;
+        dealCardsBtn.disabled = false;
         
     }
     else{
@@ -468,7 +475,11 @@ if( gWasASplitFlag == true && numberOfIterationsRow2 > 3 && numberOfIterationsRo
         dealCardsBtn.disabled = true;
     }
 
-    console.log("2:",gWasASplitFlag, numberOfIterationsRow2, numberOfIterationsRow3);
+    console.log("logging2");
+    console.log(numberOfIterationsRow2);
+    console.log(numberOfIterationsRow3);
+
+    //console.log("2:",gWasASplitFlag, numberOfIterationsRow2, numberOfIterationsRow3);
 
 
 if(mark === 0){
@@ -533,10 +544,10 @@ if(mark === 0){
         totalCardsDeltRow3++;
     }
 
-    if(totalCardsDeltRow3 == 2)
-    {
-        dealCardsBtn.disabled = false;
-    }
+   // if(totalCardsDeltRow3 == 2)
+   // {
+   //     dealCardsBtn.disabled = false;
+   // }
 
     
 
@@ -548,7 +559,7 @@ if(mark === 0){
         
         //gTotalPoints= //gTotalPoints+ pointsWagered;
 
-        let text = `5 CARDS!  YOU WIN ${pointsWagered}`;
+        let text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
         document.getElementById("messageLower").textContent = text;
         document.getElementById("ScoreAtTop").textContent = pointsHave;
         document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
@@ -574,7 +585,7 @@ if(mark === 0){
                     pointsHave = pointsHave - pointsWagered;
                     //gTotalPoints= //gTotalPoints- pointsWagered;
 
-                    let text = `BUST!  YOU LOSE ${pointsWagered}`;
+                    let text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
                     document.getElementById("messageLower").textContent = text;
                     document.getElementById("ScoreAtTop").textContent = pointsHave;
  
@@ -604,7 +615,7 @@ if(mark === 0){
 
         //gTotalPoints= //gTotalPoints+ pointsWagered*2;
         
-        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2}`;
+        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
         document.getElementById("messageLower").textContent = text;
         document.getElementById("ScoreAtTop").textContent = pointsHave;
         document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
@@ -641,6 +652,7 @@ function setsUpGame()
    
     let betweenZeroand240 = randomNumber * 260
     console.log("random", Math.trunc(betweenZeroand240));
+    newRoundBtn.disabled = true;
     drawCardBtnUpper.disabled = true;
     dealCardsBtn.disabled = true;
     drawCardBtnUpper.disabled = true;
