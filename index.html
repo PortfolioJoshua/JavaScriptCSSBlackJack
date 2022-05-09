@@ -27,7 +27,7 @@
 <div id="container">
     <div id = "headerContainer" > 
         <div id="title">BLACKJACK</div>
-        <div id = "ScoreAtTop">"${pointsHave}"</div>    
+        <div id = "scoreAtTop">0</div>    
     </div>   
         
         
@@ -43,18 +43,20 @@
             <div id = "MessageUnderRow2"><b>-</div>
            
             
-                <input id = "drawCardBtnUpper" type="button" value="Draw Card" >
-                <input id = "dealCardsBtn" type="button" value="Deal" >
-                <input id = "newRoundBtn" type="button" value="New Round" >
+                <div id = "containsUpperButtons">
+                    <input id = "drawCardBtnUpper" type="button" value="Draw Card" >
+                    <input id = "dealCardsBtn" type="button" value="Deal" >
+                    <input id = "newRoundBtn" type="button" value="New Round" >
+               
                 
-                <input id = "wagerButtonOne" type="button" value="Wager 1" onclick="wager(1)" >
+                    <input id = "wagerButtonOne" type="button" value="Wager 1" onclick="wager(1)" >
+                    
+                    <input id = "wagerButtonFive" type="button" value="Wager 5" onclick="wager(5)" >
+                    
+                    <input id = "wagerButtonFifteen" type="button" value="Wager 15" onclick="wager(15)" >
                 
-                <input id = "wagerButtonFive" type="button" value="Wager 5" onclick="wager(5)" >
-                
-                <input id = "wagerButtonFifteen" type="button" value="Wager 15" onclick="wager(15)" >
-             
-                <input id = "wagerButtonTwentyfive" type="button" value="Wager 25" onclick="wager(25)" >
-
+                    <input id = "wagerButtonTwentyfive" type="button" value="Wager 25" onclick="wager(25)" >
+                </div>
             
         </div>
     </div>
@@ -110,6 +112,13 @@ let initialXRow1 = 150;
 
 let dealerHandTotal = 0;
 let clearRectFlag = false;
+let playerScoreRow2 = 0;
+let playerScoreRow3 = 0;
+
+
+
+
+
 
 function drawDealerCards(){
 
@@ -170,6 +179,11 @@ function drawDealerCards(){
         pointsHave = pointsHave + (pointsWagered);
         let text = `DEALER BUSTS!  YOU WIN ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
         document.getElementById("MessageUnderRow2").textContent = text;
+        let text2 = `${pointsHave}`;
+        document.getElementById("scoreAtTop").textContent = text2;
+
+
+        
     }
     
     else if (dealerHandTotal > playerScoreRow2)
@@ -178,7 +192,8 @@ function drawDealerCards(){
         pointsHave = pointsHave - (pointsWagered);
         let text = `DEALER WINS!  YOU LOSE ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
         document.getElementById("MessageUnderRow2").textContent = text;
-    
+        let text2 = `${pointsHave}`;
+        document.getElementById("scoreAtTop").textContent = text2;
     }
     else 
     {
@@ -186,9 +201,53 @@ function drawDealerCards(){
         pointsHave = pointsHave + (pointsWagered);
         let text = `YOU WIN!  ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
         document.getElementById("MessageUnderRow2").textContent = text;
-    
+        let text2 = `${pointsHave}`;
+        document.getElementById("scoreAtTop").textContent = text2;
     }
 
+    ////////////
+
+    //isThereASecondDeal : set this!
+
+    if (dealerHandTotal > 21)
+    {
+        //BUST
+        document.getElementById("MessageLower").style.visibility = 'visible';
+        pointsHave = pointsHave + (pointsWagered);
+        let text = `DEALER BUSTS!  YOU WIN ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        document.getElementById("MessageLower").textContent = text;
+        let text2 = `${pointsHave}`;
+        document.getElementById("scoreAtTop").textContent = text2;
+
+        
+        
+    }
+    
+    
+    else if (dealerHandTotal > playerScoreRow3)
+    {
+        //DEALER WINS
+        document.getElementById("MessageLower").style.visibility = 'visible';
+        pointsHave = pointsHave - (pointsWagered);
+        let text = `DEALER WINS!  YOU LOSE ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        document.getElementById("MessageLower").textContent = text;
+        let text2 = `${pointsHave}`;
+        document.getElementById("scoreAtTop").textContent = text2;
+    }
+    else 
+    {
+        //PLAYER WINS
+        document.getElementById("MessageLower").style.visibility = 'visible';
+        pointsHave = pointsHave + (pointsWagered);
+        let text = `YOU WIN!  ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        document.getElementById("MessageLower").textContent = text;
+        let text2 = `${pointsHave}`;
+        document.getElementById("scoreAtTop").textContent = text2;
+    }
+
+    //////////////
+
+    
     //player
     counterAcesRow1 = -1;
     
@@ -224,10 +283,14 @@ let  gWasASplitFlag = false;
   
 let multiplierRow2 = -1;
 let initialXRow2 = 150;
-let playerScoreRow2 = 0;
+
 var counterAcesRow2 = -1;
 let numberOfIterationsRow2 = 0;
 let numberOfCardsDeltRow2 = 0;
+
+let areBothDealsComplete = "noneAre";
+let isThereASecondDeal = false;
+
 
 
 function drawPlayerCardRow2()
@@ -375,7 +438,8 @@ function drawPlayerCardRow2()
         let text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
         let text2 = `Total Points: ${pointsHave}.`;
         document.getElementById("MessageUnderRow2").textContent = text;
-        document.getElementById("ScoreAtTop").textContent = text2;
+        document.getElementById("scoreAtTop").textContent = text2;
+        
     }
     
     else if (playerScoreRow2 > 21)
@@ -400,7 +464,7 @@ function drawPlayerCardRow2()
 
                     let text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
                     document.getElementById("MessageUnderRow2").textContent = text;
-                    document.getElementById("ScoreAtTop").textContent = pointsHave; 
+                    document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
                     console.log("BUST!");
                    
@@ -422,7 +486,7 @@ function drawPlayerCardRow2()
 
         let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
         document.getElementById("MessageUnderRow2").textContent = text;
-        document.getElementById("ScoreAtTop").textContent = pointsHave; 
+        document.getElementById("scoreAtTop").textContent = pointsHave; 
     }
 
     console.log("PlayerScore2", playerScoreRow2);
@@ -445,7 +509,7 @@ function drawPlayerCardRow2()
 
 let multiplierRow3 = -1;
 let initialXRow3 = 150;
-let playerScoreRow3 = 0;
+//let playerScoreRow3 = 0;
 let totalCardsDeltRow3 = 0;
 let numberOfIterationsRow3 = 0;
 let AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace"]; 
@@ -453,7 +517,7 @@ let counterAcesRow3 = 0;
 
 function drawPlayerCardRow3(mark)
 {
-
+    isThereASecondDeal = true;
     let ctx3 = canvasPlayer2.getContext("2d");
 
     //document.getElementById('split').style.visibility = 'hidden';
@@ -561,7 +625,7 @@ if(mark === 0){
 
         let text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
         document.getElementById("messageLower").textContent = text;
-        document.getElementById("ScoreAtTop").textContent = pointsHave;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
         document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
 
     }
@@ -587,7 +651,7 @@ if(mark === 0){
 
                     let text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
                     document.getElementById("messageLower").textContent = text;
-                    document.getElementById("ScoreAtTop").textContent = pointsHave;
+                    document.getElementById("scoreAtTop").textContent = pointsHave;
  
                     
                     console.log("BUST!");
@@ -617,7 +681,7 @@ if(mark === 0){
         
         let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
         document.getElementById("messageLower").textContent = text;
-        document.getElementById("ScoreAtTop").textContent = pointsHave;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
         document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
  
     }
