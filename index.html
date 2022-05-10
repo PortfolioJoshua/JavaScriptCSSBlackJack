@@ -37,34 +37,32 @@
     
     <div>
         <canvas id="canvasPlayer1" width="1000" height="78"></canvas> 
-    
+        <br><br><br>
         <div id = "interfaceRow2">
             
             <div id = "MessageUnderRow2"><b>-</div>
            
             
                 <div id = "containsUpperButtons">
+                    <br><br>
                     <input id = "drawCardBtnUpper" type="button" value="Draw Card" >
                     <input id = "dealCardsBtn" type="button" value="Deal" >
                     <input id = "newRoundBtn" type="button" value="New Round" >
-               
-                
                     <input id = "wagerButtonOne" type="button" value="Wager 1" onclick="wager(1)" >
-                    
                     <input id = "wagerButtonFive" type="button" value="Wager 5" onclick="wager(5)" >
-                    
                     <input id = "wagerButtonFifteen" type="button" value="Wager 15" onclick="wager(15)" >
-                
                     <input id = "wagerButtonTwentyfive" type="button" value="Wager 25" onclick="wager(25)" >
+                <br><br>
+                <br>
                 </div>
             
         </div>
     </div>
     <canvas id="canvasPlayer2" width="1000" height="102" ></canvas>
 
-    <div>
+    
         <div id = "messageLower" ><b>-</div>
-    </div>
+    
         
     <div>
         <input id = "drawCardBtnLower" type="button" value="Draw Card" onclick = "drawPlayerCardRow3(0)"  >
@@ -112,6 +110,7 @@ let initialXRow1 = 150;
 
 let dealerHandTotal = 0;
 let clearRectFlag = false;
+let isAllDelt = false;
 let playerScoreRow2 = 0;
 let playerScoreRow3 = 0;
 
@@ -136,7 +135,7 @@ function drawDealerCards(){
    
    
    
-    while (dealerHandTotal <= 17)
+    while (dealerHandTotal < 17)
     {
         multiplierRow1++;
         let mark  = getMarkOfCard(AMTOFCARDS);
@@ -176,7 +175,7 @@ function drawDealerCards(){
     {
         //BUST
         pointsHave = pointsHave + (pointsWagered);
-        let text = `DEALER BUSTS!  YOU WIN ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        let text = `DEALER BUSTS!  YOU WIN ${pointsWagered} POINT`;
         document.getElementById("MessageUnderRow2").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
@@ -189,7 +188,7 @@ function drawDealerCards(){
     {
         //DEALER WINS
         pointsHave = pointsHave - (pointsWagered);
-        let text = `DEALER WINS!  YOU LOSE ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        let text = `DEALER WINS!  YOU LOSE ${pointsWagered} POINT`;
         document.getElementById("MessageUnderRow2").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
@@ -198,7 +197,7 @@ function drawDealerCards(){
     {
         //PLAYER WINS
         pointsHave = pointsHave + (pointsWagered);
-        let text = `YOU WIN!  ${pointsWagered} POINTS - SCORE: ${pointsHave}`;
+        let text = `YOU WIN!  ${pointsWagered} POINT`;
         document.getElementById("MessageUnderRow2").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
@@ -248,7 +247,7 @@ function drawDealerCards(){
     //////////////
 
     
-
+    isAllDelt = true;
     setMessageLower();
     
     //player
@@ -258,7 +257,7 @@ function drawDealerCards(){
     initialXRow1 = 150;
     dealerHandTotal = 0;
     
-    
+    dealCardsBtn.disabled = true;
 
 }
 
@@ -734,7 +733,9 @@ function getMarkOfCard()
     randomNumber = randomNumber();
     //console.log("random", randomNumber);
    
-    let betweenZeroand240 = randomNumber * 260
+
+    //change back to 260 to see if zeros display
+    let betweenZeroand240 = randomNumber * 240
     
     //console.log("random", 
     index = Math.trunc(betweenZeroand240);
@@ -789,23 +790,46 @@ return (decks[i]);
 function setMessageLower()
 {
 
-    alert("made it to setmessagelower");
-    if(playerScoreRow3 < 22 && totalCardsDeltRow3 == 5)
+    //works, goes here
+    console.log("score", playerScoreRow3);
+
+
+    //dealer wins
+    if (playerScoreRow3 < 21 && (dealerHandTotal > playerScoreRow3) && isAllDelt == true)
     {
+        pointsHave = pointsHave - (pointsWagered);
+        document.getElementById('messageLower').style.visibility = 'visible';
+        let text = `DEALER WINS! YOU LOSE ${pointsWagered} POINT`;
+        document.getElementById("messageLower").textContent = text;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
+
+
+    }
+    //dealer loses
+    else if(playerScoreRow3 < 21 && (dealerHandTotal < playerScoreRow3) && isAllDelt == true)
+    {
+        pointsHave = pointsHave + (pointsWagered);
+        document.getElementById('messageLower').style.visibility = 'visible';
+        let text = `DEALER LOSES! YOU WIN ${pointsWagered} POINT`;
+        document.getElementById("messageLower").textContent = text;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
+    }
+    //dealer loses
+    else if(playerScoreRow3 < 22 && totalCardsDeltRow3 == 5)
+    {
+        pointsHave = pointsHave + (pointsWagered*2);
         console.log("5 Card Charlie");
         document.getElementById("messageLower").style.visibility = 'visible';
         pointsHave = pointsHave + (pointsWagered);
-        
-        //gTotalPoints= //gTotalPoints+ pointsWagered;
-
-        let text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
+        let text = `DEALER LOSES!  5 CARDS!  YOU WIN ${pointsWagered*2} POINTS`;
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave;
-        document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+        //document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
        
 
     }
     
+
     else if (playerScoreRow3 > 21)
     {
         for(let i = 0 ; i < 4; i++)
@@ -819,13 +843,17 @@ function setMessageLower()
         }
     }
 
+
+
+
+        //dealer wins
         if(playerScoreRow3 > 21)
-        {
+        {   
             document.getElementById("messageLower").style.visibility = 'visible';
                     pointsHave = pointsHave - pointsWagered;
                     //gTotalPoints= //gTotalPoints- pointsWagered;
 
-                    let text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
+                    let text = `DEALER WINS! BUST!  YOU LOSE ${pointsWagered} POINT`;
                     document.getElementById("messageLower").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave;
                     
@@ -839,16 +867,16 @@ function setMessageLower()
                     //drawCardBtnUpper.disabled = true;
                     }
 
-                    document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+                    //document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
 
         }
             
         
     
     
-    
+     //dealer loses
     else if(playerScoreRow3 == 21)
-    {
+    {  
         document.getElementById("messageLower").style.visibility = 'visible';
         console.log("Blackjack");
         dealCardsBtn.disabled = true;
@@ -856,12 +884,15 @@ function setMessageLower()
 
         //gTotalPoints= //gTotalPoints+ pointsWagered*2;
         
-        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
+        let text = `DEALER LOSES! BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave;
         document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
  
     }
+
+
+
 }
 
 //////
