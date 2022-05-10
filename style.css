@@ -3,22 +3,23 @@ body{
    max-width: 1200px;
    margin-left: auto;
  margin-right: auto;
+ 
 }
 
 
 #container{
     
     border: 10px solid rgb(113, 137, 26);
-   height:700px;
+   height:40%;
    width: 50%;
    text-align:center;
    border-radius: 4em;
    margin-left: auto;
    margin-right: auto;
- margin-top: 5%;
+   margin-top: 2%;
+   
+   
  
-
- margin:0, auto;
  box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
  
 }
@@ -66,7 +67,7 @@ margin-left: 160px;
     color: blue;
     margin:0;
     padding:0;
-    margin-top:70px;
+    margin-top:20px;
 }
 
 /*border: 1px solid rgb(137, 26, 26);*/
