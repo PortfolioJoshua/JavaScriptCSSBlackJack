@@ -18,7 +18,7 @@
 
 <div id ="alternateContainer">
 
-    <div id = "item" >This is text!</div>
+    <div id = "item" ><h1>Your display is to small for this site.</h1></div>
 
 </div>
 
@@ -78,10 +78,8 @@
         
     </div>
 
-    <div id = "alternateContainer">
-
-       
-    </div>
+    
+    
 
 
     
@@ -120,6 +118,7 @@ let playerScoreRow3 = 0;
 let ctx1 = canvasDealer.getContext("2d");
 function drawDealerCards(){
 
+    alert("in here");
     document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
     drawCardBtnUpper.disabled = true;
     drawCardBtnUpper.disabled = true;
@@ -633,13 +632,7 @@ if(mark === 0){
 function setsUpGame()
 {
     
-    let randomNumber = new Math.seedrandom();
-    
-    randomNumber = randomNumber();
-    console.log("random", randomNumber);
    
-    let betweenZeroand240 = randomNumber * 260
-    console.log("random", Math.trunc(betweenZeroand240));
     newRoundBtn.disabled = true;
     drawCardBtnUpper.disabled = true;
     dealCardsBtn.disabled = true;
@@ -1010,5 +1003,5 @@ document.getElementById("newRoundBtn").addEventListener("click", newRound);
 
 
 
-</script>
+
 </html>

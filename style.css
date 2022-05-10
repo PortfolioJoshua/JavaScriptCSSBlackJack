@@ -1,5 +1,31 @@
+body{
+
+   max-width: 1200px;
+   margin-left: auto;
+ margin-right: auto;
+}
+
+
+#container{
+    
+    border: 10px solid rgb(113, 137, 26);
+   height:700px;
+   width: 50%;
+   text-align:center;
+   border-radius: 4em;
+   margin-left: auto;
+   margin-right: auto;
+ margin-top: 5%;
+ 
+
+ margin:0, auto;
+ box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
+ 
+}
+
 #headerContainer{
     
+   
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -32,17 +58,9 @@ margin-left: 160px;
     
 }
 
- #container{
-     border: 1px solid rgb(113, 137, 26);
-    height:90vh;
-    width: 80%;
-    text-align:center;
-    border-radius: 4em;
-  
-  margin-top: 1%;
-  margin-left: 10%;
-  box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
-    }
+ 
+ 
+    
 #canvasDealer{
     /*border-style: solid;*/
     color: blue;
@@ -108,37 +126,56 @@ margin-left: 160px;
    }
 
 
-   #alternateContainer{
-       display:flex;
-       flex-direction: column;
-       height:100vh;
-       width:10%;
-       margin:auto;
-       
-       font-size: 20px;
-   }
-
-   #item{
-    height:100px;
-    text-align: center;
-    justify-items: center;
-   }
+   
          
    #messageLower{
     font-weight: normal;
 
    }
    
+   #alternateContainer{
+
+    background-color: whitesmoke;
+    display:flex;
+    flex-direction: row;
    
+    justify-content:center;  
+    align-items: center;
+    width:100%;
+    height:100vh;
+    border: 1px solid rgb(41, 6, 109);
+    
+    
+
+    
+}
+
+#item{
+    border: 1px solid rgb(6, 9, 109);
+    display:flex;
+    flex-direction: row;
+    justify-content:center;  
+    align-items: center;
+    height:10%;
+    width:100%;
+    font-size: 10px;
+    
+
+
+}
+
+   /*mobile*/
     @media screen and (max-width: 480px) {
 
     #container{display: none;}
-    #alternateContainer{display:block;}
+    #alternateContainer{display:flex;}
+    #item{display:flex;}
 
     }
     @media screen and (min-width: 481px) {
 
         #alternateContainer{display:none;}
+        #item{display:none;}
         #container{display: block;}
     
     }
