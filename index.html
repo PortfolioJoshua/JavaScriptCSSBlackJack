@@ -27,7 +27,7 @@
 <div id="container">
     <div id = "headerContainer" > 
         <div id="title">BLACKJACK</div>
-        <div id = "scoreAtTop">0</div>    
+        <div id = "scoreAtTop">30</div>    
     </div>   
         
         
@@ -107,7 +107,6 @@ let canvasPlayer2 = document.getElementById("canvasPlayer2");
 
 let multiplierRow1 = -1;
 let initialXRow1 = 150;
-
 let dealerHandTotal = 0;
 let clearRectFlag = false;
 let isAllDelt = false;
@@ -118,7 +117,7 @@ let playerScoreRow3 = 0;
 
 
 
-
+let ctx1 = canvasDealer.getContext("2d");
 function drawDealerCards(){
 
     document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
@@ -126,7 +125,7 @@ function drawDealerCards(){
     drawCardBtnUpper.disabled = true;
     newRoundBtn.disabled = false;
 
-    let ctx1 = canvasDealer.getContext("2d");
+    
     IsASplitFlag = false;
     
     clearRectFlag = true;
@@ -266,33 +265,23 @@ function drawDealerCards(){
 
 //variable for final row 3 (split deck)
 let AreThereAcesArrayRow2 = ["no ace","no ace","no ace","no ace"]; 
-
-
 let pointsHave = 30;
 let pointsWagered = 0;
-
 //temporary for testing split
 let globvar = 1;
-
-//this can change - comment
-//let //gTotalPoints= 3;
 let IsASplitFlag = false;
-
 let turnNoReset = 0;
 let  gWasASplitFlag = false;
-  
 let multiplierRow2 = -1;
 let initialXRow2 = 150;
-
 var counterAcesRow2 = -1;
 let numberOfIterationsRow2 = 0;
 let numberOfCardsDeltRow2 = 0;
-
 let areBothDealsComplete = "noneAre";
 let isThereASecondDeal = false;
 
 
-
+let ctx2 = canvasPlayer1.getContext("2d");
 function drawPlayerCardRow2()
 {
 
@@ -326,7 +315,7 @@ function drawPlayerCardRow2()
 
    
     //let ctx1 = 
-    let ctx2 = canvasPlayer1.getContext("2d");
+   
    
     //two tens dealt, and chose to display two stacks of decks
    if (IsASplitFlag === true )
@@ -522,10 +511,11 @@ function setLowerMessages()
 
 
 }
+let ctx3 = canvasPlayer2.getContext("2d");
 function drawPlayerCardRow3(mark)
 {
     isThereASecondDeal = true;
-    let ctx3 = canvasPlayer2.getContext("2d");
+   
 
     //document.getElementById('split').style.visibility = 'hidden';
     
@@ -933,8 +923,58 @@ function unhidePlayerRow2(){
 }
 
 function newRound(){
+//temporary for testing split
+ globvar = 1;
+ alert("clearing");
 
-    isThereASecondDeal = false;
+ ctx1.clearRect(0,0,1000,78);
+ ctx2.clearRect(0,0,1000,78);
+ ctx3.clearRect(0,0,1000,78);
+ 
+ 
+ //messageLower.disabled = true;
+ //messageUnderRow2.disabled = true;
+ 
+ newRoundBtn.disabled = true;
+ 
+ document.getElementById('messageLower').style.visibility = 'hidden';
+ document.getElementById('MessageUnderRow2').style.visibility = 'hidden';
+
+ 
+ /*
+ multiplierRow1 = -1;
+ initialXRow1 = 150;
+ dealerHandTotal = 0;
+ clearRectFlag = false;
+ isAllDelt = false;
+ playerScoreRow2 = 0;
+ playerScoreRow3 = 0;
+
+ AreThereAcesArrayRow2 = ["no ace","no ace","no ace","no ace"]; 
+ pointsHave = 30;
+ pointsWagered = 0;
+ IsASplitFlag = false;
+ turnNoReset = 0;
+ gWasASplitFlag = false;
+ multiplierRow2 = -1;
+ initialXRow2 = 150;
+ counterAcesRow2 = -1;
+ numberOfIterationsRow2 = 0;
+ numberOfCardsDeltRow2 = 0;
+ areBothDealsCompe = "noneAre";
+ isThereASecondDeal = false;
+
+ multiplierRow3 = -1;
+ initialXRow3 = 150;
+//let playerScoreRow3 = 0;
+ totalCardsDeltRow3 = 0;
+ numberOfIterationsRow3 = 0;
+ AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace"]; 
+ counterAcesRow3 = 0;
+
+*/
+
+
 
 
 }
