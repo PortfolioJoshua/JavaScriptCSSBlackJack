@@ -1,28 +1,44 @@
 body{
 
-   max-width: 1200px;
+   /*max-width: 1200px;*/
    margin-left: auto;
  margin-right: auto;
  
 }
 
+#forFlex{
+
+    border: 10px solid rgb(210, 29, 19);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
 
 #container{
     
-    border: 10px solid rgb(113, 137, 26);
-   height:40%;
+   border: 10px solid rgb(113, 137, 26);
+   height:60%;
    width: 50%;
    text-align:center;
    border-radius: 4em;
    margin-left: auto;
    margin-right: auto;
    margin-top: 2%;
-   
-   
- 
- box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
+   box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
  
 }
+
+#containerLargeDisplay{
+
+    border: 10px solid rgb(226, 14, 177);
+    
+  
+
+}
+
 
 #headerContainer{
     
@@ -166,18 +182,62 @@ margin-left: 160px;
 }
 
    /*mobile*/
-    @media screen and (max-width: 480px) {
+    
+   
+   @media screen and (min-height: 900px) {
 
     #container{display: none;}
     #alternateContainer{display:flex;}
     #item{display:flex;}
+    #containerLargeDisplay{display: none;}
 
     }
-    @media screen and (min-width: 481px) {
+
+
+    
+    /*green*/
+    @media screen and (min-height: 1039px) {
 
         #alternateContainer{display:none;}
         #item{display:none;}
         #container{display: block;}
+        #containerLargeDisplay{display: none;}
+    
+    }
+
+    /*extra large*/
+    @media screen and (min-height: 1572px) {
+
+        /*#containerLargeDisplay{display: block;}*/
+        #alternateContainer{display:none;}
+        #item{display:none;}
+
+        #forFlex{
+
+            border: 10px solid rgb(210, 29, 19);
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        
+        }
+        /*#container{display: none;}*/
+        #container{
+    
+            border: 10px solid rgb(59, 26, 137);
+            height:33%;
+            width: 50%;
+            text-align:center;
+            border-radius: 4em;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2%;
+            box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
+          
+         }
+    
+
     
     }
 
