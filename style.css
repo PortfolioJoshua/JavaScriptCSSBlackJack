@@ -1,8 +1,11 @@
 body{
 
-   /*max-width: 1200px;*/
+   max-width: 1200px;
+   
    margin-left: auto;
  margin-right: auto;
+ margin-top: 0;
+ margin-bottom: 0;
  
 }
 
@@ -13,20 +16,21 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 95vh;
 
 }
 
 #container{
     
    border: 10px solid rgb(113, 137, 26);
-   height:60%;
+   height:85%;
    width: 50%;
    text-align:center;
    border-radius: 4em;
    margin-left: auto;
    margin-right: auto;
-   margin-top: 2%;
+   margin-top: 0;
+   margin-bottom:0;
    box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
  
 }
@@ -184,30 +188,39 @@ margin-left: 160px;
    /*mobile*/
     
    
-   @media screen and (min-height: 900px) {
+   @media screen and (min-height: 1px) {
+
+    #alternateContainer{display:none;}
+
+    }
+
+
+/*   
+@media screen and (min-height: 750px) {
 
     #container{display: none;}
     #alternateContainer{display:flex;}
     #item{display:flex;}
+    #forFlex{display: none;}
     #containerLargeDisplay{display: none;}
-
+   
     }
+*/
+    
+
+
 
 
     
-    /*green*/
-    @media screen and (min-height: 1039px) {
-
-        #alternateContainer{display:none;}
-        #item{display:none;}
-        #container{display: block;}
-        #containerLargeDisplay{display: none;}
     
-    }
 
-    /*extra large*/
-    @media screen and (min-height: 1572px) {
+    
 
+    /*extra large*   1058 - gets bigger*/
+    /*starts at 1055px goes to biggest   after 1055 is*/
+    @media screen and (min-height: 1055px) {
+
+        
         /*#containerLargeDisplay{display: block;}*/
         #alternateContainer{display:none;}
         #item{display:none;}
@@ -226,7 +239,7 @@ margin-left: 160px;
         #container{
     
             border: 10px solid rgb(59, 26, 137);
-            height:33%;
+            height:50%;
             width: 50%;
             text-align:center;
             border-radius: 4em;
@@ -234,12 +247,35 @@ margin-left: 160px;
             margin-right: auto;
             margin-top: 2%;
             box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
+            max-height: 500px;
           
          }
     
 
     
     }
+
+    /*green   1037 - 606*/
+@media screen and (min-height: 1050px) {
+
+    #alternateContainer{display:none;}
+    #item{display:none;}
+    #container{display: block;}
+    #containerLargeDisplay{display: none;}
+    
+
+}
+
+@media screen and (min-height: 750px) {
+
+    #container{display: none;}
+    #alternateContainer{display:flex;}
+    #item{display:flex;}
+    #forFlex{display: none;}
+    #containerLargeDisplay{display: none;}
+   
+    }
+
 
 
    
