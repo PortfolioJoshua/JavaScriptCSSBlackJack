@@ -16,7 +16,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 95vh;
+    height: 100vh;
 
 }
 
@@ -32,6 +32,8 @@ body{
    margin-top: 0;
    margin-bottom:0;
    box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
+   max-height:900px;
+   
  
 }
 
@@ -58,21 +60,19 @@ body{
 
 font-size: 30px;
 
-width:50%;
-text-align:center;
 
-align-self: center;
-margin-left: 160px;
+
+margin-left: 150px;
 
 }
 
 
 #scoreHere{
-    
-    width:50%;
-    font-size: 30px;
+   
+    font-size: 60px;
     color:red;
-    align-self: center;
+    
+    
    
     
 
@@ -185,6 +185,11 @@ margin-left: 160px;
 
 }
 
+#bottomCards{
+    display:flex;
+    flex-direction: row;
+    justify-content:center;  
+}
    /*mobile*/
     
    
@@ -195,8 +200,18 @@ margin-left: 160px;
     }
 
 
-/*   
-@media screen and (min-height: 750px) {
+   
+    @media screen and (max-width : 1100px) {
+
+        #container{display: none;}
+    #alternateContainer{display:flex;}
+    #item{display:flex;}
+    #forFlex{display: none;}
+    #containerLargeDisplay{display: none;}
+
+    }
+   
+@media screen and (max-height: 584px) or (max-width: 1100px){
 
     #container{display: none;}
     #alternateContainer{display:flex;}
@@ -205,20 +220,23 @@ margin-left: 160px;
     #containerLargeDisplay{display: none;}
    
     }
-*/
+
+     /*green   1037 - 606*/
+    @media screen and (max-height: 955px) and (min-heigth: 585px) {
+
+    #alternateContainer{display:none;}
+    #item{display:none;}
+    #container{display: block;}
+    #containerLargeDisplay{display: none;}
     
 
+}
 
 
-
-    
-    
-
-    
 
     /*extra large*   1058 - gets bigger*/
     /*starts at 1055px goes to biggest   after 1055 is*/
-    @media screen and (min-height: 1055px) {
+    @media screen and (max-height: 2300px) and (min-height: 956px) {
 
         
         /*#containerLargeDisplay{display: block;}*/
@@ -239,15 +257,16 @@ margin-left: 160px;
         #container{
     
             border: 10px solid rgb(59, 26, 137);
-            height:50%;
+            height:70%;
             width: 50%;
             text-align:center;
             border-radius: 4em;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 2%;
+            margin-top: 0;
+            margin-bottom:0;
             box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
-            max-height: 500px;
+            max-height: 600px;
           
          }
     
@@ -255,17 +274,9 @@ margin-left: 160px;
     
     }
 
-    /*green   1037 - 606*/
-@media screen and (min-height: 1050px) {
+ 
 
-    #alternateContainer{display:none;}
-    #item{display:none;}
-    #container{display: block;}
-    #containerLargeDisplay{display: none;}
-    
-
-}
-
+/*
 @media screen and (min-height: 750px) {
 
     #container{display: none;}
@@ -276,6 +287,7 @@ margin-left: 160px;
    
     }
 
+*/
 
 
    

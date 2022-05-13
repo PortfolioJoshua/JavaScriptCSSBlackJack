@@ -57,27 +57,25 @@
                     <input id = "wagerButtonFifteen" type="button" value="Wager 15" onclick="wager(15)" >
                     <input id = "wagerButtonTwentyfive" type="button" value="Wager 25" onclick="wager(25)" >
                 <br><br>
-                <br>
+                
                 </div>
+
+                
+
+                
             
         </div>
     </div>
-    <canvas id="canvasPlayer2" width="500" height="102" ></canvas>
+    <canvas id="canvasPlayer2" width="500" height="78" ></canvas>
 
     
         <div id = "messageLower" ><b>-</div>
     
         
-    <div>
+            <br>
         <input id = "drawCardBtnLower" type="button" value="Draw Card" onclick = "drawPlayerCardRow3(0)"  >
-
-        
-       
-        
-    
-
-    <input id = "split" type="button" value="Split" >
-    </div>    
+        <input id = "split" type="button" value="Double Down" >
+      
        
         
     
@@ -284,12 +282,16 @@ let numberOfIterationsRow2 = 0;
 let numberOfCardsDeltRow2 = 0;
 let areBothDealsComplete = "noneAre";
 let isThereASecondDeal = false;
-
-
+let FirstDealIsDoneFlag = false; 
+let SecondDeatIsDoneFlag = false;
 let ctx2 = canvasPlayer1.getContext("2d");
 function drawPlayerCardRow2()
 {
 
+    if (FirstDealIsDoneFlag == true) 
+    {
+        retunr(-1);
+    }
     
 
     turnNoReset++;
@@ -939,8 +941,13 @@ function newRound(){
  document.getElementById('messageLower').style.visibility = 'hidden';
  document.getElementById('MessageUnderRow2').style.visibility = 'hidden';
 
+
+wagerButtonOne.disabled=false;
+wagerButtonFive.disabled=false;
+wagerButtonFifteen.disabled=false;
+wagerButtonTwentyfive.disabled=false;
  
- /*
+ 
  multiplierRow1 = -1;
  initialXRow1 = 150;
  dealerHandTotal = 0;
@@ -971,7 +978,7 @@ function newRound(){
  AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace"]; 
  counterAcesRow3 = 0;
 
-*/
+
 
 
 
