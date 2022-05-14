@@ -121,6 +121,9 @@ let playerScoreRow3 = 0;
 
 
 let ctx1 = canvasDealer.getContext("2d");
+
+
+
 function drawDealerCards(){
 
     alert("in here");
@@ -141,7 +144,7 @@ function drawDealerCards(){
     while (dealerHandTotal < 17)
     {
         multiplierRow1++;
-        let mark  = getMarkOfCard(AMTOFCARDS);
+        let mark  = getMarkOfCard();
 
         if (mark == "Q" || mark == "K" || mark == "Q" || mark == "J" || mark == "10")
         {
@@ -153,6 +156,7 @@ function drawDealerCards(){
         }
         else
         {
+            console.log("mark" , mark);
             dealerHandTotal = dealerHandTotal + parseInt(mark);
         }
         console.log("dealerHandTotal", dealerHandTotal);
@@ -569,6 +573,7 @@ let ctx3 = canvasPlayer2.getContext("2d");
 
 function drawPlayerCardRow3(mark)
 {
+   
     isThereISecondDeal = true;
     //////
     
