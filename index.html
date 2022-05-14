@@ -10,6 +10,7 @@
 <body onunload = "deleteArray()">
     <!-- Script -->
     <script src="script.js"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
 
 
@@ -281,19 +282,51 @@ var counterAcesRow2 = -1;
 let numberOfIterationsRow2 = 0;
 let numberOfCardsDeltRow2 = 0;
 let areBothDealsComplete = "noneAre";
-let isThereASecondDeal = false;
+let isThereISecondDeal = false;
 let FirstDealIsDoneFlag = false; 
-let SecondDeatIsDoneFlag = false;
+let SecondDealIsDoneFlag = false;
 let ctx2 = canvasPlayer1.getContext("2d");
+
+
+
+
 function drawPlayerCardRow2()
 {
 
-    if (FirstDealIsDoneFlag == true) 
+    /////
+
+
+    if (FirstDealIsDoneFlag == true)
     {
-        retunr(-1);
+        return(-1);
     }
     
 
+    /*
+    if(drawCardBtnUpper.disabled = true;)
+        if(FirstDealIsDoneFlag == true && SecondDealIsDoneFlag == true)
+        {
+            drawCardBtnUpper.disabled = true;
+            dealCardsBtn.disabled = true;
+            return(1);
+        } 
+            
+        
+        
+
+    if (FirstDealIsDoneFlag == true) 
+    {
+        drawCardBtnUpper.disabled = true;
+        return(1);
+        
+    }
+
+*/
+
+
+    ///////
+
+    
     turnNoReset++;
     numberOfIterationsRow2++;
     
@@ -435,6 +468,10 @@ function drawPlayerCardRow2()
         let text2 = `Total Points: ${pointsHave}.`;
         document.getElementById("MessageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = text2;
+        FirstDealIsDoneFlag = true;
+        //dealCardsBtn.disabled = false;
+        //drawCardBtnUpper.disabled = true;
+        checkEndOfHands();
         
     }
     
@@ -463,9 +500,13 @@ function drawPlayerCardRow2()
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
                     console.log("BUST!");
-                   
+                    FirstDealIsDoneFlag = true;
                     //drawCardBtnUpper.disabled = true;
 
+
+                    //if done, make newRoundBtn visible 
+                    checkEndOfHands();
+ 
         }
             
         
@@ -483,6 +524,10 @@ function drawPlayerCardRow2()
         let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
         document.getElementById("MessageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave; 
+        FirstDealIsDoneFlag = true;
+        //dealCardsBtn.disabled = false;
+        //drawCardBtnUpper.disabled = true;
+        checkEndOfHands();
     }
 
     console.log("PlayerScore2", playerScoreRow2);
@@ -519,12 +564,43 @@ function setLowerMessages()
 
 }
 let ctx3 = canvasPlayer2.getContext("2d");
+
+
+
 function drawPlayerCardRow3(mark)
 {
-    isThereASecondDeal = true;
+    isThereISecondDeal = true;
+    //////
+    
+    
+    /*
+        //both hands are complete
+        if(FirstDealIsDoneFlag == true && SecondDealIsDoneFlag == true)
+        {
+        drawCardBtnLower.disabled = true;
+        dealCardsBtn.disabled = true;
+        return(1);
+        } 
+            
+        
+        
+
+        if (SecondDealIsDoneFlag == true) 
+        {
+            drawCardBtnLower.disabled = true;
+            return(1);
+            
+        }
+*/
+
+    //////
+    //if(SecondDealIsDoneFlag == true)
+    //{
+    //    return(-1);
+    //}
    
 
-    //document.getElementById('split').style.visibility = 'hidden';
+   
     
 
 //////////////////////////////////
@@ -719,14 +795,22 @@ function getMarkOfCard()
     let flagFoundCard = false;
 
     /////
+
+   
+
+    //import seedrandom = from './randomNumber';
+    
+    
     let randomNumber = new Math.seedrandom();
+
+    
     
     randomNumber = randomNumber();
     //console.log("random", randomNumber);
    
 
     //change back to 260 to see if zeros display
-    let betweenZeroand240 = randomNumber * 240
+    let betweenZeroand240 = randomNumber * 240;
     
     //console.log("random", 
     index = Math.trunc(betweenZeroand240);
@@ -781,6 +865,11 @@ return (decks[i]);
 function setMessageLower()
 {
 
+    if (SecondDealIsDoneFlag == true)
+    {
+        return(-1);
+    } 
+
     //works, goes here
     console.log("score", playerScoreRow3);
 
@@ -793,6 +882,9 @@ function setMessageLower()
         let text = `DEALER WINS! YOU LOSE ${pointsWagered} POINT`;
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave;
+        SecondDealIsDoneFlag = true;
+        checkEndOfHands();
+        
 
 
     }
@@ -804,6 +896,8 @@ function setMessageLower()
         let text = `DEALER LOSES! YOU WIN ${pointsWagered} POINT`;
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave;
+        SecondDealIsDoneFlag = true;
+        checkEndOfHands();
     }
     //dealer loses
     else if(playerScoreRow3 < 22 && totalCardsDeltRow3 == 5)
@@ -815,8 +909,9 @@ function setMessageLower()
         let text = `DEALER LOSES!  5 CARDS!  YOU WIN ${pointsWagered*2} POINTS`;
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave;
+        SecondDealIsDoneFlag = true;
         //document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
-       
+        checkEndOfHands();
 
     }
     
@@ -847,8 +942,8 @@ function setMessageLower()
                     let text = `DEALER WINS! BUST!  YOU LOSE ${pointsWagered} POINT`;
                     document.getElementById("messageLower").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave;
-                    
-                    
+                    SecondDealIsDoneFlag = true;
+                    checkEndOfHands();
                     console.log("BUST!");
                    
                     
@@ -879,6 +974,8 @@ function setMessageLower()
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave;
         document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
+        SecondDealIsDoneFlag = true;
+        checkEndOfHands();
  
     }
 
@@ -978,9 +1075,10 @@ wagerButtonTwentyfive.disabled=false;
  AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace"]; 
  counterAcesRow3 = 0;
 
+ FirstDealIsDoneFlag = false;
+ SecondDealIsDoneFlag = false;
 
-
-
+ isThereISecondDeal = false;
 
 
 }
@@ -994,6 +1092,39 @@ function playWave()
 
 setsUpGame();
 
+
+function checkEndOfHands()
+{
+    if(isThereISecondDeal)
+    {
+        if (FirstDealIsDoneFlag && SecondDealIsDoneFlag )
+        {
+            newRoundBtn.disabled = false;
+            drawCardBtnLower.disabled = true;
+            drawCardBtnUpper.disabled = true;
+            dealCardsBtn.disabled = true;
+        }
+        else if(SecondDealIsDoneFlag)
+        {
+        
+                drawCardBtnLower.disabled = true;
+                
+        }
+    }
+
+    else if(!isThereISecondDeal)
+    {
+    
+    
+        if (FirstDealIsDoneFlag == true)
+        {
+            drawCardBtnUpper.disabled = true;
+            newRoundBtn.disabled = false;
+            
+        }
+    }
+
+}
 
 
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
