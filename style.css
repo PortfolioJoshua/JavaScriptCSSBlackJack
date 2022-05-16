@@ -151,6 +151,10 @@ margin-left: 150px;
          
    #messageLower{
     font-weight: normal;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 
    }
    
