@@ -195,8 +195,10 @@ function drawDealerCards(){
     if(SecondDealIsDoneFlag == false)
     {
         
+        
     
-    if (dealerHandTotal > playerScoreRow3  && dealerHandTotal > 21)
+    
+    if (dealerHandTotal > 21)
     {
         //DEALER LOSES
         pointsHave = pointsHave + (pointsWagered);
@@ -212,14 +214,11 @@ function drawDealerCards(){
             text = `DEALER LOSES!  YOU WIN ${pointsWagered} POINT`;
         }
                    
-         
-        
-        
         document.getElementById("messageLower").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
     }
-    else if (playerScoreRow3 > dealerHandTotal && playerScoreRow3 <= 21)
+    else if (playerScoreRow3 > dealerHandTotal )
     {
         //PLAYER WINS
         pointsHave = pointsHave + (pointsWagered);
@@ -245,7 +244,7 @@ function drawDealerCards(){
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
     }
-    else if(playerScoreRow3 < dealerHandTotal && dealerHandTotal <= 21) 
+    else if(playerScoreRow3 <= dealerHandTotal) 
     {
         //DEALER WINS
         pointsHave = pointsHave - (pointsWagered);
@@ -277,7 +276,8 @@ function drawDealerCards(){
     if (FirstDealIsDoneFlag  == false)
     {
         
-    if(dealerHandTotal > 21)
+    //already checked and not applicable:  5 card charlie, player bust, player blackjack
+     if(dealerHandTotal > 21)
         {
                     //DEALER BUSTS
                     pointsHave = pointsHave + pointsWagered;
@@ -311,7 +311,7 @@ function drawDealerCards(){
 
     ////////////
 
-        else if(dealerHandTotal >= playerScoreRow2 && dealerHandTotal <= 21 )
+        else if(dealerHandTotal >= playerScoreRow2  )
         {
                     //DEALER WINS
                     pointsHave = pointsHave - pointsWagered;
@@ -342,7 +342,7 @@ function drawDealerCards(){
 
     ///////////
 
-    else if(dealerHandTotal < playerScoreRow2 && playerScoreRow2 <= 21)
+    else if(dealerHandTotal < playerScoreRow2 )
         {   
                     //PLAYER WINS       
                     pointsHave = pointsHave + pointsWagered;
@@ -410,7 +410,7 @@ let numberOfIterationsRow2 = 0;
 let numberOfCardsDeltRow2 = 0;
 let areBothDealsComplete = "noneAre";
 let isThereISecondDeal = false;
-
+let alternateHandForCharlie = 0;
 
 let ctx2 = canvasPlayer1.getContext("2d");
 
@@ -422,15 +422,7 @@ let ctx2 = canvasPlayer1.getContext("2d");
 function drawPlayerCardRow2()
 {
 
-    /////
-
-
-    if (FirstDealIsDoneFlag == true)
-    {
-        //return(-1);
-    }
     
-
     
     turnNoReset++;
     numberOfIterationsRow2++;
@@ -523,6 +515,7 @@ function drawPlayerCardRow2()
     {
         numberOfCardsDeltRow2++;
         playerScoreRow2 = playerScoreRow2 + 10;
+        alternateHandForCharlie = alternateHandForCharlie + 10;
     }
     else if (mark == "A")
     {
@@ -530,11 +523,13 @@ function drawPlayerCardRow2()
         counterAcesRow2 = counterAcesRow2 + 1;
         playerScoreRow2 = playerScoreRow2 + 11;
         AreThereAcesArrayRow2[counterAcesRow2] = "is ace";
+        alternateHandForCharlie = alternateHandForCharlie  + 1;
     }
     else
     {
         playerScoreRow2 = playerScoreRow2 + parseInt(mark);
         numberOfCardsDeltRow2++;
+        alternateHandForCharlie = alternateHandForCharlie + parseInt(mark);
     }
 
 
@@ -592,7 +587,7 @@ function drawPlayerCardRow2()
     
     else if (playerScoreRow2 > 21)
     {
-        for(let i = 0 ; i < 4; i++)
+        for(let i = 0 ; i < 4*5; i++)
         {
                 if(AreThereAcesArrayRow2[i] == "is ace")
                 {
@@ -757,6 +752,7 @@ if(mark === 0){
     {
         totalCardsDeltRow3++;
         playerScoreRow3 = playerScoreRow3 + 10;
+        alternateHandForCharlie = alternateHandForCharlie + 10;
     }
     else if (mark == "A")
     {
@@ -765,17 +761,21 @@ if(mark === 0){
         playerScoreRow3 = playerScoreRow3 + 11;
         AreThereAcesArrayRow3[counterAcesRow3] = "is ace";
         counterAcesRow3++;
+        alternateHandForCharlie = alternateHandForCharlie + 1;
     }
     else
     {
         playerScoreRow3 = playerScoreRow3 + parseInt(mark);
         totalCardsDeltRow3++;
+        alternateHandForCharlie = alternateHandForCharlie + parseInt(mark);
+
+        
     }
 
 
     
     //////////
-    if(playerScoreRow3 < 22 && numberOfCardsDeltRow3 == 5)
+    if(alternateHandForCharlie < 22 && numberOfCardsDeltRow3 == 5)
     {
         console.log("5 Card Charlie");
         pointsHave = pointsHave + (pointsWagered);
@@ -803,7 +803,7 @@ if(mark === 0){
     
     else if (playerScoreRow3 > 21)
     {
-        for(let i = 0 ; i < 4; i++)
+        for(let i = 0 ; i < 4*5; i++)
         {
                 if(AreThereAcesArrayRow3[i] == "is ace")
                 {
@@ -1098,8 +1098,8 @@ function newRound(){
  
  newRoundBtn.disabled = true;
  
- document.getElementById('messageLower').style.visibility = 'hidden';
- document.getElementById('MessageUnderRow2').style.visibility = 'hidden';
+ document.getElementById('messageLower').style.visibility = "";
+ document.getElementById('MessageUnderRow2').style.visibility = "";
 
 
 wagerButtonOne.disabled=false;
@@ -1143,8 +1143,7 @@ wagerButtonTwentyfive.disabled=false;
 
  isThereISecondDeal = false;
  numberOfCardsDeltRow3 = 0;
-
-
+ alternateHandForCharlie = 0;
 
 }
 
@@ -1192,13 +1191,56 @@ function checkEndOfHands()
 
 }
 
+function shuffleTheDeck()
+{
+    document.getElementById("drawCardBtnUpper").removeEventListener("click", drawPlayerCardRow2);
+    document.getElementById("dealCardsBtn").removeEventListener("click", drawDealerCards);
+    document.getElementById("split").removeEventListener("click", unhidePlayerRow2);
+    document.getElementById("newRoundBtn").removeEventListener("click", newRound);
+
+    document.getElementById('title').textContent = "Shuffling The Deck...";
+
+
+    deckUseage = 
+[
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0
+
+
+];
+
+    
+//window.setTimeout(shuffleTheDeck2, 5);
+
+}
+
 
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
 document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
 document.getElementById("split").addEventListener("click", unhidePlayerRow2);
 document.getElementById("newRoundBtn").addEventListener("click", newRound);
-
-
 
 </script>
 
