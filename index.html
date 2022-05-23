@@ -45,7 +45,7 @@
         <br>
         <div id = "interfaceRow2">
             
-            <div id = "MessageUnderRow2"><b>-</div>
+            <div id = "messageUnderRow2"><b></div>
            
             
                 <div id = "containsUpperButtons">
@@ -297,7 +297,7 @@ function drawDealerCards(){
                     
 
 
-                    document.getElementById("MessageUnderRow2").textContent = text;
+                    document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
                     console.log("BUST!");
@@ -328,7 +328,7 @@ function drawDealerCards(){
                     }
 
                     
-                    document.getElementById("MessageUnderRow2").textContent = text;
+                    document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
                     console.log("BUST!");
@@ -361,7 +361,7 @@ function drawDealerCards(){
 
 
                     
-                    document.getElementById("MessageUnderRow2").textContent = text;
+                    document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
                     console.log("BUST!");
@@ -395,7 +395,7 @@ function drawDealerCards(){
 
 
 //variable for final row 3 (split deck)
-let AreThereAcesArrayRow2 = ["no ace","no ace","no ace","no ace"]; 
+let AreThereAcesArrayRow2 = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
 let pointsHave = 30;
 let pointsWagered = 0;
 //temporary for testing split
@@ -490,18 +490,20 @@ function drawPlayerCardRow2()
     
     //for testing - SOME OF THIS IS NEEDED!!!!
     let mark = "";
-    if(globvar == 1 || globvar == 2  )
+    /*if(globvar == 1 || globvar == 2 || globvar == 3 )
     {
         mark = "10";
         globvar++;
        
+        console.log("mark", mark);
+        alert("mark1");
     }
-    else
+    else*/
     {
         mark  = getMarkOfCard();
     }
 
-    console.log("mark", mark);
+    
 
     
     ctx2.beginPath();
@@ -552,13 +554,21 @@ function drawPlayerCardRow2()
 
 
     }
-
-
-    
-
-    
-    else if(playerScoreRow2 < 22 && numberOfCardsDeltRow2 == 5)
+    else if(numberOfCardsDeltRow2 >= 2)
     {
+        SecondDealIsDoneFlag = true;
+        dealCardsBtn.disabled = false;
+        split.disabled = true;
+        
+    }
+
+
+    
+
+    
+    if(playerScoreRow2 < 22 && numberOfCardsDeltRow2 == 5)
+    {
+        dealCardsBtn.disabled = true;
         console.log("5 Card Charlie");
         pointsHave = pointsHave + (pointsWagered);
 
@@ -572,7 +582,7 @@ function drawPlayerCardRow2()
             text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
         }
         let text2 = `Total Points: ${pointsHave}.`;
-        document.getElementById("MessageUnderRow2").textContent = text;
+        document.getElementById("messageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = text2;
         FirstDealIsDoneFlag = true;
         //dealCardsBtn.disabled = false;
@@ -591,7 +601,7 @@ function drawPlayerCardRow2()
         {
                 if(AreThereAcesArrayRow2[i] == "is ace")
                 {
-                    AreThereAcesArrayRow2[i] == "used ace";
+                    AreThereAcesArrayRow2[i] = "used ace";
                     playerScoreRow2 = playerScoreRow2 - 10;
                     break;
                 }
@@ -601,6 +611,7 @@ function drawPlayerCardRow2()
         if(playerScoreRow2 > 21)
         {
                     
+                    dealCardsBtn.disabled = true;
                     pointsHave = pointsHave - pointsWagered;
 
 
@@ -618,7 +629,7 @@ function drawPlayerCardRow2()
 
 
                     
-                    document.getElementById("MessageUnderRow2").textContent = text;
+                    document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
                     console.log("BUST!");
@@ -639,10 +650,12 @@ function drawPlayerCardRow2()
         pointsHave = pointsHave + (pointsWagered*2)
 
         let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
-        document.getElementById("MessageUnderRow2").textContent = text;
+        document.getElementById("messageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave; 
         FirstDealIsDoneFlag = true;
-        dealCardsBtn.disabled = false;
+        
+         
+        //dealCardsBtn.disabled = false;
         drawCardBtnUpper.disabled = true;
         
 
@@ -672,7 +685,8 @@ let initialXRow3 = 150;
 //let playerScoreRow3 = 0;
 let totalCardsDeltRow3 = 0;
 let numberOfIterationsRow3 = 0;
-let AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace"]; 
+let AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
+
 let counterAcesRow3 = 0;
 let numberOfCardsDeltRow3 = 0;
 
@@ -773,10 +787,15 @@ if(mark === 0){
     }
 
 
+    if(numberOfCardsDeltRow2 >= 2)
+    {
+        dealCardsBtn.disabled = false;
+    }
     
     //////////
     if(alternateHandForCharlie < 22 && numberOfCardsDeltRow3 == 5)
     {
+        dealCardsBtn.disabled = true;
         console.log("5 Card Charlie");
         pointsHave = pointsHave + (pointsWagered);
 
@@ -807,7 +826,7 @@ if(mark === 0){
         {
                 if(AreThereAcesArrayRow3[i] == "is ace")
                 {
-                    AreThereAcesArrayRow3[i] == "used ace";
+                    AreThereAcesArrayRow3[i] = "used ace";
                     playerScoreRow3 = playerScoreRow3 - 10;
                     break;
                 }
@@ -816,7 +835,7 @@ if(mark === 0){
 
         if(playerScoreRow3 > 21)
         {
-                    
+                    dealCardsBtn.disabled = true;
                     pointsHave = pointsHave - pointsWagered;
 
                     let text = "";
@@ -859,7 +878,7 @@ if(mark === 0){
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave; 
         SecondDealIsDoneFlag = true;
-        dealCardsBtn.disabled = false;
+        //dealCardsBtn.disabled = false;
         //drawCardBtnUpper.disabled = true;
         checkEndOfHands();
     }
@@ -1098,8 +1117,8 @@ function newRound(){
  
  newRoundBtn.disabled = true;
  
- document.getElementById('messageLower').style.visibility = "";
- document.getElementById('MessageUnderRow2').style.visibility = "";
+ document.getElementById('messageLower').textContent  = "";
+ document.getElementById('messageUnderRow2').textContent= "";
 
 
 wagerButtonOne.disabled=false;
@@ -1116,8 +1135,9 @@ wagerButtonTwentyfive.disabled=false;
  playerScoreRow2 = 0;
  playerScoreRow3 = 0;
 
- AreThereAcesArrayRow2 = ["no ace","no ace","no ace","no ace"]; 
- pointsHave = 30;
+ AreThereAcesArrayRow2 = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
+ 
+ //pointsHave = 30;
  pointsWagered = 0;
  IsASplitFlag = false;
  turnNoReset = 0;
@@ -1135,7 +1155,8 @@ wagerButtonTwentyfive.disabled=false;
 //let playerScoreRow3 = 0;
  totalCardsDeltRow3 = 0;
  numberOfIterationsRow3 = 0;
- AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace"]; 
+ AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
+
  counterAcesRow3 = 0;
 
  FirstDealIsDoneFlag = false;
