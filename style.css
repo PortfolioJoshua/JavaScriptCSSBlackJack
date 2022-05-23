@@ -1,17 +1,28 @@
 body{
 
-   max-width: 1200px;
-   
-   margin-left: auto;
+max-width: 1200px;
+ margin-left: auto;
  margin-right: auto;
  margin-top: 0;
  margin-bottom: 0;
- 
+ }
+
+
+#container{
+    
+   border: 2px solid rgb(0, 0, 0);
+   height:85%;
+   width: 50%;
+   text-align:center;
+   border-radius: 4em;
+   box-shadow: 10px 20px 30px rgba(0, 0, 0, .6);
+   max-height:900px;
 }
 
 #forFlex{
 
-    border: 10px solid rgb(210, 29, 19);
+    /*most outer container*/
+    /*border: 10px solid rgb(150, 210, 19);*/
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -20,99 +31,30 @@ body{
 
 }
 
-#container{
-    
-   border: 10px solid rgb(113, 137, 26);
-   height:85%;
-   width: 50%;
-   text-align:center;
-   border-radius: 4em;
-   box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
-   max-height:900px;
-   
- 
-}
-
-#containerLargeDisplay{
-
-    border: 10px solid rgb(226, 14, 177);
-    
-  
-
-}
 
 
 #headerContainer{
     
-   
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    
-    
 }
 
 #title{
 
 font-size: 30px;
-
-
-
 margin-left: 150px;
-
 }
-
-
 #scoreHere{
    
     font-size: 60px;
     color:red;
-    
-    
-   
-    
-
-    
 }
 
- 
- 
-    
-#canvasDealer{
-    /*border-style: solid;*/
-    color: blue;
-   
-    margin-top:20px;
-}
-
-/*border: 1px solid rgb(137, 26, 26);*/
-
-#canvasPlayer1{
-
-   /* border-style: solid;*/
-
-}
-
-#canvasPlayer2{
-
-    /*border-style: solid;*/
-
-}
-   
-
-
-#frontOfCards{
-
-    width: 400px;
-    text-align: center;
-    justify-content: center;
-    color:red;
-}
-    
 #scoreAtTop{
     width:50%;
     font-size: 30px;
-    color:red;
+    color:rgb(255, 72, 0);
     align-self: center;
 }
 
@@ -121,30 +63,9 @@ margin-left: 150px;
     
 }
    
-
-   #message{
-    color:red;
-    font-size: 14;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Courier, monospace, Times, serif;
-    margin-bottom: 5px;
-   
-   }
-  
-   #flex{
-       display: flex;
-       flex-direction: row;
-
-   }
-
-   #drawCardBtnUpper{
-       text-align: center;
-       justify-items: center;
-   }
-
-
-   
-         
-   #messageLower{
+/*font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Courier, monospace, Times, serif;!-->/
+*/
+  #messageLower{
     font-weight: normal;
     margin-bottom: 0;
     margin-top: 0;
@@ -153,94 +74,71 @@ margin-left: 150px;
 
    }
 
+   /* for small mobile screen*/
+   #alternateContainer{
+    border: 10px solid rgb(252, 231, 170);
+    background-color: whitesmoke;
+    display:flex;
+    flex-direction: row;
+    justify-content:center;  
+    align-items: center;
+    width:100%;
+    height:100vh;
+   
+}
+
    #messageUnderRow2{
 
     margin-bottom:10px;
     margin-bottom:10px;
    }
    
-   #alternateContainer{
-
-    background-color: whitesmoke;
-    display:flex;
-    flex-direction: row;
    
-    justify-content:center;  
-    align-items: center;
-    width:100%;
-    height:100vh;
-    border: 1px solid rgb(41, 6, 109);
-    
-    
 
-    
-}
-
-#item{
-    border: 1px solid rgb(6, 9, 109);
-    display:flex;
-    flex-direction: row;
-    justify-content:center;  
-    align-items: center;
-    height:10%;
-    width:100%;
-    font-size: 10px;
-    
-
-
-}
-
-#bottomCards{
+   #bottomCards{
     display:flex;
     flex-direction: row;
     justify-content:center;  
 }
    /*mobile*/
+   @media screen and (max-height: 584px){
     
-   
-   @media screen and (min-height: 1px) {
-
-    #alternateContainer{display:none;}
-
-    }
-
-
-   
-    @media screen and (max-width : 1100px) {
-
-        #container{display: none;}
-    #alternateContainer{display:flex;}
-    #item{display:flex;}
-    #forFlex{display: none;}
-    #containerLargeDisplay{display: none;}
-
-    }
-   
-@media screen and (max-height: 584px) or (max-width: 1100px){
-
+    
     #container{display: none;}
-    #alternateContainer{display:flex;}
-    #item{display:flex;}
-    #forFlex{display: none;}
-    #containerLargeDisplay{display: none;}
+    
+    #alternateContainer{display:flex;
+       
+
+    }
    
+    
+    #forFlex{display: none;}
+    #containerLargeDisplay{display: none;
+    
+    }
+    
     }
 
-     /*green   1037 - 606*/
-    @media screen and (max-height: 955px) and (min-heigth: 585px) {
+   
 
-    #alternateContainer{display:none;}
-    #item{display:none;}
-    #container{display: block;}
+     /*green*/
+     
+    @media screen and (max-height: 955px) and (min-height: 585px) {
+    #alternateContainer{
+       display:none;
+    }
+    
+    #container{
+        display: block;
+    }
+    
+    
     #containerLargeDisplay{display: none;}
     
 
-}
+}  
 
-
-
-    /*extra large*   1058 - gets bigger*/
-    /*starts at 1055px goes to biggest   after 1055 is*/
+/*blue*/  
     @media screen and (max-height: 2300px) and (min-height: 956px) {
 
         
@@ -248,29 +146,9 @@ margin-left: 150px;
         #alternateContainer{display:none;}
         #item{display:none;}
 
-        #forFlex{
-
-            border: 10px solid rgb(210, 29, 19);
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        
-        }
-        /*#container{display: none;}*/
         #container{
-    
-            border: 10px solid rgb(59, 26, 137);
-            height:70%;
-            width: 50%;
-            text-align:center;
-            border-radius: 4em;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 0;
-            margin-bottom:0;
-            box-shadow: 10px 20px 30px rgba(0, 0, 0, .3);
+            border: 2px solid rgb(0, 0, 0);
+            box-shadow: 10px 20px 30px rgba(0, 0, 0, .6);
             max-height: 600px;
           
          }
@@ -281,18 +159,6 @@ margin-left: 150px;
 
  
 
-/*
-@media screen and (min-height: 750px) {
-
-    #container{display: none;}
-    #alternateContainer{display:flex;}
-    #item{display:flex;}
-    #forFlex{display: none;}
-    #containerLargeDisplay{display: none;}
-   
-    }
-
-*/
 
 
    
