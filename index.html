@@ -159,15 +159,17 @@ function drawDealerCards(){
         }
         multiplierRow1++;
         let mark  = getMarkOfCard();
-
-        if (mark == "Q" || mark == "K" || mark == "Q" || mark == "J" || mark == "10")
+        //these are the face cards
+        if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
         {
             dealerHandTotal = dealerHandTotal + 10;
         }
+        //thi is an ace
         else if (mark == "A")
         {
             dealerHandTotal = dealerHandTotal + 1;
         }
+        //these are the number cards 2 - 9 (not one for ace)
         else
         {
             console.log("mark" , mark);
@@ -177,13 +179,16 @@ function drawDealerCards(){
 
         ctx1.beginPath();
         ctx1.fillStyle='red';
+        //draws cards
         ctx1.rect((initialXRow1) +  multiplierRow1 * CARDGAP, 7 , 50, 64);
         ctx1.stroke();
 
         ctx1.font = "50px Arial";
 
 
+        //alignment for bigger card mark
         if(mark == "10"){
+            //dras mark
             ctx1.fillText(mark, initialXRow1 + multiplierRow1 * CARDGAP-4,  60 );
         }
         else{
@@ -215,7 +220,7 @@ function drawDealerCards(){
         {
             text = `DEALER LOSES!  YOU WIN ${pointsWagered} POINT`;
         }
-                   
+         //lowest message of two          
         document.getElementById("messageLower").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
@@ -237,7 +242,7 @@ function drawDealerCards(){
         {
             text = `YOU WIN!  ${pointsWagered} POINT`;
         }
-            
+        //lowest of two messages 
         document.getElementById("messageLower").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
@@ -290,7 +295,7 @@ function drawDealerCards(){
 
                     
 
-
+                    //upper message, of two.
                     document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
@@ -322,7 +327,7 @@ function drawDealerCards(){
                         text = `YOU LOSE ${pointsWagered} POINT`;
                     }
 
-                    
+                    //upper message of two
                     document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
@@ -355,7 +360,7 @@ function drawDealerCards(){
                     }
 
 
-                    
+                    //upper message of two
                     document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
@@ -464,7 +469,7 @@ function drawPlayerCardRow2()
 
 
 
-
+        //clear sthe two canvases for dealers deal and players regular deal
         ctx1.clearRect(0,0,1000,78);
         ctx2.clearRect(0,0,1000,78);
 
@@ -489,13 +494,14 @@ function drawPlayerCardRow2()
     console.log("log:", (initialXRow2) +  multiplierRow2 * CARDGAP, multiplierRow2);
     ctx2.stroke();
     ctx2.font = "50px Arial";
-    
-    if (mark == "Q" || mark == "K" || mark == "Q" || mark == "J" || mark == "10")
+    //face cards
+    if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
     {
         numberOfCardsDeltRow2++;
         playerScoreRow2 = playerScoreRow2 + 10;
         alternateHandForCharlie = alternateHandForCharlie + 10;
     }
+    //ace
     else if (mark == "A")
     {
         numberOfCardsDeltRow2++;
@@ -504,6 +510,7 @@ function drawPlayerCardRow2()
         AreThereAcesArrayRow2[counterAcesRow2] = "is ace";
         alternateHandForCharlie = alternateHandForCharlie  + 1;
     }
+    //number cards 2-9 : no one because is ace
     else
     {
         playerScoreRow2 = playerScoreRow2 + parseInt(mark);
@@ -559,6 +566,7 @@ function drawPlayerCardRow2()
             text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
         }
         let text2 = `Total Points: ${pointsHave}.`;
+        //top of two messages
         document.getElementById("messageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = text2;
         FirstDealIsDoneFlag = true;
@@ -606,7 +614,7 @@ function drawPlayerCardRow2()
 
 
 
-                    
+                    //top of two messages
                     document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
@@ -628,6 +636,7 @@ function drawPlayerCardRow2()
         pointsHave = pointsHave + (pointsWagered*2)
 
         let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
+        //top of two messages
         document.getElementById("messageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave; 
         FirstDealIsDoneFlag = true;
@@ -719,14 +728,15 @@ if(mark === 0){
     ctx3.stroke();
     ctx3.font = "50px Arial";
     
-    if (mark == "Q" || mark == "K" || mark == "Q" || mark == "J" || mark == "10")
+    //a ten valuedf card: queen, king, jack, or ten 
+    if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
     {
         totalCardsDeltRow3++;
         playerScoreRow3 = playerScoreRow3 + 10;
         
         alternateHandForCharlie = alternateHandForCharlie + 10;
     }
-    
+    //an ace
     else if (mark == "A")
     {
         totalCardsDeltRow3++;
@@ -737,6 +747,7 @@ if(mark === 0){
         //value of hand with all aces counted as 1.
         alternateHandForCharlie = alternateHandForCharlie + 1;
     }
+    //number 2 - 9 , one is not counted because it is an ace
     else
     {
         playerScoreRow3 = playerScoreRow3 + parseInt(mark);
@@ -771,6 +782,7 @@ if(mark === 0){
         }
 
         let text2 = `Total Points: ${pointsHave}.`;
+        //lowest of two messages
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = text2;
         SecondDealIsDoneFlag = true;
@@ -810,7 +822,7 @@ if(mark === 0){
                         text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
                     }
 
-                    
+                    //lowest of two messages
                     document.getElementById("messageLower").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
@@ -834,6 +846,7 @@ if(mark === 0){
 
 
         let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
+        //lowest of two messages
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave; 
         SecondDealIsDoneFlag = true;
