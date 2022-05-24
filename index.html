@@ -199,9 +199,24 @@ function drawDealerCards(){
     }
 
     //if true, no need for deal, cards already busted, charlied, or blackjacked
+    //row3
     if(SecondDealIsDoneFlag == false)
     {
         
+        
+    //if ace and over 21 change next ace to 1
+    if (playerScoreRow3 > 21)
+    {
+        for(let i = 0 ; i < 4*5; i++)
+        {
+                if(AreThereAcesArrayRow3[i] == "is ace")
+                {
+                    AreThereAcesArrayRow3[i] = "used ace";
+                    playerScoreRow3 = playerScoreRow3 - 10;
+                    break;
+                }
+        }
+    }
         
     
     //bust
@@ -275,6 +290,21 @@ function drawDealerCards(){
     //player didn't bust, charlie, or blackjack, so needs to check against deakers deal
     if (FirstDealIsDoneFlag  == false)
     {
+    
+            
+    //if ace and over 21 change next ace to 1
+    if (dealerHandTotal > 21)
+    {
+        for(let i = 0 ; i < 4*5; i++)
+        {
+                if(AreThereAcesArrayRow2[i] == "is ace")
+                {
+                    AreThereAcesArrayRow2[i] = "used ace";
+                    dealerHandTotal = dealerHandTotal - 10;
+                    break;
+                }
+        }
+    }
     
      if(dealerHandTotal > 21)
         {
@@ -1196,6 +1226,7 @@ function shuffleTheDeck()
 
 }
 
+setsUpGame();
 
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
 document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
