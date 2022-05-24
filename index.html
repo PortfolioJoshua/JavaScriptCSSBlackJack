@@ -49,7 +49,7 @@
             
                 <div id = "containsUpperButtons">
                     
-                    <input id = "drawCardBtnUpper" type="button" value="Draw Card" >
+                    <input id = "drawCardBtnUpper" type="button" value="Draw Card" onclick = "drawPlayerCardRow2(0) >
                     <input id = "dealCardsBtn" type="button" value="Deal" >
                     <input id = "newRoundBtn" type="button" value="New Round" >
                     <input id = "wagerButtonOne" type="button" value="Wager 1" onclick="wager(1)" >
@@ -116,6 +116,9 @@ let playerScoreRow2 = 0;
 let playerScoreRow3 = 0;
 let FirstDealIsDoneFlag = false; 
 let SecondDealIsDoneFlag = false;
+
+let AreThereAcesArrayRow = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
+
 
 //get the context to use canvas, is global
 let ctx1 = canvasDealer.getContext("2d");
@@ -209,9 +212,9 @@ function drawDealerCards(){
     {
         for(let i = 0 ; i < 4*5; i++)
         {
-                if(AreThereAcesArrayRow3[i] == "is ace")
+                if(AreThereAcesArrayRow[i] == "is ace")
                 {
-                    AreThereAcesArrayRow3[i] = "used ace";
+                    AreThereAcesArrayRow[i] = "used ace";
                     playerScoreRow3 = playerScoreRow3 - 10;
                     break;
                 }
@@ -297,9 +300,9 @@ function drawDealerCards(){
     {
         for(let i = 0 ; i < 4*5; i++)
         {
-                if(AreThereAcesArrayRow2[i] == "is ace")
+                if(AreThereAcesArrayRow[i] == "is ace")
                 {
-                    AreThereAcesArrayRow2[i] = "used ace";
+                    AreThereAcesArrayRow[i] = "used ace";
                     dealerHandTotal = dealerHandTotal - 10;
                     break;
                 }
@@ -425,7 +428,6 @@ function drawDealerCards(){
 
 
 //variable for final row 3 (split deck)
-let AreThereAcesArrayRow2 = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
 let pointsHave = 30;
 let pointsWagered = 0;
 //temporary for testing split
@@ -449,7 +451,7 @@ let ctx2 = canvasPlayer1.getContext("2d");
 
 
 //checks this and alters mid messsgae display - complete!!!
-function drawPlayerCardRow2()
+function drawPlayerCardRow2(mark)
 {
 
     
@@ -515,7 +517,10 @@ function drawPlayerCardRow2()
         mark  = getMarkOfCard();
     }
 
-    
+    for(let i = 0; i < 2 ;i++)
+    {
+        mark = 10;
+    }
 
     
     ctx2.beginPath();
@@ -537,7 +542,7 @@ function drawPlayerCardRow2()
         numberOfCardsDeltRow2++;
         counterAcesRow2 = counterAcesRow2 + 1;
         playerScoreRow2 = playerScoreRow2 + 11;
-        AreThereAcesArrayRow2[counterAcesRow2] = "is ace";
+        AreThereAcesArrayRow[counterAcesRow2] = "is ace";
         alternateHandForCharlie = alternateHandForCharlie  + 1;
     }
     //number cards 2-9 : no one because is ace
@@ -614,9 +619,9 @@ function drawPlayerCardRow2()
     {
         for(let i = 0 ; i < 4*5; i++)
         {
-                if(AreThereAcesArrayRow2[i] == "is ace")
+                if(AreThereAcesArrayRow[i] == "is ace")
                 {
-                    AreThereAcesArrayRow2[i] = "used ace";
+                    AreThereAcesArrayRow[i] = "used ace";
                     playerScoreRow2 = playerScoreRow2 - 10;
                     break;
                 }
@@ -701,7 +706,6 @@ let initialXRow3 = 150;
 //let playerScoreRow3 = 0;
 let totalCardsDeltRow3 = 0;
 let numberOfIterationsRow3 = 0;
-let AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
 
 let counterAcesRow3 = 0;
 let numberOfCardsDeltRow3 = 0;
@@ -772,7 +776,7 @@ if(mark === 0){
         totalCardsDeltRow3++;
         counterAcesRow3 = counterAcesRow3 + 1;
         playerScoreRow3 = playerScoreRow3 + 11;
-        AreThereAcesArrayRow3[counterAcesRow3] = "is ace";
+        AreThereAcesArrayRow[counterAcesRow3] = "is ace";
         counterAcesRow3++;
         //value of hand with all aces counted as 1.
         alternateHandForCharlie = alternateHandForCharlie + 1;
@@ -827,9 +831,9 @@ if(mark === 0){
     {
         for(let i = 0 ; i < 4*5; i++)
         {
-                if(AreThereAcesArrayRow3[i] == "is ace")
+                if(AreThereAcesArrayRow[i] == "is ace")
                 {
-                    AreThereAcesArrayRow3[i] = "used ace";
+                    AreThereAcesArrayRow[i] = "used ace";
                     playerScoreRow3 = playerScoreRow3 - 10;
                     break;
                 }
@@ -1066,7 +1070,7 @@ function unhidePlayerRow2(){
     isThereASecondDeal = true;
     //for draeing both decks wgeb split button was pressed
     drawPlayerCardRow3(10);
-    drawPlayerCardRow2();
+    drawPlayerCardRow2(10);
     
 }
 
@@ -1104,7 +1108,6 @@ wagerButtonTwentyfive.disabled=false;
  playerScoreRow2 = 0;
  playerScoreRow3 = 0;
 //four aces, times 5 decks
- AreThereAcesArrayRow2 = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
  
  //pointsHave = 30;
  pointsWagered = 0;
@@ -1124,7 +1127,6 @@ wagerButtonTwentyfive.disabled=false;
 //let playerScoreRow3 = 0;
  totalCardsDeltRow3 = 0;
  numberOfIterationsRow3 = 0;
- AreThereAcesArrayRow3 = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
 
  counterAcesRow3 = 0;
 
@@ -1228,7 +1230,7 @@ function shuffleTheDeck()
 
 setsUpGame();
 
-document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
+//document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
 document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
 document.getElementById("split").addEventListener("click", unhidePlayerRow2);
 document.getElementById("newRoundBtn").addEventListener("click", newRound);
