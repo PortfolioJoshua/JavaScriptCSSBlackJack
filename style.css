@@ -101,7 +101,7 @@ margin-left: 150px;
     justify-content:center;  
 }
    /*mobile*/
-   @media screen and (max-height: 584px){
+   @media screen and (max-height: 554px){
     
     
     #container{display: none;}
@@ -123,13 +123,14 @@ margin-left: 150px;
 
      /*green*/
      
-    @media screen and (max-height: 955px) and (min-height: 585px) {
+    @media screen and (max-height: 955px) and (min-height: 555px) {
     #alternateContainer{
        display:none;
     }
     
     #container{
         display: block;
+        
     }
     
     
