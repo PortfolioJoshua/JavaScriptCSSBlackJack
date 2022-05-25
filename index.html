@@ -49,7 +49,7 @@
             
                 <div id = "containsUpperButtons">
                     
-                    <input id = "drawCardBtnUpper" type="button" value="Draw Card" onclick = "drawPlayerCardRow2(0) >
+                    <input id = "drawCardBtnUpper" type="button" value="Draw Card" onclick = "drawPlayerCardRow2(0)" >
                     <input id = "dealCardsBtn" type="button" value="Deal" >
                     <input id = "newRoundBtn" type="button" value="New Round" >
                     <input id = "wagerButtonOne" type="button" value="Wager 1" onclick="wager(1)" >
@@ -140,7 +140,7 @@ function drawDealerCards(){
 
     document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
     drawCardBtnUpper.disabled = true;
-    drawCardBtnUpper.disabled = true;
+    drawCardBtnLower.disabled = true;
     newRoundBtn.disabled = false;
 
     
@@ -417,7 +417,7 @@ function drawDealerCards(){
     counterAcesRow1 = -1;
     
     multiplierRow1 = -1;
-    initialXRow1 = 150;
+   
     dealerHandTotal = 0;
     
     dealCardsBtn.disabled = true;
@@ -444,16 +444,17 @@ let areBothDealsComplete = "noneAre";
 let isThereISecondDeal = false;
 let alternateHandForCharlie = 0;
 
+let counterOfPressedUpperDrawBtn = 0;
 let ctx2 = canvasPlayer1.getContext("2d");
 
-
-
-
+let IsDoubleDownRow2Flag = false;
+let tenCounter = 0;
 
 //checks this and alters mid messsgae display - complete!!!
 function drawPlayerCardRow2(mark)
 {
 
+    counterOfPressedUpperDrawBtn++;
     
     
     turnNoReset++;
@@ -461,10 +462,11 @@ function drawPlayerCardRow2(mark)
     
     
     //there are two ten valued deals, so mustg be split on choosing to split
-    if( gWasASplitFlag == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
+   /* if( gWasASplitFlag == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
     {
-        
+        alert("in here");
         dealCardsBtn.disabled = false;
+        IsDoubleDownRow2Flag = true; 
         
         
     }
@@ -473,20 +475,10 @@ function drawPlayerCardRow2(mark)
         dealCardsBtn.disabled = true;
     }
     
-
+*/
     document.getElementById('split').style.visibility = 'hidden';
     
    
-    //two tens dealt, and chose to display two stacks of decks
-   if (IsASplitFlag === true )
-   {
-    ctx2.clearRect(0,0,1000,78);
-    numberOfCardsDeltRow2 = 0;
-    multiplierRow2 = - 1;
-    playerScoreRow2 = 0;
-    IsASplitFlag = false;
-
-   }
     
 
    
@@ -509,19 +501,46 @@ function drawPlayerCardRow2(mark)
     }
    
     multiplierRow2++;
-    
+    console.log("x", multiplierRow2);
     
    
-    let mark = "";
-    {
-        mark  = getMarkOfCard();
-    }
+    
+        if (counterOfPressedUpperDrawBtn == 1 )
+        {
+            mark = "10";
 
-    for(let i = 0; i < 2 ;i++)
-    {
-        mark = 10;
-    }
+        }
+        else if (counterOfPressedUpperDrawBtn == 2)
+        {
 
+            mark = "10";
+            IsASplitFlag = true;
+            
+        }
+        else
+        {
+            mark = getMarkOfCard();
+        }
+    
+
+        //two tens dealt, and chose to display two stacks of decks
+   if (IsASplitFlag == true )
+   {
+       alert("split");
+       
+    //ctx2.clearRect(0,0,1000,78);
+    //numberOfCardsDeltRow2 = 1;
+    //multiplierRow2 = multiplierRow2 - 1;
+    //playerScoreRow2  = playerScoreRow2 - 10;
+    IsASplitFlag = false;
+    //drawPlayerCardRow3("10");
+    //drawPlayerCardRow2("10");
+
+    
+
+   }
+    
+        
     
     ctx2.beginPath();
     ctx2.fillStyle='blue';
@@ -532,7 +551,14 @@ function drawPlayerCardRow2(mark)
     //face cards
     if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
     {
+        
         numberOfCardsDeltRow2++;
+        
+        if(mark == "10" && (numberOfIterationsRow2 == 1 || numberOfCardsDeltRow2 == 2))
+        {
+            tenCounter++;
+        }
+        
         playerScoreRow2 = playerScoreRow2 + 10;
         alternateHandForCharlie = alternateHandForCharlie + 10;
     }
@@ -554,33 +580,36 @@ function drawPlayerCardRow2(mark)
     }
 
 
+    console.log("playerScoreRow2" , playerScoreRow2);
     
 
 
     
     
 
-    //two cards dealt and both are tens - not split yet - split calls :unhidePlayerRow2()
-    if(numberOfCardsDeltRow2 == 2 && playerScoreRow2 == 20 && turnNoReset == 2)
+    //two cards dealt and both are tens 
+    if(tenCounter == 2)
     {
-        
-        dealCardsBtn.disabled = false;
+        alert("counter");
+        //dealCardsBtn.disabled = false;
         document.getElementById('split').style.visibility = 'visible';
-        IsASplitFlag = false;
+        dealCardsBtn.disabled =  false;
+        //IsASplitFlag = false;
         gWasASplitFlag = true;
-        
+        tenCounter = 0;
+    }
         
 
 
-    }//two cards and no split
-    else if(numberOfCardsDeltRow2 >= 2)
+    //two cards and no split
+    /*else if(numberOfCardsDeltRow2 >= 2)
     {
-        SecondDealIsDoneFlag = true;
-        dealCardsBtn.disabled = false;
-        split.disabled = true;
+        //SecondDealIsDoneFlag = true;
+        //dealCardsBtn.disabled = false;
+        //split.disabled = true;
         
     }
-
+*/
 
     
 
@@ -605,6 +634,7 @@ function drawPlayerCardRow2(mark)
         document.getElementById("messageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = text2;
         FirstDealIsDoneFlag = true;
+        
         //dealCardsBtn.disabled = false;
         //drawCardBtnUpper.disabled = true;
         checkEndOfHands();
@@ -725,22 +755,24 @@ function drawPlayerCardRow3(mark)
 {
     numberOfCardsDeltRow3++;
     isThereISecondDeal = true;
-   
+    numberOfIterationsRow3++;
 
-numberOfIterationsRow3++;
 
-//checks for two ten valued cards dealt
+
+
+/*//checks for two ten valued cards dealt
 if( gWasASplitFlag == true && numberOfIterationsRow2 > 3 && numberOfIterationsRow3 > 1)
     {
         
         dealCardsBtn.disabled = false;
-        
+        alert("a");
     }
     else{
         
         dealCardsBtn.disabled = true;
+        alert("b");
     }
-
+*/
 
 if(mark === 0){
 
@@ -758,7 +790,7 @@ if(mark === 0){
     ctx3.beginPath();
     ctx3.fillStyle='blue';
     ctx3.rect((initialXRow3) +  multiplierRow3 * CARDGAP, 7 , 50, 64);
-    console.log("log:", (initialXRow3) +  multiplierRow3 * CARDGAP, multiplierRow3);
+   
     ctx3.stroke();
     ctx3.font = "50px Arial";
     
@@ -792,6 +824,10 @@ if(mark === 0){
     }
 
 
+    console.log("playerScoreRow3", playerScoreRow3);
+    
+
+
     if(numberOfCardsDeltRow2 >= 2)
     {
         dealCardsBtn.disabled = false;
@@ -820,6 +856,7 @@ if(mark === 0){
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = text2;
         SecondDealIsDoneFlag = true;
+       
         //dealCardsBtn.disabled = false;
         //drawCardBtnUpper.disabled = true;
         checkEndOfHands();
@@ -1056,8 +1093,9 @@ wagerButtonTwentyfive.disabled=true;
 
 }
 
-function unhidePlayerRow2(){
+function onDoubleDownPress(){
    
+    alert("rigth");
     IsASplitFlag = true;
     WasASplitFlag = true;
 
@@ -1069,13 +1107,19 @@ function unhidePlayerRow2(){
     
     isThereASecondDeal = true;
     //for draeing both decks wgeb split button was pressed
-    drawPlayerCardRow3(10);
-    drawPlayerCardRow2(10);
+    drawPlayerCardRow3("10");
+    IsDoubleDownRow2Flag = true;
+    ctx2.clearRect((initialXRow1 +  (1 * CARDGAP) - 1),0,1000,78);
+    
+    //for testing
+    //playerScoreRow3 =  10;
+    //drawPlayerCardRow2("10");
     
 }
 
 //reset all values to initial state for next new round
 function newRound(){
+    
 //temporary for testing split
  globvar = 1;
  
@@ -1101,7 +1145,7 @@ wagerButtonTwentyfive.disabled=false;
  
  
  multiplierRow1 = -1;
- initialXRow1 = 150;
+ initialXRow1 = 150;//
  dealerHandTotal = 0;
  clearRectFlag = false;
  isAllDelt = false;
@@ -1136,7 +1180,9 @@ wagerButtonTwentyfive.disabled=false;
  isThereISecondDeal = false;
  numberOfCardsDeltRow3 = 0;
  alternateHandForCharlie = 0;
+ IsDoubleDownRow2Flag = false;
 
+ tenCounter = 0;
 }
 
 function playWave()
@@ -1152,30 +1198,49 @@ function checkEndOfHands()
 {
     if(isThereISecondDeal)
     {
-        if (FirstDealIsDoneFlag && SecondDealIsDoneFlag )
+        alert("end4");
+        console.log("a", FirstDealIsDoneFlag);
+        console.log("b,", SecondDealIsDoneFlag);
+        console.log("c", IsDoubleDownRow2Flag);
+        if (FirstDealIsDoneFlag && SecondDealIsDoneFlag && IsDoubleDownRow2Flag)
         {
             newRoundBtn.disabled = false;
             drawCardBtnLower.disabled = true;
             drawCardBtnUpper.disabled = true;
-            dealCardsBtn.disabled = true;
+            //dealCardsBtn.disabled = false;
+            alert("endofhands");
         }
         else if(SecondDealIsDoneFlag)
         {
         
                 drawCardBtnLower.disabled = true;
+                //drawCardBtnUpper.disabled =true;
+                //newRoundBtn.disabled = false;
 
+                alert("end3");
                 
         }
+        else if (FirstDealIsDoneFlag)
+        {
+                //drawCardBtnUpper.disabled = true;
+                drawCardBtnUpper.disabled = true;
+                //newRoundBtn.disabled = false;
+                alert("end1");
+        }
+
+
     }
 
     else if(!isThereISecondDeal)
     {
+        alert("end5");
     
     
         if (FirstDealIsDoneFlag == true)
         {
-            drawCardBtnUpper.disabled = true;
+            drawCardBtnUpper.disabled = false;
             newRoundBtn.disabled = false;
+            alert("end2");
             
         }
     }
@@ -1187,7 +1252,7 @@ function shuffleTheDeck()
 {
     document.getElementById("drawCardBtnUpper").removeEventListener("click", drawPlayerCardRow2);
     document.getElementById("dealCardsBtn").removeEventListener("click", drawDealerCards);
-    document.getElementById("split").removeEventListener("click", unhidePlayerRow2);
+    document.getElementById("split").removeEventListener("click", onDoubleDownPress);
     document.getElementById("newRoundBtn").removeEventListener("click", newRound);
 
     document.getElementById('title').textContent = "Shuffling The Deck...";
@@ -1232,7 +1297,7 @@ setsUpGame();
 
 //document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
 document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
-document.getElementById("split").addEventListener("click", unhidePlayerRow2);
+document.getElementById("split").addEventListener("click", onDoubleDownPress);
 document.getElementById("newRoundBtn").addEventListener("click", newRound);
 
 </script>
