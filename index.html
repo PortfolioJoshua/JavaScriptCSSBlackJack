@@ -502,6 +502,35 @@ function drawPlayerCardRow2(mark)
            
             
         }
+        else if (counterOfPressedUpperDrawBtn == 3)
+        {
+
+            mark = "2";
+           
+            
+        }
+        else if (counterOfPressedUpperDrawBtn == 4)
+        {
+
+            mark = "2";
+           
+            
+        }
+        else if (counterOfPressedUpperDrawBtn == 5)
+        {
+
+            mark = "2";
+           
+            
+        }
+        else if (counterOfPressedUpperDrawBtn == 6)
+        {
+
+            mark = "2";
+           
+            
+        }
+
         else
         {
             mark = getMarkOfCard();
@@ -595,9 +624,10 @@ function drawPlayerCardRow2(mark)
 */
 
     
-
+    console.log("charlie", alternateHandForCharlie);
+    console.log("numberOfCardsDeltRow2", numberOfCardsDeltRow2 );
     //5 cards wins, alternatehandforcharlie is a count with aces counting 1 not 11.
-    if(alternateHandForCharlie < 22 && numberOfCardsDeltRow2 == 5)
+    if(alternateHandForCharlie < 22 && numberOfCardsDeltRow2 == 6)
     {
         //dealCardsBtn.disabled = true;
         console.log("5 Card Charlie");
