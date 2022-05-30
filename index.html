@@ -144,7 +144,6 @@ function drawDealerCards(){
     newRoundBtn.disabled = false;
 
     
-    IsASplitFlag = false;
     
     clearRectFlag = true;
     
@@ -432,7 +431,7 @@ let pointsHave = 30;
 let pointsWagered = 0;
 //temporary for testing split
 let globvar = 1;
-let IsASplitFlag = false;
+
 let turnNoReset = 0;
 let  gWasASplitFlag = false;
 let multiplierRow2 = -1;
@@ -500,7 +499,7 @@ function drawPlayerCardRow2(mark)
         {
 
             mark = "10";
-            IsASplitFlag = true;
+           
             
         }
         else
@@ -509,22 +508,7 @@ function drawPlayerCardRow2(mark)
         }
     
 
-        //two tens dealt, and chose to display two stacks of decks
-   if (IsASplitFlag == true )
-   {
-      
-       
-    //ctx2.clearRect(0,0,1000,78);
-    //numberOfCardsDeltRow2 = 1;
-    //multiplierRow2 = multiplierRow2 - 1;
-    //playerScoreRow2  = playerScoreRow2 - 10;
-    IsASplitFlag = false;
-    //drawPlayerCardRow3("10");
-    //drawPlayerCardRow2("10");
-
-    
-
-   }
+        
     
         
     
@@ -588,7 +572,7 @@ function drawPlayerCardRow2(mark)
         document.getElementById('split').style.visibility = 'visible';
         //dealCardsBtn.disabled =  false;
         //multiplierRow2--;
-        //IsASplitFlag = false;
+        
         //gWasASplitFlag = true;
         tenCounter = 0;
     }
@@ -1096,7 +1080,7 @@ wagerButtonTwentyfive.disabled=true;
 function onDoubleDownPress(){
    
    
-    IsASplitFlag = true;
+    
     WasASplitFlag = true;
 
     //sets up buttons visiblity
@@ -1161,7 +1145,7 @@ wagerButtonTwentyfive.disabled=false;
  
  //pointsHave = 30;
  pointsWagered = 0;
- IsASplitFlag = false;
+ 
  turnNoReset = 0;
  gWasASplitFlag = false;
  multiplierRow2 = -1;
