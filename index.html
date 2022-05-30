@@ -441,7 +441,7 @@ let numberOfIterationsRow2 = 0;
 let numberOfCardsDeltRow2 = 0;
 //let areBothDealsComplete = "noneAre";
 let isThereISecondDeal = false;
-let alternateHandForCharlie = 0;
+let alternateHandForCharlieRow2 = 0;
 
 let counterOfPressedUpperDrawBtn = 0;
 let ctx2 = canvasPlayer1.getContext("2d");
@@ -559,7 +559,7 @@ function drawPlayerCardRow2(mark)
         }
         
         playerScoreRow2 = playerScoreRow2 + 10;
-        alternateHandForCharlie = alternateHandForCharlie + 10;
+        alternateHandForCharlieRow2 = alternateHandForCharlieRow2 + 10;
     }
     //ace
     else if (mark == "A")
@@ -568,14 +568,14 @@ function drawPlayerCardRow2(mark)
         counterAcesRow = counterAcesRow + 1;
         playerScoreRow2 = playerScoreRow2 + 11;
         AreThereAcesArrayRow[counterAcesRow] = "is ace";
-        alternateHandForCharlie = alternateHandForCharlie  + 1;
+        alternateHandForCharlieRow2 = alternateHandForCharlieRow2  + 1;
     }
     //number cards 2-9 : no one because is ace
     else
     {
         playerScoreRow2 = playerScoreRow2 + parseInt(mark);
         numberOfCardsDeltRow2++;
-        alternateHandForCharlie = alternateHandForCharlie + parseInt(mark);
+        alternateHandForCharlieRow2 = alternateHandForCharlieRow2 + parseInt(mark);
     }
 
 
@@ -624,10 +624,9 @@ function drawPlayerCardRow2(mark)
 */
 
     
-    console.log("charlie", alternateHandForCharlie);
-    console.log("numberOfCardsDeltRow2", numberOfCardsDeltRow2 );
+    
     //5 cards wins, alternatehandforcharlie is a count with aces counting 1 not 11.
-    if(alternateHandForCharlie < 22 && numberOfCardsDeltRow2 == 6)
+    if(alternateHandForCharlieRow2 < 22 && numberOfCardsDeltRow2 == 6)
     {
         //dealCardsBtn.disabled = true;
         console.log("5 Card Charlie");
@@ -752,6 +751,7 @@ let numberOfIterationsRow3 = 0;
 
 //let counterAcesRow = 0;
 let numberOfCardsDeltRow3 = 0;
+let alternateHandForCharlieRow3 = 0;
 
 function setLowerMessages()
 {
@@ -803,7 +803,7 @@ if(mark === 0){
         totalCardsDeltRow3++;
         playerScoreRow3 = playerScoreRow3 + 10;
         
-        alternateHandForCharlie = alternateHandForCharlie + 10;
+        alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + 10;
     }
     //an ace
     else if (mark == "A")
@@ -814,14 +814,14 @@ if(mark === 0){
         AreThereAcesArrayRow[counterAcesRow] = "is ace";
         counterAcesRow++;
         //value of hand with all aces counted as 1.
-        alternateHandForCharlie = alternateHandForCharlie + 1;
+        alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + 1;
     }
     //number 2 - 9 , one is not counted because it is an ace
     else
     {
         playerScoreRow3 = playerScoreRow3 + parseInt(mark);
         totalCardsDeltRow3++;
-        alternateHandForCharlie = alternateHandForCharlie + parseInt(mark);
+        alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + parseInt(mark);
 
         
     }
@@ -847,7 +847,7 @@ if(mark === 0){
    
    
     //hand wins becaues it is five cards and isn't over 21
-    if(alternateHandForCharlie < 22 && numberOfCardsDeltRow3 == 5)
+    if(alternateHandForCharlieRow3 < 22 && numberOfCardsDeltRow3 == 5)
     {
         //dealCardsBtn.disabled = true;
         console.log("5 Card Charlie");
@@ -1199,7 +1199,8 @@ wagerButtonTwentyfive.disabled=false;
 
  isThereISecondDeal = false;
  numberOfCardsDeltRow3 = 0;
- alternateHandForCharlie = 0;
+ alternateHandForCharlieRow2 = 0;
+ alternateHandForCharlieRow3 = 0;
  IsDoubleDownRow2Flag = false;
 
  tenCounter = 0;
