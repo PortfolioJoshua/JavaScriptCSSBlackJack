@@ -448,6 +448,7 @@ let ctx2 = canvasPlayer1.getContext("2d");
 
 let IsDoubleDownRow2Flag = false;
 let tenCounter = 0;
+let IsASplitFlag = false;
 
 //checks this and alters mid messsgae display - complete!!!
 function drawPlayerCardRow2(mark)
@@ -548,6 +549,17 @@ function drawPlayerCardRow2(mark)
     ctx2.stroke();
     ctx2.font = "50px Arial";
     //face cards
+    
+    console.log("isasplit", IsASplitFlag);
+
+
+    if(IsASplitFlag)
+    {
+        playerScoreRow2 = playerScoreRow2 - 10;
+        alternateHandForCharlieRow2 = alternateHandForCharlieRow2 - 10;
+        IsASplitFlag = false;
+    }
+    
     if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
     {
         
@@ -560,6 +572,9 @@ function drawPlayerCardRow2(mark)
         
         playerScoreRow2 = playerScoreRow2 + 10;
         alternateHandForCharlieRow2 = alternateHandForCharlieRow2 + 10;
+
+        alert("here");
+        alert(IsASplitFlag);
     }
     //ace
     else if (mark == "A")
@@ -579,10 +594,12 @@ function drawPlayerCardRow2(mark)
     }
 
 
+
+     
     console.log("playerScoreRow2" , playerScoreRow2);
     console.log("numberOfCardsDeltRow2 ", numberOfCardsDeltRow2 );
     console.log("numberOfCardsDeltRow3 ", numberOfCardsDeltRow3 );
-
+    console.log("alternateHandForCharlieRow2", alternateHandForCharlieRow2 );
 
 
     //if there is two upper cards the valuem of numberofcardsrpw2 is 3, because the progrm counts the card that is removed and added to numberofcardsrow3;
@@ -641,10 +658,10 @@ function drawPlayerCardRow2(mark)
         {
             text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
         }
-        let text2 = `Total Points: ${pointsHave}.`;
+        //let text2 = `Total Points: ${pointsHave}.`;
         //top of two messages
         document.getElementById("messageUnderRow2").textContent = text;
-        document.getElementById("scoreAtTop").textContent = text2;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
         FirstDealIsDoneFlag = true;
         
         //dealCardsBtn.disabled = false;
@@ -752,6 +769,7 @@ let numberOfIterationsRow3 = 0;
 //let counterAcesRow = 0;
 let numberOfCardsDeltRow3 = 0;
 let alternateHandForCharlieRow3 = 0;
+let counterOfPressedLowerDrawBtn = 0;
 
 function setLowerMessages()
 {
@@ -767,7 +785,7 @@ let ctx3 = canvasPlayer2.getContext("2d");
 function drawPlayerCardRow3(mark)
 {
 
-    
+    counterOfPressedLowerDrawBtn++;
     numberOfCardsDeltRow3++;
     isThereISecondDeal = true;
     numberOfIterationsRow3++;
@@ -781,6 +799,54 @@ if(mark === 0){
 
     mark  = getMarkOfCard();
 }
+
+////
+
+        if (counterOfPressedLowerDrawBtn == 1 )
+        {
+            mark = "10";
+
+        }
+        else if (counterOfPressedLowerDrawBtn == 2)
+        {
+
+            mark = "2";
+           
+            
+        }
+        else if (counterOfPressedLowerDrawBtn == 3)
+        {
+
+            mark = "2";
+           
+            
+        }
+        else if (counterOfPressedLowerDrawBtn == 4)
+        {
+
+            mark = "2";
+           
+            
+        }
+        else if (counterOfPressedLowerDrawBtn == 5)
+        {
+
+            mark = "2";
+           
+            
+        }
+        else if (counterOfPressedLowerDrawBtn == 6)
+        {
+
+            mark = "2";
+           
+            
+        }
+
+
+
+/////
+
    
         document.getElementById('messageLower').style.visibility = 'visible';
         document.getElementById('canvasPlayer2').style.visibility = 'visible';
@@ -804,6 +870,16 @@ if(mark === 0){
         playerScoreRow3 = playerScoreRow3 + 10;
         
         alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + 10;
+
+
+        //if(totalCardsDeltRow3 == 2)
+        //{
+        //    playerScoreRow2 = playerScoreRow2 - 10;
+        //    alternateHandForCharlieRow3 = alternateHandForCharlieRow3 - 10;
+        //}
+
+
+        
     }
     //an ace
     else if (mark == "A")
@@ -867,7 +943,7 @@ if(mark === 0){
         let text2 = `Total Points: ${pointsHave}.`;
         //lowest of two messages
         document.getElementById("messageLower").textContent = text;
-        document.getElementById("scoreAtTop").textContent = text2;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
         SecondDealIsDoneFlag = true;
        
         //dealCardsBtn.disabled = false;
@@ -1110,7 +1186,8 @@ wagerButtonTwentyfive.disabled=true;
 function onDoubleDownPress(){
    
    
-    
+    alert("yes!");
+    IsASplitFlag = true;
     WasASplitFlag = true;
 
     //sets up buttons visiblity
@@ -1205,6 +1282,8 @@ wagerButtonTwentyfive.disabled=false;
 
  tenCounter = 0;
  counterOfPressedUpperDrawBtn  = 0;
+ counterOfPressedLowerDrawBtn = 0;
+
 
  //AreThereAcesArrayRow = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
 
