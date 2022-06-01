@@ -118,7 +118,7 @@ let FirstDealIsDoneFlag = false;
 let SecondDealIsDoneFlag = false;
 
 let AreThereAcesArrayRow = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
-
+let counterOfPressedDealerDrawBtn = 0;
 
 //get the context to use canvas, is global
 let ctx1 = canvasDealer.getContext("2d");
@@ -127,7 +127,7 @@ let ctx1 = canvasDealer.getContext("2d");
 
 function drawDealerCards(){
 
-   
+    
 
     //is set if deal has been busted, charlied, or black jacked - wouldn't need a dealers deal than
     if (FirstDealIsDoneFlag == true && SecondDealIsDoneFlag == true)
@@ -154,6 +154,7 @@ function drawDealerCards(){
    //dealer hits until 17 or five cards
     while (dealerHandTotal < 17)
     {
+        //counterOfPressedDealerDrawBtn++;
         counter++;
         if(counter == 6)
         {
@@ -161,6 +162,34 @@ function drawDealerCards(){
         }
         multiplierRow1++;
         let mark  = getMarkOfCard();
+
+
+        /////
+        /*
+        if (counterOfPressedDealerDrawBtn == 1 )
+        {
+            mark = "5";
+
+        }
+        else if (counterOfPressedDealerDrawBtn == 2)
+        {
+
+            mark = "A";
+           
+            
+        }
+        else if (counterOfPressedDealerDrawBtn == 3)
+        {
+
+            mark = "5";
+           
+            
+        }
+        */
+
+        /////
+
+
         //these are the face cards
         if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
         {
@@ -241,6 +270,10 @@ function drawDealerCards(){
         document.getElementById("messageLower").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
+
+        SecondDealIsDoneFlag = true;
+        checkEndOfHands();
+
     }
     //playerscorerow3 will be 21 or under, because would have already blackjacked
     //player wins by points
@@ -263,6 +296,8 @@ function drawDealerCards(){
         document.getElementById("messageLower").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
+        SecondDealIsDoneFlag = true;
+        checkEndOfHands();
     }
     //already checked dealer hand greater than 21, so this score means dealer wins by tie or better score
     else if(playerScoreRow3 <= dealerHandTotal) 
@@ -284,6 +319,8 @@ function drawDealerCards(){
         document.getElementById("messageLower").textContent = text;
         let text2 = `${pointsHave}`;
         document.getElementById("scoreAtTop").textContent = text2;
+        SecondDealIsDoneFlag = true;
+        checkEndOfHands();
 
 
     }
@@ -363,7 +400,7 @@ function drawDealerCards(){
                     document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
                     
-                    console.log("BUST!");
+                    //console.log("BUST!");
                     FirstDealIsDoneFlag = true;
                     
                     checkEndOfHands();
@@ -493,13 +530,13 @@ function drawPlayerCardRow2(mark)
     
         if (counterOfPressedUpperDrawBtn == 1 )
         {
-            mark = "9";
+            mark = "10";
 
         }
         else if (counterOfPressedUpperDrawBtn == 2)
         {
 
-            mark = "A";
+            mark = "10";
            
             
         }
@@ -1283,6 +1320,7 @@ wagerButtonTwentyfive.disabled=false;
  tenCounter = 0;
  counterOfPressedUpperDrawBtn  = 0;
  counterOfPressedLowerDrawBtn = 0;
+ counterOfPressedDealerDrawBtn = 0;
 
 
  //AreThereAcesArrayRow = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
