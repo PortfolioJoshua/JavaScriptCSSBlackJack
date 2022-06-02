@@ -540,32 +540,37 @@ function drawPlayerCardRow2(mark)
            
             
         }
+        
         /*
         else if (counterOfPressedUpperDrawBtn == 3)
         {
 
-            //mark = "5";
+            mark = "5";
            
             
         }
+        
+        
         else if (counterOfPressedUpperDrawBtn == 4)
         {
 
-            //mark = "2";
+            mark = "A";
            
             
         }
+        
+        
         else if (counterOfPressedUpperDrawBtn == 5)
         {
 
-            //mark = "2";
+            mark = "2";
            
             
         }
         else if (counterOfPressedUpperDrawBtn == 6)
         {
 
-           // mark = "2";
+            mark = "2";
            
             
         }
@@ -611,8 +616,7 @@ function drawPlayerCardRow2(mark)
         playerScoreRow2 = playerScoreRow2 + 10;
         alternateHandForCharlieRow2 = alternateHandForCharlieRow2 + 10;
 
-        alert("here");
-        alert(IsASplitFlag);
+        
     }
     //ace
     else if (mark == "A")
@@ -840,26 +844,27 @@ if(mark === 0){
 
 ////
 
-/*
+
         if (counterOfPressedLowerDrawBtn == 1 )
         {
-            mark = "9";
+            mark = "10";
 
         }
         else if (counterOfPressedLowerDrawBtn == 2)
-        {
-
-            mark = "A";
-           
-            
-        }
-        else if (counterOfPressedLowerDrawBtn == 3)
         {
 
             mark = "5";
            
             
         }
+        else if (counterOfPressedLowerDrawBtn == 3)
+        {
+
+            mark = "A";
+           
+            
+        }
+        /*
         else if (counterOfPressedLowerDrawBtn == 4)
         {
 
@@ -881,8 +886,9 @@ if(mark === 0){
            
             
         }
+        */
 
-*/
+
 
 /////
 
@@ -927,7 +933,7 @@ if(mark === 0){
         counterAcesRow = counterAcesRow + 1;
         playerScoreRow3 = playerScoreRow3 + 11;
         AreThereAcesArrayRow[counterAcesRow] = "is ace";
-        counterAcesRow++;
+        //counterAcesRow++;
         //value of hand with all aces counted as 1.
         alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + 1;
     }
@@ -942,7 +948,7 @@ if(mark === 0){
     }
 
 
-    console.log("playerScoreRow3", playerScoreRow3);
+    //console.log("playerScoreRow3", playerScoreRow3);
     
    
    
@@ -994,17 +1000,23 @@ if(mark === 0){
     //check if hand has any aces becaue the hand is over 21, if so change 11 value to 1 
     else if (playerScoreRow3 > 21)
     {
+        console.log("playerScoreRow3a", playerScoreRow3);
+    
         for(let i = 0 ; i < 4*5; i++)
         {
                 if(AreThereAcesArrayRow[i] == "is ace")
                 {
                     AreThereAcesArrayRow[i] = "used ace";
                     playerScoreRow3 = playerScoreRow3 - 10;
+                    //alert("used here");
                     break;
                 }
         }
     }
 
+
+    console.log("playerScoreRow3b", playerScoreRow3);
+    
         //player scores over 21, so player busts and loses
         if(playerScoreRow3 > 21)
         {
@@ -1225,7 +1237,7 @@ wagerButtonTwentyfive.disabled=true;
 function onDoubleDownPress(){
    
    
-    alert("yes!");
+    
     IsASplitFlag = true;
     WasASplitFlag = true;
 
@@ -1392,7 +1404,7 @@ function checkEndOfHands()
                 }
                 */
                 
-                alert("end1");
+                //alert("end1");
                 
         }
         
@@ -1419,7 +1431,7 @@ function checkEndOfHands()
                 }
                 */
                
-                alert("end3");
+                //alert("end3");
                 
         }
         
@@ -1429,7 +1441,7 @@ function checkEndOfHands()
 
     else if(!isThereISecondDeal)
     {
-        alert("end5");
+        //alert("end5");
     
     
         if (FirstDealIsDoneFlag == true)
@@ -1438,7 +1450,7 @@ function checkEndOfHands()
             newRoundBtn.disabled = false;
             dealCardsBtn.disabled = true;
 
-            alert("end2");
+            //alert("end2");
             
         }
     }
