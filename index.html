@@ -236,18 +236,7 @@ function drawDealerCards(){
         
         
     //if ace and over 21 change next ace to 1
-    if (playerScoreRow3 > 21)
-    {
-        for(let i = 0 ; i < 4*5; i++)
-        {
-                if(AreThereAcesArrayRow[i] == "is ace")
-                {
-                    AreThereAcesArrayRow[i] = "used ace";
-                    playerScoreRow3 = playerScoreRow3 - 10;
-                    break;
-                }
-        }
-    }
+    
         
     
     //bust
@@ -331,19 +320,7 @@ function drawDealerCards(){
     {
     
             
-    //if ace and over 21 change next ace to 1
-    if (dealerHandTotal > 21)
-    {
-        for(let i = 0 ; i < 4*5; i++)
-        {
-                if(AreThereAcesArrayRow[i] == "is ace")
-                {
-                    AreThereAcesArrayRow[i] = "used ace";
-                    dealerHandTotal = dealerHandTotal - 10;
-                    break;
-                }
-        }
-    }
+    
     
      if(dealerHandTotal > 21)
         {
@@ -624,7 +601,7 @@ function drawPlayerCardRow2(mark)
         numberOfCardsDeltRow2++;
         counterAcesRow = counterAcesRow + 1;
         playerScoreRow2 = playerScoreRow2 + 11;
-        AreThereAcesArrayRow[counterAcesRow] = "is ace";
+        AreThereAcesArrayRow[counterAcesRow] = "is row2 ace";
         alternateHandForCharlieRow2 = alternateHandForCharlieRow2  + 1;
     }
     //number cards 2-9 : no one because is ace
@@ -720,7 +697,7 @@ function drawPlayerCardRow2(mark)
     {
         for(let i = 0 ; i < 4*5; i++)
         {
-                if(AreThereAcesArrayRow[i] == "is ace")
+                if(AreThereAcesArrayRow[i] == "is row2 ace")
                 {
                     AreThereAcesArrayRow[i] = "used ace";
                     playerScoreRow2 = playerScoreRow2 - 10;
@@ -932,7 +909,7 @@ if(mark === 0){
         totalCardsDeltRow3++;
         counterAcesRow = counterAcesRow + 1;
         playerScoreRow3 = playerScoreRow3 + 11;
-        AreThereAcesArrayRow[counterAcesRow] = "is ace";
+        AreThereAcesArrayRow[counterAcesRow] = "is row3 ace";
         //counterAcesRow++;
         //value of hand with all aces counted as 1.
         alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + 1;
@@ -1004,7 +981,7 @@ if(mark === 0){
     
         for(let i = 0 ; i < 4*5; i++)
         {
-                if(AreThereAcesArrayRow[i] == "is ace")
+                if(AreThereAcesArrayRow[i] == "is row3 ace")
                 {
                     AreThereAcesArrayRow[i] = "used ace";
                     playerScoreRow3 = playerScoreRow3 - 10;
@@ -1342,7 +1319,7 @@ wagerButtonTwentyfive.disabled=false;
  //clear aces in aray so next ahnd has no aces yet
 for(let i = 0 ; i < 4*5; i++)
 {
-    if(AreThereAcesArrayRow[i] == "is ace")
+    if(AreThereAcesArrayRow[i] == "is row2 ace" || AreThereAcesArrayRow[i] == "is row3 ace")
     {
         AreThereAcesArrayRow[i] = "used ace";
         
