@@ -540,35 +540,36 @@ function drawPlayerCardRow2(mark)
            
             
         }
+        /*
         else if (counterOfPressedUpperDrawBtn == 3)
         {
 
-            mark = "5";
+            //mark = "5";
            
             
         }
         else if (counterOfPressedUpperDrawBtn == 4)
         {
 
-            mark = "2";
+            //mark = "2";
            
             
         }
         else if (counterOfPressedUpperDrawBtn == 5)
         {
 
-            mark = "2";
+            //mark = "2";
            
             
         }
         else if (counterOfPressedUpperDrawBtn == 6)
         {
 
-            mark = "2";
+           // mark = "2";
            
             
         }
-
+        */
         else
         {
             mark = getMarkOfCard();
@@ -592,7 +593,7 @@ function drawPlayerCardRow2(mark)
 
     if(IsASplitFlag)
     {
-        playerScoreRow2 = playerScoreRow2 - 10;
+        //playerScoreRow2 = playerScoreRow2 - 10;
         alternateHandForCharlieRow2 = alternateHandForCharlieRow2 - 10;
         IsASplitFlag = false;
     }
@@ -839,6 +840,7 @@ if(mark === 0){
 
 ////
 
+/*
         if (counterOfPressedLowerDrawBtn == 1 )
         {
             mark = "9";
@@ -880,7 +882,7 @@ if(mark === 0){
             
         }
 
-
+*/
 
 /////
 
@@ -1358,7 +1360,7 @@ function checkEndOfHands()
         console.log("c", IsDoubleDownRow2Flag);
         
         
-        
+        //is now to done hands
         if (FirstDealIsDoneFlag && SecondDealIsDoneFlag && IsDoubleDownRow2Flag)
         {
             newRoundBtn.disabled = false;
@@ -1370,7 +1372,7 @@ function checkEndOfHands()
         
 
 
-        //is a second deal
+        //first player hand complete before seconddealisdoneflag
         else if (FirstDealIsDoneFlag)
         {
             
@@ -1380,6 +1382,7 @@ function checkEndOfHands()
                 drawCardBtnUpper.disabled = true;
                 drawCardBtnLower.disabled = false;
                 
+                /*
                 if(numberOfCardsDeltRow3 > 1)
                 {
                 dealCardsBtn.disabled = false;
@@ -1387,21 +1390,24 @@ function checkEndOfHands()
                 else{
                     dealCardsBtn.disabled = true;
                 }
+                */
                 
-                //newRoundBtn.disabled = false;
                 alert("end1");
                 
         }
         
-        //is a first deal - only this one done flag, not firstdealisdoneflag 
+        // second player hand completed before firstdealisdoneflag
         else if(SecondDealIsDoneFlag)
         {
                
         
-                //dealCardsBtn.disabled = false;
+                //upper button shows
                 drawCardBtnUpper.disabled =false;
+                //bottom button hidden
                 drawCardBtnLower.disabled = true;
                
+
+                /*
                 if(numberOfCardsDeltRow2 > 1)
                 {
                 dealCardsBtn.disabled = false;
@@ -1411,7 +1417,7 @@ function checkEndOfHands()
                     dealCardsBtn.disabled = true;
 
                 }
-                //newRoundBtn.disabled = false;
+                */
                
                 alert("end3");
                 
