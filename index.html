@@ -91,7 +91,7 @@
 
 <script>
 
-//test//test//
+
 //amt of space between cards 
 const CARDGAP = 70;
 //five decks
@@ -154,7 +154,7 @@ function drawDealerCards(){
    //dealer hits until 17 or five cards
     while (dealerHandTotal < 17)
     {
-        counterOfPressedDealerDrawBtn++;
+        //counterOfPressedDealerDrawBtn++;
         counter++;
         if(counter == 6)
         {
@@ -165,7 +165,7 @@ function drawDealerCards(){
 
 
         /////
-        
+        /*
         if (counterOfPressedDealerDrawBtn == 1 )
         {
             mark = "A";
@@ -206,6 +206,7 @@ function drawDealerCards(){
             
         }
 
+        
         else if (counterOfPressedDealerDrawBtn == 7)
         {
 
@@ -213,7 +214,7 @@ function drawDealerCards(){
            
             
         }
-
+        */
 
 
 
@@ -534,10 +535,10 @@ function drawPlayerCardRow2(mark)
     }
    
     multiplierRow2++;
-    console.log("x", multiplierRow2);
     
-   
     
+        //left for any need to test, for testing divide, uncomment first two conditions and value above with ++
+        /*
         if (counterOfPressedUpperDrawBtn == 1 )
         {
             mark = "10";
@@ -551,7 +552,7 @@ function drawPlayerCardRow2(mark)
             
         }
         
-        /*
+        
         else if (counterOfPressedUpperDrawBtn == 3)
         {
 
@@ -585,14 +586,13 @@ function drawPlayerCardRow2(mark)
             
         }
         */
-        else
-        {
+        //else
+        //{
             mark = getMarkOfCard();
-        }
+        //}
     
 
         
-    
         
     
     ctx2.beginPath();
@@ -603,7 +603,7 @@ function drawPlayerCardRow2(mark)
     ctx2.font = "50px Arial";
     //face cards
     
-    console.log("isasplit", IsASplitFlag);
+    //console.log("isasplit", IsASplitFlag);
 
 
     if(IsASplitFlag)
@@ -654,9 +654,19 @@ function drawPlayerCardRow2(mark)
     console.log("alternateHandForCharlieRow2", alternateHandForCharlieRow2 );
 
 
-    //if there is two upper cards the valuem of numberofcardsrpw2 is 3, because the progrm counts the card that is removed and added to numberofcardsrow3;
+    console.log("nc2 ", numberOfCardsDeltRow2);
+    console.log("nc3 ", numberOfCardsDeltRow3);
+
+
+    //numberOfCardsDeltRow2 is one more than correct
+    if (numberOfCardsDeltRow2 == 2 && numberOfCardsDeltRow3 == 0)
+    {
+        dealCardsBtn.disabled = false;
+        alert("here");
+    }
+    //if there is two upper cards the valuem of numberofcardsrpw2 is 3, because the first card that is divided to numberofcardsdeltrow3 is counted;
     //numberofcardsdeltrow2 is two when it is possible to deal the cards. (bot values have two cards and are ready for dealing)
-    if(numberOfCardsDeltRow2 > 2 && numberOfCardsDeltRow3 > 1  )
+    else if(numberOfCardsDeltRow2 > 2 && numberOfCardsDeltRow3 > 1  )
     {
         dealCardsBtn.disabled = false;
     }
@@ -681,18 +691,6 @@ function drawPlayerCardRow2(mark)
     }
         
 
-
-    //two cards and no split
-    /*else if(numberOfCardsDeltRow2 >= 2)
-    {
-        //SecondDealIsDoneFlag = true;
-        //dealCardsBtn.disabled = false;
-        //split.disabled = true;
-        
-    }
-*/
-
-    
     
     //5 cards wins, alternatehandforcharlie is a count with aces counting 1 not 11.
     if(alternateHandForCharlieRow2 < 22 && numberOfCardsDeltRow2 == 6)
@@ -852,9 +850,9 @@ if(mark === 0){
     mark  = getMarkOfCard();
 }
 
-////
+////left this for any need of testing to set cards with values that take place of mark
 
-
+    /*
         if (counterOfPressedLowerDrawBtn == 1 )
         {
             mark = "10";
@@ -927,14 +925,6 @@ if(mark === 0){
         alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + 10;
 
 
-        //if(totalCardsDeltRow3 == 2)
-        //{
-        //    playerScoreRow2 = playerScoreRow2 - 10;
-        //    alternateHandForCharlieRow3 = alternateHandForCharlieRow3 - 10;
-        //}
-
-
-        
     }
     //an ace
     else if (mark == "A")
@@ -958,16 +948,8 @@ if(mark === 0){
     }
 
 
-    //console.log("playerScoreRow3", playerScoreRow3);
-    
-   
-   
-    
 
-    
-        
-
-    //if there is two upper cards the valuem of numberofcardsrpw2 is 3, because the progrm counts the card that is removed and added to numberofcardsrow3;
+    //if there is two upper cards the valuem of numberofcardsrpw2 is 3, because the first card that is divided to numberofcardsdeltrow3 is counted;
     //numberofcardsdeltrow2 is two when it is possible to deal the cards. (bot values have two cards and are ready for dealing)
     if(numberOfCardsDeltRow2 > 2 && numberOfCardsDeltRow3 > 1  )
     {
@@ -980,7 +962,7 @@ if(mark === 0){
     //hand wins becaues it is five cards and isn't over 21
     if(alternateHandForCharlieRow3 < 22 && numberOfCardsDeltRow3 == 5)
     {
-        //dealCardsBtn.disabled = true;
+       
         console.log("5 Card Charlie");
         pointsHave = pointsHave + (pointsWagered);
 
@@ -1001,8 +983,7 @@ if(mark === 0){
         document.getElementById("scoreAtTop").textContent = pointsHave;
         SecondDealIsDoneFlag = true;
        
-        //dealCardsBtn.disabled = false;
-        //drawCardBtnUpper.disabled = true;
+        
         checkEndOfHands();
         
     }
@@ -1018,14 +999,14 @@ if(mark === 0){
                 {
                     AreThereAcesArrayRow[i] = "used ace";
                     playerScoreRow3 = playerScoreRow3 - 10;
-                    //alert("used here");
+                    
                     break;
                 }
         }
     }
 
 
-    console.log("playerScoreRow3b", playerScoreRow3);
+    
     
         //player scores over 21, so player busts and loses
         if(playerScoreRow3 > 21)
@@ -1063,7 +1044,7 @@ if(mark === 0){
     else if(playerScoreRow3 == 21)
     {
         
-        //dealCardsBtn.disabled = true;
+        
         pointsHave = pointsHave + (pointsWagered*2);
 
 
@@ -1072,8 +1053,7 @@ if(mark === 0){
         document.getElementById("messageLower").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave; 
         SecondDealIsDoneFlag = true;
-        //dealCardsBtn.disabled = false;
-        //drawCardBtnUpper.disabled = true;
+        
         checkEndOfHands();
     }
 
