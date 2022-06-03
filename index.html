@@ -1258,7 +1258,7 @@ function onDoubleDownPress(){
 //reset all values to initial state for next new round
 function newRound(){
 
-shuffleTheDeck();
+
 //temporary for testing split
  globvar = 1;
  
@@ -1326,7 +1326,7 @@ wagerButtonTwentyfive.disabled=false;
  counterOfPressedUpperDrawBtn  = 0;
  counterOfPressedLowerDrawBtn = 0;
  counterOfPressedDealerDrawBtn = 0;
-
+ 
 
  //AreThereAcesArrayRow = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
 
@@ -1341,6 +1341,7 @@ for(let i = 0 ; i < 4*5; i++)
     }
 }
 
+shuffleTheDeck();
 
 }
 
@@ -1490,7 +1491,15 @@ function shuffleTheDeck()
 ];
 
     
-//window.setTimeout(shuffleTheDeck2, 5);
+window.setTimeout(shuffleTheDeck2, 1250);
+
+}
+
+function shuffleTheDeck2()
+{
+    
+    let text = "BLACKJACK 5 card dealer";
+    document.getElementById('title').textContent = text;
 
 }
 
