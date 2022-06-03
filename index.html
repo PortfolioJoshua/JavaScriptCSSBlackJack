@@ -91,6 +91,11 @@
 
 <script>
 
+function dummy()
+{
+  alert("dummy");
+}
+
 
 //amt of space between cards 
 const CARDGAP = 70;
@@ -125,7 +130,7 @@ let ctx1 = canvasDealer.getContext("2d");
 
 
 
-function drawDealerCards(){
+async function drawDealerCards(){
 
     
 
@@ -223,7 +228,7 @@ function drawDealerCards(){
 
         /////
 
-
+       
         //these are the face cards
         if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
         {
@@ -260,6 +265,8 @@ function drawDealerCards(){
             ctx1.fillText(mark, initialXRow1 + multiplierRow1 * CARDGAP+10,  60 );
         }
 
+        await new Promise(dummy => { setTimeout(dummy, 1000); });
+        
 
     }
 
@@ -350,7 +357,7 @@ function drawDealerCards(){
     }
    
     //player didn't bust, charlie, or blackjack, so needs to check against deakers deal
-    if (FirstDealIsDoneFlag  == false)
+    if (FirstDealIsDoneFlag  == false  && isThereISecondDeal)
     {
     
             
@@ -1502,6 +1509,8 @@ function shuffleTheDeck2()
     document.getElementById('title').textContent = text;
 
 }
+
+
 
 setsUpGame();
 
