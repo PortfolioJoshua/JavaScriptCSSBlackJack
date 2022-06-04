@@ -264,9 +264,10 @@ async function drawDealerCards(){
         else{
             ctx1.fillText(mark, initialXRow1 + multiplierRow1 * CARDGAP+10,  60 );
         }
+        newRoundBtn.disabled = true;
         //pauses after ecah card
-        //await new Promise(dummy => { setTimeout(dummy, 1000); });
-        
+        await new Promise(dummy => { setTimeout(dummy, 1000); });
+        newRoundBtn.disabled = false;
 
     }
 
@@ -669,7 +670,7 @@ function drawPlayerCardRow2(mark)
     if (numberOfCardsDeltRow2 == 2 && numberOfCardsDeltRow3 == 0)
     {
         dealCardsBtn.disabled = false;
-        alert("here");
+       
     }
     //if there is two upper cards the valuem of numberofcardsrpw2 is 3, because the first card that is divided to numberofcardsdeltrow3 is counted;
     //numberofcardsdeltrow2 is two when it is possible to deal the cards. (bot values have two cards and are ready for dealing)
@@ -1348,7 +1349,7 @@ for(let i = 0 ; i < 4*5; i++)
     }
 }
 
-//shuffleTheDeck();
+shuffleTheDeck();
 
 }
 
@@ -1459,9 +1460,6 @@ function checkEndOfHands()
 function shuffleTheDeck2()
 {
     
-    let text = "BLACKJACK 5 card dealer";
-    document.getElementById('title').textContent = text;
-    alert("b");
 }
 
 
@@ -1506,10 +1504,17 @@ async function shuffleTheDeck()
 
 ];
 
-
+wagerButtonOne.disabled=true;
+wagerButtonFive.disabled=true;
+wagerButtonFifteen.disabled=true;
+wagerButtonTwentyfive.disabled=true;
 await new Promise(shuffleTheDeck2 => { setTimeout(shuffleTheDeck2, 1000); });
 let text = "BLACKJACK 5 card dealer";
 document.getElementById('title').textContent = text;
+wagerButtonOne.disabled=false;
+wagerButtonFive.disabled=false;
+wagerButtonFifteen.disabled=false;
+wagerButtonTwentyfive.disabled=false;
     
 }
 
