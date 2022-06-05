@@ -507,7 +507,7 @@ let counterOfPressedUpperDrawBtn = 0;
 //canvas context
 let ctx2 = canvasPlayer1.getContext("2d");
 
-let IsDoubleDownRow2Flag = false;
+
 //a count of two sets up divide hand
 let tenCounter = 0;
 let IsASplitFlag = false;
@@ -1258,7 +1258,7 @@ function onDivideHand(){
     isThereASecondDeal = true;
     //for draeing both decks wgeb split button was pressed
     drawPlayerCardRow3("10");
-    IsDoubleDownRow2Flag = true;
+    
     multiplierRow2--;
     ctx2.clearRect((initialXRow1 +  (1 * CARDGAP) - 1),0,1000,78);
     playerScoreRow2 = playerScoreRow2 - 10;
@@ -1341,7 +1341,7 @@ wagerButtonTwentyfive.disabled=false;
  //summed score with aces equal to one
  alternateHandForCharlieRow2 = 0;
  alternateHandForCharlieRow3 = 0;
- IsDoubleDownRow2Flag = false;
+ IsASplitFlag = false;
 
  //for debugging, when equals two snippet run 
  tenCounter = 0;
@@ -1384,11 +1384,11 @@ function checkEndOfHands()
       
         console.log("a", FirstDealIsDoneFlag);
         console.log("b,", SecondDealIsDoneFlag);
-        console.log("c", IsDoubleDownRow2Flag);
+        console.log("c", IsASplitFlag);
         
         
         //2nd time through this will be true
-        if (FirstDealIsDoneFlag && SecondDealIsDoneFlag && IsDoubleDownRow2Flag)
+        if (FirstDealIsDoneFlag && SecondDealIsDoneFlag && IsASplitFlag)
         {
             newRoundBtn.disabled = false;
             drawCardBtnLower.disabled = true;
