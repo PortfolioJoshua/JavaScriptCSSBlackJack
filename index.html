@@ -49,7 +49,7 @@
             
                 <div id = "containsUpperButtons">
                     
-                    <input id = "drawCardBtnUpper" type="button" value="Draw Card" onclick = "drawPlayerCardRow2(0)" >
+                    <input id = "drawCardBtnUpper" type="button" value="Draw Card" >
                     <input id = "dealCardsBtn" type="button" value="Deal" >
                     <input id = "newRoundBtn" type="button" value="New Round" >
                     <input id = "wagerButtonOne" type="button" value="Wager 1" onclick="wager(1)" >
@@ -515,7 +515,7 @@ let IsASplitFlag = false;
 //checks this and alters mid messsgae display - complete!!!
 //this is the second row of cards, first being the dealers
 //and last being the divided hand when applicable
-function drawPlayerCardRow2(mark)
+function drawPlayerCardRow2()
 {
     //for debugging
     counterOfPressedUpperDrawBtn++;
@@ -1537,7 +1537,7 @@ wagerButtonTwentyfive.disabled=false;
 
 setsUpGame();
 
-//document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
+document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
 document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
 document.getElementById("split").addEventListener("click", onDivideHand);
 document.getElementById("newRoundBtn").addEventListener("click", newRound);
