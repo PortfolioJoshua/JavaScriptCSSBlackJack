@@ -117,7 +117,7 @@ let canvasPlayer2 = document.getElementById("canvasPlayer2");
 let multiplierRow1 = -1;
 let initialXRow1 = 150;
 let dealerHandTotal = 0;
-let clearRectFlag = false;
+
 let isAllDelt = false;
 let playerScoreRow2 = 0;
 let playerScoreRow3 = 0;
@@ -153,7 +153,7 @@ function drawDealerCards(){
 
     
     
-    clearRectFlag = true;
+    
     
     
    
@@ -527,28 +527,6 @@ function drawPlayerCardRow2()
     
     document.getElementById('split').style.visibility = 'hidden';
     
-   
-    
-
-   
-    if (clearRectFlag == true)
-    {
-
-        
-        document.getElementById('messageLower').style.visibility = 'hidden';
-        document.getElementById('canvasPlayer2').style.visibility = 'hidden';
-        document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
-        document.getElementById('split').style.visibility = 'hidden';
-
-
-
-        //clear sthe two canvases for dealers deal and players regular deal
-        ctx1.clearRect(0,0,1000,78);
-        ctx2.clearRect(0,0,1000,78);
-
-        clearRectFlag = false;
-    }
-   
     multiplierRow2++;
     
         //left for any need to test, for testing divide, uncomment first two conditions and value above with ++
@@ -1310,15 +1288,14 @@ wagerButtonTwentyfive.disabled=false;
  //for spacing cards
  multiplierRow1 = -1;
  //offset for cards
- initialXRow1 = 150;//
+ initialXRow1 = 150;
  dealerHandTotal = 0;
- //reset
- clearRectFlag = false;
+ 
  isAllDelt = false;
  //reset round's scores
  playerScoreRow2 = 0;
  playerScoreRow3 = 0;
- //four aces, times 5 decks
+ 
  
  //this stays instead
  //pointsHave = 30;

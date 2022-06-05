@@ -158,6 +158,16 @@ margin-left: 150px;
     
     }
 
+    @media screen and (max-width: 1139px){
+
+        
+    #container{display: none;}
+    
+    #alternateContainer{display:flex;}
+
+
+    }
+
  
 
 
