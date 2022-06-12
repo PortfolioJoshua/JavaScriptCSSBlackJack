@@ -73,7 +73,7 @@
     
         
            <br>
-        <input id = "drawCardBtnLower" type="button" value="Draw Card" onclick = "drawPlayerCardRow3(0)"  >
+        <input id = "drawCardBtnLower" type="button" value="Draw Card" onclick = "drawPlayerCardRow3('0')";  >
         <input id = "split" type="button" value="Divide Hand" >
       
        
@@ -162,7 +162,7 @@ function drawDealerCards(){
    //dealer hits until 17 or five cards
     while (dealerHandTotal < 17)
     {
-        //counterOfPressedDealerDrawBtn++;
+        counterOfPressedDealerDrawBtn++;
         counter++;
         if(counter == 6)
         {
@@ -175,6 +175,7 @@ function drawDealerCards(){
         //for testing uncomment counterofpressed... and the first if and else if to test division
         //could also test charlie for example by changing first five values
         /////
+        
         /*
         if (counterOfPressedDealerDrawBtn == 1 )
         {
@@ -226,7 +227,7 @@ function drawDealerCards(){
         }
         */
 
-
+        
 
 
     
@@ -481,7 +482,7 @@ function drawDealerCards(){
 
 
 //initial points
-let pointsHave = 1;
+let pointsHave = 30;
 let pointsWagered = 0;
 //temporary for testing split
 let globvar = 1;
@@ -531,6 +532,7 @@ function drawPlayerCardRow2()
     
         //left for any need to test, for testing divide, uncomment first two conditions and value above with ++
         
+        /*
         if (counterOfPressedUpperDrawBtn == 1 )
         {
             mark = "10";
@@ -539,16 +541,16 @@ function drawPlayerCardRow2()
         else if (counterOfPressedUpperDrawBtn == 2)
         {
 
-            mark = "10";
+            mark = "2";
            
             
         }
         
-        /*
+        
         else if (counterOfPressedUpperDrawBtn == 3)
         {
 
-            mark = "5";
+            mark = "2";
            
             
         }
@@ -557,7 +559,7 @@ function drawPlayerCardRow2()
         else if (counterOfPressedUpperDrawBtn == 4)
         {
 
-            mark = "A";
+            mark = "2";
            
             
         }
@@ -577,11 +579,11 @@ function drawPlayerCardRow2()
            
             
         }
-        */
-        //else
-        //{
-            //mark = getMarkOfCard();
-        //}
+        
+        else*/
+        {
+            mark = getMarkOfCard();
+        }
     
 
         
@@ -667,8 +669,8 @@ function drawPlayerCardRow2()
     //two cards dealt and both are ten with one displayed
     if(tenCounter == 2)
     {   
-        
-        
+        //remove second ten
+        numberOfCardsDeltRow2--;
         document.getElementById('split').style.visibility = 'visible';
         tenCounter = 0;
     }
@@ -681,6 +683,7 @@ function drawPlayerCardRow2()
 
     
     //5 cards wins, alternatehandforcharlie is a count with aces counting 1 not 11.
+
     if(alternateHandForCharlieRow2 < 22 && numberOfCardsDeltRow2 == 5)
     {
         //dealCardsBtn.disabled = true;
@@ -827,34 +830,35 @@ function drawPlayerCardRow3(mark)
 
 
 
-if(mark === 0){
+if(mark === "0"){
     //gets value of card
     mark  = getMarkOfCard();
 }
 
 ////left this for any need of testing to set cards with values that take place of mark
 
-    /*
+        
+/*
         if (counterOfPressedLowerDrawBtn == 1 )
         {
-            mark = "10";
+            mark = "3";
 
         }
         else if (counterOfPressedLowerDrawBtn == 2)
         {
 
-            mark = "5";
+            mark = "2";
            
             
         }
         else if (counterOfPressedLowerDrawBtn == 3)
         {
 
-            mark = "A";
+            mark = "2";
            
             
         }
-        /*
+        
         else if (counterOfPressedLowerDrawBtn == 4)
         {
 
@@ -877,7 +881,7 @@ if(mark === 0){
             
         }
         */
-
+        
 
 
 /////
@@ -1165,7 +1169,7 @@ function getMarkOfCard()
     }
     else
     {
-        for(i = index - 1; i >= 0; i-- )
+        for(i = index; i >= 0; i-- )
         {
             if (deckUseage[i] == 0)
             {
@@ -1385,7 +1389,7 @@ function checkEndOfHands()
         
         
         //2nd time through this will be true
-        if (FirstDealIsDoneFlag && SecondDealIsDoneFlag && IsASplitFlag)
+        if (FirstDealIsDoneFlag && SecondDealIsDoneFlag)
         {
             newRoundBtn.disabled = false;
             drawCardBtnLower.disabled = true;
