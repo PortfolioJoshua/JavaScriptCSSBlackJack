@@ -31,7 +31,7 @@
     
     <div id = "headerContainer" > 
         <div id="title">BLACKJACK 5 card dealer</div>
-        <div id = "scoreAtTop">30</div>    
+        <div id = "scoreAtTop">10</div>    
     </div>   
         
         
@@ -130,7 +130,7 @@ let counterOfPressedDealerDrawBtn = 0;
 
 //get the context to use canvas, is global
 let ctx1 = canvasDealer.getContext("2d");
-
+let numberOfCardsDeltDealer = 0;
 
 
 function drawDealerCards(){
@@ -162,6 +162,7 @@ function drawDealerCards(){
    //dealer hits until 17 or five cards
     while (dealerHandTotal < 17)
     {
+        numberOfCardsDeltDealer++;
         counterOfPressedDealerDrawBtn++;
         counter++;
         if(counter == 6)
@@ -482,7 +483,7 @@ function drawDealerCards(){
 
 
 //initial points
-let pointsHave = 30;
+let pointsHave = 10;
 let pointsWagered = 0;
 //temporary for testing split
 let globvar = 1;
@@ -1259,10 +1260,10 @@ if (pointsHave == 0)
     newRoundBtn.disabled = true;
     await new Promise(noPoints2 => { setTimeout(noPoints2, 2000); });
     
-    pointsHave = 30;
+    pointsHave = 10;
     text = "BLACKJACK 5 card dealer";
     document.getElementById('title').textContent = text;
-    document.getElementById('scoreAtTop').textContent = 30;
+    document.getElementById('scoreAtTop').textContent = 10;
 }
 
 //temporary for testing split
@@ -1313,7 +1314,7 @@ wagerButtonTwentyfive.disabled=false;
  initialXRow2 = 150;
  counterAcesRow = -1;
  numberOfIterationsRow2 = 0;
- numberOfCardsDeltRow2 = 0;
+ //numberOfCardsDeltRow2 = 0;
  
  isThereASecondDeal = false;
 //for spacing cards
@@ -1330,8 +1331,9 @@ wagerButtonTwentyfive.disabled=false;
  SecondDealIsDoneFlag = false;
 
  isThereASecondDeal = false;
- numberOfCardsDeltRow3 = 0;
+ //numberOfCardsDeltRow3 = 0;
 
+ 
  //summed score with aces equal to one
  alternateHandForCharlieRow2 = 0;
  alternateHandForCharlieRow3 = 0;
@@ -1343,6 +1345,8 @@ wagerButtonTwentyfive.disabled=false;
  counterOfPressedUpperDrawBtn  = 0;
  counterOfPressedLowerDrawBtn = 0;
  counterOfPressedDealerDrawBtn = 0;
+
+ 
  
  //a reminder of starting initialization
  //AreThereAcesArrayRow = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
@@ -1358,7 +1362,9 @@ for(let i = 0 ; i < 4*5; i++)
     }
 }
 
+if(numberOfCardsDeltRow2 + numberOfCardsDeltRow3 + numberOfCardsDeltDealer > ((52 * 5 )/2))
 shuffleTheDeck();
+
 
 }
 
@@ -1450,6 +1456,7 @@ function checkEndOfHands()
 //called with timeout - keep
 function shuffleTheDeck2()
 {
+
     
 }
 
@@ -1463,6 +1470,9 @@ async function shuffleTheDeck()
     //document.getElementById("split").removeEventListener("click", onDivideHand);
     //document.getElementById("newRoundBtn").removeEventListener("click", newRound);
 
+    numberOfCardsDeltDealer = 0;
+    numberOfCardsDeltRow2 = 0;
+    numberOfCardsDeltRow3 = 0;
     document.getElementById('title').textContent = "Shuffling The Deck...";
 
 
@@ -1503,7 +1513,7 @@ wagerButtonOne.disabled=true;
 wagerButtonFive.disabled=true;
 wagerButtonFifteen.disabled=true;
 wagerButtonTwentyfive.disabled=true;
-//await new Promise(shuffleTheDeck2 => { setTimeout(shuffleTheDeck2, 1500); });
+await new Promise(shuffleTheDeck2 => { setTimeout(shuffleTheDeck2, 1500); });
 let text = "BLACKJACK 5 card dealer";
 document.getElementById('title').textContent = text;
 wagerButtonOne.disabled=false;
