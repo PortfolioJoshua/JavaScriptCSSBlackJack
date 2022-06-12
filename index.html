@@ -130,10 +130,10 @@ let counterOfPressedDealerDrawBtn = 0;
 
 //get the context to use canvas, is global
 let ctx1 = canvasDealer.getContext("2d");
-let numberOfCardsDeltDealer = 0;
 
+let totalAllCardsPlayedBeforeShuffle = 0;
 
-function drawDealerCards(){
+async function drawDealerCards(){
 
     
 
@@ -162,7 +162,7 @@ function drawDealerCards(){
    //dealer hits until 17 or five cards
     while (dealerHandTotal < 17)
     {
-        numberOfCardsDeltDealer++;
+        totalAllCardsPlayedBeforeShuffle++; 
         counterOfPressedDealerDrawBtn++;
         counter++;
         if(counter == 6)
@@ -273,7 +273,7 @@ function drawDealerCards(){
         }
         newRoundBtn.disabled = true;
         //pauses after each card - uncomment to use
-        //await new Promise(dummy => { setTimeout(dummy, 1000); });
+        await new Promise(dummy => { setTimeout(dummy, 1000); });
         newRoundBtn.disabled = false;
 
     }
@@ -519,6 +519,7 @@ let IsASplitFlag = false;
 //and last being the divided hand when applicable
 function drawPlayerCardRow2()
 {
+    totalAllCardsPlayedBeforeShuffle++;
     //for debugging
     counterOfPressedUpperDrawBtn++;
     
@@ -820,6 +821,7 @@ let ctx3 = canvasPlayer2.getContext("2d");
 //this is the 3rd row of cards for dividing two tens
 function drawPlayerCardRow3(mark)
 {
+    totalAllCardsPlayedBeforeShuffle++; 
     //used for debugging differen set marks
     counterOfPressedLowerDrawBtn++;
     numberOfCardsDeltRow3++;
@@ -1253,6 +1255,9 @@ function onDivideHand(){
 //reset all values to initial state for next new round
 async function newRound(){
 
+    numberOfCardsDeltRow2 = 0;
+    numberOfCardsDeltRow3 = 0;
+
 if (pointsHave == 0)
 {
     let text = "Out of points, resetting game!"
@@ -1346,6 +1351,9 @@ wagerButtonTwentyfive.disabled=false;
  counterOfPressedLowerDrawBtn = 0;
  counterOfPressedDealerDrawBtn = 0;
 
+ numberOfCardsDeltRow2 = 0;
+ numberOfCardsDeltRow3 = 0;
+
  
  
  //a reminder of starting initialization
@@ -1362,9 +1370,10 @@ for(let i = 0 ; i < 4*5; i++)
     }
 }
 
-if(numberOfCardsDeltRow2 + numberOfCardsDeltRow3 + numberOfCardsDeltDealer > ((52 * 5 )/2))
-shuffleTheDeck();
-
+if(totalAllCardsPlayedBeforeShuffle  > ((52 * 5 )/2))
+{
+    shuffleTheDeck();
+}
 
 }
 
@@ -1464,15 +1473,14 @@ function shuffleTheDeck2()
 //sets all card usages to zero
 async function shuffleTheDeck()
 {
+    
     //uncertain if useable:
     //document.getElementById("drawCardBtnUpper").removeEventListener("click", drawPlayerCardRow2);
     //document.getElementById("dealCardsBtn").removeEventListener("click", drawDealerCards);
     //document.getElementById("split").removeEventListener("click", onDivideHand);
     //document.getElementById("newRoundBtn").removeEventListener("click", newRound);
 
-    numberOfCardsDeltDealer = 0;
-    numberOfCardsDeltRow2 = 0;
-    numberOfCardsDeltRow3 = 0;
+    
     document.getElementById('title').textContent = "Shuffling The Deck...";
 
 
