@@ -31,7 +31,7 @@
     
     <div id = "headerContainer" > 
         <div id="title">BLACKJACK 5 card dealer</div>
-        <div id = "scoreAtTop">10</div>    
+        <div id = "scoreAtTop">1</div>    
     </div>   
         
         
@@ -90,7 +90,8 @@
 
 
 <script>
-
+const AMOUNT_OF_STARTING_POINTS = 1;
+//<div id = "scoreAtTop">10</div> must be changed too.
 function dummy()
 {
   alert("dummy");
@@ -100,7 +101,7 @@ function dummy()
 //amt of space between cards 
 const CARDGAP = 70;
 //five decks
-const AMTOFCARDS = (52*5 - 1);
+const AMTOFCARDS = (52*4);
 
 
 //make these buttons vague
@@ -491,7 +492,7 @@ async function drawDealerCards(){
 
 
 //initial points
-let pointsHave = 10;
+let pointsHave = AMOUNT_OF_STARTING_POINTS;
 let pointsWagered = 0;
 //temporary for testing split
 let globvar = 1;
@@ -703,7 +704,7 @@ function drawPlayerCardRow2()
     //if ace and over 21 change next ace to 1
     if (playerScoreRow2 > 21)
     {
-        for(let i = 0 ; i < 4*52; i++)
+        for(let i = 0 ; i < AMTOFCARDS; i++)
         {
                 if(AreThereAcesArrayRow[i] == "is row2 ace")
                 {
@@ -993,7 +994,7 @@ if(mark === "0"){
     {
         
     
-        for(let i = 0 ; i < 4*52; i++)
+        for(let i = 0 ; i < AMTOFCARDS; i++)
         {
                 if(AreThereAcesArrayRow[i] == "is row3 ace")
                 {
@@ -1232,7 +1233,7 @@ function getMarkOfCard()
         //search incrementally, for next available card
         if (flagFoundCard == false)
         {
-            for(i = index + 1 ; i < AMTOFCARDS-1 ; i++)
+            for(i = index + 1 ; i < AMTOFCARDS ; i++)
             {
                 if (deckUseage[i] = 0)
                 {
@@ -1310,10 +1311,10 @@ if (pointsHave <= 0)
     newRoundBtn.disabled = true;
     await new Promise(noPoints2 => { setTimeout(noPoints2, 2000); });
     
-    pointsHave = 10;
+    pointsHave = AMOUNT_OF_STARTING_POINTS;
     text = "BLACKJACK 5 card dealer";
     document.getElementById('title').textContent = text;
-    document.getElementById('scoreAtTop').textContent = 10;
+    document.getElementById('scoreAtTop').pointsHave.toString(pointsHave);
 }
 
 //temporary for testing split
@@ -1415,7 +1416,7 @@ for(let i = 0 ; i < 4*5; i++)
     }
 }
 
-if(totalAllCardsPlayedBeforeShuffle  > ((52 * 5 )/2))
+if(totalAllCardsPlayedBeforeShuffle  > ((AMTOFCARDS )/2))
 {
     shuffleTheDeck();
 }
