@@ -90,7 +90,7 @@
 
 
 <script>
-const AMOUNT_OF_STARTING_POINTS = 1;
+const AMOUNT_OF_STARTING_POINTS = 10;
 //<div id = "scoreAtTop">10</div> must be changed too.
 //also first print in html needs to be changed.
 function dummy()
@@ -1314,7 +1314,7 @@ if (pointsHave <= 0)
     pointsHave = AMOUNT_OF_STARTING_POINTS;
     text = "BLACKJACK 5 card dealer";
     document.getElementById('title').textContent = text;
-    document.getElementById('scoreAtTop').pointsHave.toString(pointsHave);
+    document.getElementById('scoreAtTop').textContent = (pointsHave);
 }
 
 //temporary for testing split
@@ -1414,7 +1414,7 @@ for(let i = 0 ; i < 4*5; i++)
     }
 }
 
-if(totalAllCardsPlayedBeforeShuffle  > ((AMTOFCARDS )/2))
+if(totalAllCardsPlayedBeforeShuffle >= ((AMTOFCARDS )/2))
 {
     shuffleTheDeck();
 }
@@ -1573,6 +1573,8 @@ wagerButtonFive.disabled=false;
 wagerButtonFifteen.disabled=false;
 wagerButtonTwentyfive.disabled=false;
     
+document.getElementById("scoreAtTop").textContent = AMOUNT_OF_STARTING_POINTS;
+pointsHave = AMOUNT_OF_STARTING_POINTS;
 }
 
 
