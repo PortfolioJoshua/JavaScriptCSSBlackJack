@@ -829,8 +829,7 @@ let initialXRow3 = 150;
 //let playerScoreRow3 = 0;
 let totalCardsDeltRow3 = 0;
 let numberOfIterationsRow3 = 0;
-//let counterAcesRow = 0;
-//one ace already in hand
+
 let numberOfCardsDeltRow3 = 0;
 //aces are counted as one always
 let alternateHandForCharlieRow3 = 0;
@@ -861,8 +860,8 @@ if(mark === "0"){
     mark  = getMarkOfCard();
 }
 
-////left this for any need of testing to set cards with values that take place of mark
-//for two tens which needs to divide don'r uncomment firsst if statement
+//left this for any need of testing to set cards with values that take place of mark
+//for two tens which needs to divide don't uncomment first two if thens statement. set them both to ten
 
         
     
@@ -978,8 +977,8 @@ if(mark === "0"){
 
 
 
-    //if there is two upper cards the valuem of numberofcardsrpw2 is 3, because the first card that is divided to numberofcardsdeltrow3 is counted;
-    //(both values have two cards and are ready for dealing)
+   
+    //both hands have two cards and are ready for dealing
     if(numberOfCardsDeltRow2 >= 2 && numberOfCardsDeltRow3 > 1  )
     {
         dealCardsBtn.disabled = false;
@@ -1398,9 +1397,7 @@ wagerButtonTwentyfive.disabled=false;
  counterOfPressedLowerDrawBtn = 0;
  counterOfPressedDealerDrawBtn = 0;
 
- numberOfCardsDeltRow2 = 0;
- numberOfCardsDeltRow3 = 0;
-
+ 
  
  
  //a reminder of starting initialization
