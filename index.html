@@ -90,9 +90,9 @@
 
 
 <script>
+//<div id = "scoreAtTop">10</div> must be changed too.  This is in the beginning html.
 const AMOUNT_OF_STARTING_POINTS = 10;
-//<div id = "scoreAtTop">10</div> must be changed too.
-//also first print in html needs to be changed.
+
 function dummy()
 {
   alert("dummy");
@@ -134,6 +134,7 @@ let counterOfPressedDealerDrawBtn = 0;
 let ctx1 = canvasDealer.getContext("2d");
 
 let totalAllCardsPlayedBeforeShuffle = 0;
+
 
 async function drawDealerCards(){
 
@@ -305,8 +306,8 @@ async function drawDealerCards(){
         }
          //lowest message of two          
         document.getElementById("messageLower").textContent = text;
-        let text2 = `${pointsHave}`;
-        document.getElementById("scoreAtTop").textContent = text2;
+       
+        document.getElementById("scoreAtTop").textContent =  pointsHave;
 
         SecondDealIsDoneFlag = true;
         checkEndOfHands();
@@ -331,8 +332,8 @@ async function drawDealerCards(){
         }
         //lowest of two messages 
         document.getElementById("messageLower").textContent = text;
-        let text2 = `${pointsHave}`;
-        document.getElementById("scoreAtTop").textContent = text2;
+        
+        document.getElementById("scoreAtTop").textContent =  pointsHave;
         SecondDealIsDoneFlag = true;
         checkEndOfHands();
     }
@@ -359,8 +360,8 @@ async function drawDealerCards(){
 
         //bottom most text, there are two spots
         document.getElementById("messageLower").textContent = text;
-        let text2 = `${pointsHave}`;
-        document.getElementById("scoreAtTop").textContent = text2;
+        
+        document.getElementById("scoreAtTop").textContent = pointsHave;
         SecondDealIsDoneFlag = true;
         checkEndOfHands();
 
@@ -544,6 +545,7 @@ function drawPlayerCardRow2()
     
         //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
         
+        
         if (counterOfPressedUpperDrawBtn == 1 )
         {
             mark = "10";
@@ -556,7 +558,7 @@ function drawPlayerCardRow2()
            
             
         }
-        
+        /*
         
         else if (counterOfPressedUpperDrawBtn == 3)
         {
@@ -570,7 +572,7 @@ function drawPlayerCardRow2()
         else if (counterOfPressedUpperDrawBtn == 4)
         {
 
-            mark = "10";
+            mark = "2";
            
             
         }
@@ -590,10 +592,10 @@ function drawPlayerCardRow2()
            
             
         }
-        
-        //else
+        */
+        else
         {
-           //mark = getMarkOfCard();
+           mark = getMarkOfCard();
         }
     
 
@@ -864,25 +866,25 @@ if(mark === "0"){
 //for two tens which needs to divide don't uncomment first two if thens statement. set them both to ten
 
         
-    
+        
         if (counterOfPressedLowerDrawBtn == 1 )
         {
             mark = "10";
         
         }
-
+        /*
         
         else if (counterOfPressedLowerDrawBtn == 2)
         {
 
-            mark = "8";
+            mark = "2";
            
             
         }
         else if (counterOfPressedLowerDrawBtn == 3)
         {
 
-            mark = "8";
+            mark = "A";
            
             
         }
@@ -908,7 +910,7 @@ if(mark === "0"){
            
             
         }
-        
+        */
         
     
 
@@ -1311,6 +1313,8 @@ if (pointsHave <= 0)
     newRoundBtn.disabled = true;
     await new Promise(noPoints2 => { setTimeout(noPoints2, 2000); });
     
+   
+
     pointsHave = AMOUNT_OF_STARTING_POINTS;
     text = "BLACKJACK 5 card dealer";
     document.getElementById('title').textContent = text;
@@ -1416,7 +1420,9 @@ for(let i = 0 ; i < 4*5; i++)
 
 if(totalAllCardsPlayedBeforeShuffle >= ((AMTOFCARDS )/2))
 {
+   
     shuffleTheDeck();
+    
 }
 
 }
@@ -1573,10 +1579,8 @@ wagerButtonFive.disabled=false;
 wagerButtonFifteen.disabled=false;
 wagerButtonTwentyfive.disabled=false;
     
-document.getElementById("scoreAtTop").textContent = AMOUNT_OF_STARTING_POINTS;
-pointsHave = AMOUNT_OF_STARTING_POINTS;
-}
 
+}
 
 
 
