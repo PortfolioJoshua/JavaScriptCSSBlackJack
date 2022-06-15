@@ -180,7 +180,7 @@ async function drawDealerCards(){
         //could also test charlie for example by changing first five values
         /////
         
-        /*
+        
         if (counterOfPressedDealerDrawBtn == 1 )
         {
             mark = "A";
@@ -229,7 +229,7 @@ async function drawDealerCards(){
            
             
         }
-        */
+        
 
         
 
@@ -545,25 +545,25 @@ function drawPlayerCardRow2()
     
         //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
         
-        
+        /*
         if (counterOfPressedUpperDrawBtn == 1 )
         {
-            mark = "10";
+            mark = "A";
 
         }
         else if (counterOfPressedUpperDrawBtn == 2)
         {
 
-            mark = "10";
+            mark = "A";
            
             
         }
-        /*
+        
         
         else if (counterOfPressedUpperDrawBtn == 3)
         {
 
-            mark = "5";
+            mark = "A";
            
             
         }
@@ -585,6 +585,7 @@ function drawPlayerCardRow2()
            
             
         }
+        /*
         else if (counterOfPressedUpperDrawBtn == 6)
         {
 
@@ -593,7 +594,7 @@ function drawPlayerCardRow2()
             
         }
         */
-        else
+        //else
         {
            mark = getMarkOfCard();
         }
@@ -910,8 +911,8 @@ if(mark === "0"){
            
             
         }
-        */
         
+        */
     
 
 
@@ -1318,7 +1319,7 @@ if (pointsHave <= 0)
     pointsHave = AMOUNT_OF_STARTING_POINTS;
     text = "BLACKJACK 5 card dealer";
     document.getElementById('title').textContent = text;
-    document.getElementById('scoreAtTop').textContent = (pointsHave);
+    document.getElementById('scoreAtTop').textContent = pointsHave;
 }
 
 //temporary for testing split
