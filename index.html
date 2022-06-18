@@ -267,7 +267,7 @@ async function drawDealerCards(){
         ctx1.font = "50px Arial";
 
 
-        //alignment for bigger card mark
+        //1 is smaller, so left adjustment needed. 
         if(mark == "10"){
             
             //move non ten, one digit graphic, right
@@ -815,7 +815,7 @@ function drawPlayerCardRow2()
 
 
     //size of mark needs to be centerd on card
-    //1 has more whitespace, move 1 to left
+    //1 is smaller, so left adjustment needed. 
     if(mark == "10"){
         ctx2.fillText(mark, (initialXRow2) + (multiplierRow2 * CARDGAP)-4,  60 );
     }
@@ -1107,7 +1107,7 @@ if(mark === "0"){
     
     
     //different fit on card when certain numbers]
-    //1 has more whitespace, move 1 to left
+    //1 is smaller, so left adjustment needed. 
     if(mark == "10"){
         ctx3.fillText(mark, initialXRow3 + (multiplierRow3 * CARDGAP)-4,  60 );
     }
