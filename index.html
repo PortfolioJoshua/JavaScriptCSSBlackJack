@@ -269,11 +269,12 @@ async function drawDealerCards(){
 
         //alignment for bigger card mark
         if(mark == "10"){
-            //dras mark
-            ctx1.fillText(mark, initialXRow1 + multiplierRow1 * CARDGAP-4,  60 );
+            
+            //1 has more whitespace
+            ctx1.fillText(mark, initialXRow1 + (multiplierRow1 * CARDGAP)-4,  60 );
         }
         else{
-            ctx1.fillText(mark, initialXRow1 + multiplierRow1 * CARDGAP+10,  60 );
+            ctx1.fillText(mark, initialXRow1 + (multiplierRow1 * CARDGAP)+10,  60 );
         }
         newRoundBtn.disabled = true;
         //pauses after each card - uncomment to use
@@ -605,7 +606,7 @@ function drawPlayerCardRow2()
     //draw the card, graphically
     ctx2.beginPath();
     ctx2.fillStyle='blue';
-    ctx2.rect((initialXRow2) +  multiplierRow2 * CARDGAP, 7 , 50, 64);
+    ctx2.rect((initialXRow2) +  (multiplierRow2 * CARDGAP), 7 , 50, 64);
     
     ctx2.stroke();
     ctx2.font = "50px Arial";
@@ -813,11 +814,12 @@ function drawPlayerCardRow2()
 
 
     //size of mark needs to be centerd on card
+     //1 has more whitespace
     if(mark == "10"){
-        ctx2.fillText(mark, initialXRow2 + multiplierRow2 * CARDGAP-4,  60 );
+        ctx2.fillText(mark, (initialXRow2) + (multiplierRow2 * CARDGAP)-4,  60 );
     }
     else{
-        ctx2.fillText(mark, initialXRow2 + multiplierRow2 * CARDGAP+10,  60 );
+        ctx2.fillText(mark, initialXRow2 + (multiplierRow2 * CARDGAP)+10,  60 );
     }
 
    
@@ -1102,12 +1104,13 @@ if(mark === "0"){
     
     
     
-    //different fit on card when certain numbers
+    //different fit on card when certain numbers]
+     //1 has more whitespace
     if(mark == "10"){
-        ctx3.fillText(mark, initialXRow3 + multiplierRow3 * CARDGAP-4,  60 );
+        ctx3.fillText(mark, initialXRow3 + (multiplierRow3 * CARDGAP)-4,  60 );
     }
     else{
-        ctx3.fillText(mark, initialXRow3 + multiplierRow3 * CARDGAP+10,  60 );
+        ctx3.fillText(mark, initialXRow3 + (multiplierRow3 * CARDGAP)+10,  60 );
     }
 
 }
@@ -1295,7 +1298,7 @@ function onDivideHand(){
     drawPlayerCardRow3("10");
     
     multiplierRow2--;
-    //erases 2nd card of row2
+    //erases 2nd card of row2, a ten!
     ctx2.clearRect((initialXRow1 +  (1 * CARDGAP) - 1),0,1000,78);
     playerScoreRow2 = playerScoreRow2 - 10;
     
