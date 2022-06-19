@@ -53,7 +53,6 @@
 const AMOUNT_OF_STARTING_POINTS = 10;
 function pause()
 {
-  
 }
 //amt of space between cards 
 const CARDGAP = 70;
@@ -83,14 +82,12 @@ let counterOfPressedDealerDrawBtn = 0;
 let ctx1 = canvasDealer.getContext("2d");
 let totalAllCardsPlayedBeforeShuffle = 0;
 async function drawDealerCards(){
-    
     //is set if deal has been busted, charlied, or black jacked - wouldn't need a dealers deal than
     if (FirstDealIsDoneFlag == true && SecondDealIsDoneFlag == true)
     {
         return (-1);
     }
     dealCardsBtn.disabled = true;
-   
     document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
     drawCardBtnUpper.disabled = true;
     drawCardBtnLower.disabled = true;
@@ -111,8 +108,6 @@ async function drawDealerCards(){
         //for testing uncomment counterofpressed... and the first if and else if to test division
         //could also test charlie for example by changing first five values
         /////
-        
-        
         if (counterOfPressedDealerDrawBtn == 1 )
         {
             mark = "A";
@@ -120,14 +115,10 @@ async function drawDealerCards(){
         else if (counterOfPressedDealerDrawBtn == 2)
         {
             mark = "2";
-           
-            
         }
         else if (counterOfPressedDealerDrawBtn == 3)
         {
             mark = "2";
-           
-            
         }
          if (counterOfPressedDealerDrawBtn == 4 )
         {
@@ -136,23 +127,15 @@ async function drawDealerCards(){
         else if (counterOfPressedDealerDrawBtn == 5)
         {
             mark = "2";
-           
-            
         }
         else if (counterOfPressedDealerDrawBtn == 6)
         {
             mark = "2";
-           
-            
         }
-        
         else if (counterOfPressedDealerDrawBtn == 7)
         {
             mark = "3";
-           
-            
         }
-        
         /////
         //these are the face cards
         if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
@@ -172,7 +155,6 @@ async function drawDealerCards(){
             dealerHandTotal = dealerHandTotal + parseInt(mark);
         }
         console.log("dealerHandTotal", dealerHandTotal);
-        
         ctx1.beginPath();
         ctx1.fillStyle='red';
         //draws card's image
@@ -182,7 +164,6 @@ async function drawDealerCards(){
         //font ends at last value
         //1 is smaller, so left adjustment needed. 
         if(mark == "10"){
-            
             //move non ten, one digit graphic, right
             ctx1.fillText(mark, initialXRow1 + (multiplierRow1 * CARDGAP)-5,  57 );
         }
@@ -199,14 +180,11 @@ async function drawDealerCards(){
     //row3
     if(SecondDealIsDoneFlag == false  && isThereASecondDeal)
     {
-     
-    
     //bust
     if (dealerHandTotal > 21)
     {
         //DEALER LOSES
         pointsHave = pointsHave + (pointsWagered);
-        
         let text = "";
         if(pointsWagered > 1)
         {
@@ -218,7 +196,6 @@ async function drawDealerCards(){
         }
          //lowest message of two          
         document.getElementById("messageLower").textContent = text;
-       
         document.getElementById("scoreAtTop").textContent =  pointsHave;
         SecondDealIsDoneFlag = true;
         checkEndOfHands();
@@ -240,7 +217,6 @@ async function drawDealerCards(){
         }
         //lowest of two messages 
         document.getElementById("messageLower").textContent = text;
-        
         document.getElementById("scoreAtTop").textContent =  pointsHave;
         SecondDealIsDoneFlag = true;
         checkEndOfHands();
@@ -266,25 +242,18 @@ async function drawDealerCards(){
         }
         //bottom most text, there are two spots
         document.getElementById("messageLower").textContent = text;
-        
         document.getElementById("scoreAtTop").textContent = pointsHave;
         SecondDealIsDoneFlag = true;
         checkEndOfHands();
     }
     }
-   
     //player didn't bust, charlie, or blackjack, so needs to check against deakers deal
     if (FirstDealIsDoneFlag  == false  )
     {
-    
-            
-    
-    
      if(dealerHandTotal > 21)
         {
                     //DEALER BUSTS
                     pointsHave = pointsHave + pointsWagered;
-                   
                     let text = "";
                     if(pointsWagered > 1)
                     {
@@ -294,19 +263,13 @@ async function drawDealerCards(){
                     {
                         text = `BUST!  YOU WIN ${pointsWagered} POINT`;
                     }
-                    
                     //upper message, of two.
                     document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
-                    
                     console.log("BUST!");
                     FirstDealIsDoneFlag = true;
-                    
                     checkEndOfHands();
- 
         }
-            
-        
     ////////////
         //already checked dealer is therefor less than 21 and has more points than player
         else if(dealerHandTotal >= playerScoreRow2  )
@@ -329,12 +292,9 @@ async function drawDealerCards(){
                     //upper message of two
                     document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
-                    
                     //console.log("BUST!");
                     FirstDealIsDoneFlag = true;
-                    
                     checkEndOfHands();
- 
         }
     ///////////
     //player is under 21, because didn't score blackjack before cards dealt
@@ -343,7 +303,6 @@ async function drawDealerCards(){
         {   
                     //PLAYER WINS       
                     pointsHave = pointsHave + pointsWagered;
-                   
                     let text = "";
                     if(pointsWagered > 1)
                     {
@@ -356,23 +315,15 @@ async function drawDealerCards(){
                     //upper message of two
                     document.getElementById("messageUnderRow2").textContent = text;
                     document.getElementById("scoreAtTop").textContent = pointsHave; 
-                    
                     console.log("BUST!");
                     FirstDealIsDoneFlag = true;
-                    
                     checkEndOfHands();
- 
         }
     }
     //////////////
-    
     isAllDelt = true;
-    
-    
     multiplierRow1 = -1;
-   
     dealerHandTotal = 0;
-    
     dealCardsBtn.disabled = true;
 }
 //initial points
@@ -408,19 +359,10 @@ function drawPlayerCardRow2()
     totalAllCardsPlayedBeforeShuffle++;
     //for debugging
     counterOfPressedUpperDrawBtn++;
-    
-    
     numberOfIterationsRow2++;
-    
-    
-    
     document.getElementById('split').style.visibility = 'hidden';
-    
     multiplierRow2++;
-    
         //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
-        
-        
         if (counterOfPressedUpperDrawBtn == 1 )
         {
             mark = "10";
@@ -428,56 +370,33 @@ function drawPlayerCardRow2()
         else if (counterOfPressedUpperDrawBtn == 2)
         {
             mark = "10";
-           
-            
         }
-        
-        
         else if (counterOfPressedUpperDrawBtn == 3)
         {
             mark = "5";
-           
-            
         }
-        
-        
         else if (counterOfPressedUpperDrawBtn == 4)
         {
             mark = "A";
-           
-            
         }
-        
-        
         else if (counterOfPressedUpperDrawBtn == 5)
         {
             mark = "A";
-           
-            
         }
-        
         else if (counterOfPressedUpperDrawBtn == 6)
         {
             mark = "A";
-           
-            
         }
-        
         //else
         {
            //mark = getMarkOfCard();
         }
-    
-        
-        
     //draw the card, graphically
     ctx2.beginPath();
     ctx2.fillStyle='blue';
     ctx2.rect((initialXRow2) +  (multiplierRow2 * CARDGAP), 7 , 50, 64);
-    
     ctx2.stroke();
     ctx2.font = "50px Arial";
-   
     //devide button press
     if(IsASplitFlag)
     {
@@ -485,21 +404,17 @@ function drawPlayerCardRow2()
         alternateHandForCharlieRow2 = alternateHandForCharlieRow2 - 10;
         IsASplitFlag = false;
     }
-    
     //face cards
     if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
     {
         mark = "10";
         numberOfCardsDeltRow2++;
-        
         if(numberOfIterationsRow2 == 1 || numberOfCardsDeltRow2 == 2)
         {
             tenCounter++;
         }
-        
         playerScoreRow2 = playerScoreRow2 + 10;
         alternateHandForCharlieRow2 = alternateHandForCharlieRow2 + 10;
-        
     }
     //ace
     else if (mark == "A")
@@ -543,7 +458,6 @@ function drawPlayerCardRow2()
     if (numberOfCardsDeltRow2 == 2 && numberOfCardsDeltRow3 == 0)
     {
         dealCardsBtn.disabled = false;
-       
     }
     //if there is two upper cards the valuem of numberofcardsrpw2 is 3, because the first card that is divided to numberofcardsdeltrow3 is counted
     //(both values have two cards and are ready for dealing)
@@ -551,7 +465,6 @@ function drawPlayerCardRow2()
     {
         dealCardsBtn.disabled = false;
     }
-    
     //if ace and over 21 change next ace to 1
     if (playerScoreRow2 > 21)
     {
@@ -566,11 +479,9 @@ function drawPlayerCardRow2()
         }
     }
     console.log("3:", playerScoreRow2 );
-        
     //plyer scores over 21, so busts
     if(playerScoreRow2 > 21)
     {
-                    
                 //dealCardsBtn.disabled = true;
                 pointsHave = pointsHave - pointsWagered;
                 if(pointsHave < 0)
@@ -586,24 +497,17 @@ function drawPlayerCardRow2()
                 {
                     text = `BUST!  YOU LOSE ${pointsWagered} POINT`;
                 }
-                
                 //top of two messages
                 document.getElementById("messageUnderRow2").textContent = text;
                 document.getElementById("scoreAtTop").textContent = pointsHave; 
-                
                 console.log("BUST!");
                 FirstDealIsDoneFlag = true;
                 //check for firstdealisdoneflag to change display buttons
                 checkEndOfHands();
     }
-            
-        
-    
-    
     //player scores blackjack
     else if(playerScoreRow2 == 21)
     {
-       
         //dealCardsBtn.disabled = true;
         pointsHave = pointsHave + (pointsWagered*2)
         let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
@@ -611,11 +515,8 @@ function drawPlayerCardRow2()
         document.getElementById("messageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave; 
         FirstDealIsDoneFlag = true;
-        
-         
         //dealCardsBtn.disabled = false;
         drawCardBtnUpper.disabled = true;
-        
         //check for firstdealisdoneflag to change display buttons
         checkEndOfHands();
     }
@@ -634,17 +535,13 @@ function drawPlayerCardRow2()
         {
             text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
         }
-        
         //top of two messages
         document.getElementById("messageUnderRow2").textContent = text;
         document.getElementById("scoreAtTop").textContent = pointsHave;
         FirstDealIsDoneFlag = true;
         //checks for deals done to display buttons
         checkEndOfHands();
-        
-        
     }
-    
     //size of mark needs to be centerd on card
     //1 is smaller, so left adjustment needed. 
     //font ends at last value
@@ -655,7 +552,6 @@ function drawPlayerCardRow2()
         //move non ten, one digit graphic, right
         ctx2.fillText(mark, initialXRow2 + (multiplierRow2 * CARDGAP)+11, 57 );
     }
-   
 }
 //controls the spacing of the cards
 let multiplierRow3 = -1;
@@ -686,71 +582,47 @@ function drawPlayerCardRow3(mark)
     //left this for any need of testing to set cards with values that take place of mark
     //for two tens which needs to divide. Don't uncomment first if then statement and set as ten.
     //Iterate value in if then right above there.
-        
-    
     if (counterOfPressedLowerDrawBtn == 1 )
     {
         mark = "10";
-    
     }
-    
-    
     else if (counterOfPressedLowerDrawBtn == 2)
     {
         mark = "2";
-        
-        
     }
     else if (counterOfPressedLowerDrawBtn == 3)
     {
         mark = "A";
-        
-        
     }
-    
     else if (counterOfPressedLowerDrawBtn == 4)
     {
         mark = "A";
-        
-        
     }
     else if (counterOfPressedLowerDrawBtn == 5)
     {
         mark = "A";
-        
-        
     }
     else if (counterOfPressedLowerDrawBtn == 6)
     {
         mark = "2";
-        
-        
     }
-    
-    
     document.getElementById('messageLower').style.visibility = 'visible';
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     document.getElementById('drawCardBtnLower').style.visibility = 'visible';
-    
-   
     multiplierRow3++;
-    
     ctx3 = canvasPlayerRow3.getContext("2d");
     //graphically draws card
     ctx3.beginPath();
     ctx3.fillStyle='blue';
     ctx3.rect((initialXRow3) +  multiplierRow3 * CARDGAP, 7 , 50, 64);
-   
     ctx3.stroke();
     ctx3.font = "50px Arial";
-    
     //a ten valuedf card: queen, king, jack, or ten 
     if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
     {
         mark = "10";
         totalCardsDeltRow3++;
         playerScoreRow3 = playerScoreRow3 + 10;
-        
         alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + 10;
     }
     //an ace
@@ -761,7 +633,6 @@ function drawPlayerCardRow3(mark)
         playerScoreRow3 = playerScoreRow3 + 11;
         //holds aces in array for row3
         AreThereAcesArrayRow[counterAcesRow] = "is row3 ace";
-        
         //value of hand with all aces counted as 1.
         alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + 1;
     }
@@ -771,7 +642,6 @@ function drawPlayerCardRow3(mark)
         playerScoreRow3 = playerScoreRow3 + parseInt(mark);
         totalCardsDeltRow3++;
         alternateHandForCharlieRow3 = alternateHandForCharlieRow3 + parseInt(mark);
-        
     }
     console.log("2playerScoreRow2" , playerScoreRow2);
     console.log("2numberOfCardsDeltRow2 ", numberOfCardsDeltRow2 );
@@ -787,27 +657,20 @@ function drawPlayerCardRow3(mark)
     //check if hand has any aces becaue the hand is over 21, if so change 11 value to 1 
     if (playerScoreRow3 > 21)
     {
-        
-    
         for(let i = 0 ; i < AMTOFCARDS; i++)
         {
                 if(AreThereAcesArrayRow[i] == "is row3 ace")
                 {
                     AreThereAcesArrayRow[i] = "used ace";
                     playerScoreRow3 = playerScoreRow3 - 10;
-                    
                     break;
                 }
         }
     }
     console.log("playerScoreRow3a", playerScoreRow3);
-    
-    
     //player scores over 21, so player busts and loses
     if(playerScoreRow3 > 21)
     {
-        
-                
                 pointsHave = pointsHave - pointsWagered;
                 if(pointsHave < 0)
                 {
@@ -825,17 +688,14 @@ function drawPlayerCardRow3(mark)
                 //lowest of two messages
                 document.getElementById("messageLower").textContent = text;
                 document.getElementById("scoreAtTop").textContent = pointsHave; 
-                
                 console.log("BUST!");
                 SecondDealIsDoneFlag = true;
-                
                 //checks for done flags and alters display of buttons
                 checkEndOfHands();
     }
     //player scores over 21, so busts and player loses
     else if(playerScoreRow3 == 21)
     {
-    
     //score
     pointsHave = pointsHave + (pointsWagered*2);
     let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
@@ -843,17 +703,14 @@ function drawPlayerCardRow3(mark)
     document.getElementById("messageLower").textContent = text;
     document.getElementById("scoreAtTop").textContent = pointsHave; 
     SecondDealIsDoneFlag = true;
-    
     //checks for done flags and alters display of buttons
     checkEndOfHands();
     }
     //hand wins becaues it is five cards and isn't over 21
     else if(alternateHandForCharlieRow3 < 22 && numberOfCardsDeltRow3 == 5)
     {
-    
     console.log("5 Card Charlie");
     pointsHave = pointsHave + (pointsWagered);
-    
     let text = "";
     if(pointsWagered > 1)
     {
@@ -868,15 +725,9 @@ function drawPlayerCardRow3(mark)
     document.getElementById("messageLower").textContent = text;
     document.getElementById("scoreAtTop").textContent = pointsHave;
     SecondDealIsDoneFlag = true;
-    
-    
     //checks for done flags and alters display of buttons
     checkEndOfHands();
-    
-    
     }
-        
-        
     //different fit on card when certain numbers]
     //1 is smaller, so left adjustment needed.
     //font ends at last value 
@@ -891,13 +742,10 @@ function drawPlayerCardRow3(mark)
 //on start, these buttons are disabled, wage buttons will be false (not disabled)
 function setsUpGame()
 {
-    
-   
     newRoundBtn.disabled = true;
     drawCardBtnUpper.disabled = true;
     dealCardsBtn.disabled = true;
     drawCardBtnUpper.disabled = true;
-    
 }
 //if indexed value is 1 than the card has been used in the next array
 let deckUseage = 
@@ -952,18 +800,13 @@ function getMarkOfCard()
 {
     //used to determine direction of search for a card
     let flagFoundCard = false;
-    
     let randomNumber = new Math.seedrandom();
-    
     //random number is between 0 and 1
     randomNumber = randomNumber();
     //changes value to 0-259
     let betweenZeroand259 = randomNumber * 259;
-    
    //removes decimal part of number
     index = Math.trunc(betweenZeroand259);
-   
-    
     //if is available value use it, otherwise search towards zero for first available card
     let i = 0;
     if(deckUseage[index] == 0)
@@ -981,9 +824,7 @@ function getMarkOfCard()
                 flagFounCard = true;
                 break;
             }
-            
         }
-        
         //search incrementally, for next available card
         if (flagFoundCard == false)
         {
@@ -996,13 +837,9 @@ function getMarkOfCard()
                 }
             }
         }
-        
-        
     }
-   
     return (decks[i]);
 }
- 
 function wager(points_Wagered){
     //not enough points to make wager
     if(points_Wagered > pointsHave)
@@ -1018,9 +855,6 @@ function wager(points_Wagered){
     wagerButtonTwentyfive.disabled=true;
 }
 function onDivideHand(){
-   
-   
-    
     IsASplitFlag = true;
     WasASplitFlag = true;
     //sets up buttons visiblity
@@ -1029,20 +863,15 @@ function onDivideHand(){
     document.getElementById('messageLower').style.visibility = 'visible';
         document.getElementById('drawCardBtnLower').style.visibility = 'visible';
         dealCardsBtn.disabled = true;
-    
     drawCardBtnLower.disabled =  false;
-    
     isThereASecondDeal = true;
     //for draeing both decks wgeb split button was pressed
     drawPlayerCardRow3("10");
-    
     multiplierRow2--;
     //erases 2nd card of row2, a ten!
     //canvas is zero to 51, this is a width of 52
     ctx2.clearRect(initialXRow2 + (CARDGAP)-1,0,52,78);
     playerScoreRow2 = playerScoreRow2 - 10;
-    
-    
 }
 //reset all values to initial state for next new round
 async function newRound(){
@@ -1054,8 +883,6 @@ async function newRound(){
         document.getElementById('title').textContent = text;
         newRoundBtn.disabled = true;
         await new Promise(noPoints => { setTimeout(noPoints, 2000); });
-        
-    
         pointsHave = AMOUNT_OF_STARTING_POINTS;
         text = "BLACKJACK 5 card dealer";
         document.getElementById('title').textContent = text;
@@ -1063,19 +890,14 @@ async function newRound(){
     }
     //temporary for testing split
     globvar = 1;
-    
     //clears all 3 canvases, 64 height with 8 vertical offset because 
     //rect starts at zero and than the height offset is 7
     ctx1.clearRect(0,0,530,72);
     ctx2.clearRect(0,0,530,72);
     ctx3.clearRect(0,0,530,72);
-    
-    
     //messageLower.disabled = true;
     //messageUnderRow2.disabled = true;
-    
     newRoundBtn.disabled = true;
-    
     //clears out messages
     document.getElementById('messageLower').textContent  = "";
     document.getElementById('messageUnderRow2').textContent= "";
@@ -1084,36 +906,25 @@ async function newRound(){
     wagerButtonFive.disabled=false;
     wagerButtonFifteen.disabled=false;
     wagerButtonTwentyfive.disabled=false;
-    
     //for spacing cards
     multiplierRow1 = -1;
-    
-    
     dealerHandTotal = 0;
-    
     isAllDelt = false;
     //reset round's scores
     playerScoreRow2 = 0;
     playerScoreRow3 = 0;
-    
-    
     //this stays instead
     //pointsHave = 30;
     pointsWagered = 0;
-    
- 
     gWasASplitFlag = false;
     //for spacing cards
     multiplierRow2 = -1;
-    
     counterAcesRow = -1;
     numberOfIterationsRow2 = 0;
     //numberOfCardsDeltRow2 = 0;
-    
     isThereASecondDeal = false;
     //for spacing cards
     multiplierRow3 = -1;
-    
     //let playerScoreRow3 = 0;
     totalCardsDeltRow3 = 0;
     numberOfIterationsRow3 = 0;
@@ -1122,7 +933,6 @@ async function newRound(){
     SecondDealIsDoneFlag = false;
     isThereASecondDeal = false;
     //numberOfCardsDeltRow3 = 0;
-    
     //summed score with aces equal to one
     alternateHandForCharlieRow2 = 0;
     alternateHandForCharlieRow3 = 0;
@@ -1133,9 +943,6 @@ async function newRound(){
     counterOfPressedUpperDrawBtn  = 0;
     counterOfPressedLowerDrawBtn = 0;
     counterOfPressedDealerDrawBtn = 0;
-    
-    
- 
     //a reminder of starting initialization
     //AreThereAcesArrayRow = ["no ace","no ace","no ace","no ace" , "no ace","no ace","no ace","no ace" ,"no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace","no ace"]; 
     //clear aces in aray so next ahnd has no useable aces yet
@@ -1144,25 +951,19 @@ async function newRound(){
         if(AreThereAcesArrayRow[i] == "is row2 ace" || AreThereAcesArrayRow[i] == "is row3 ace")
         {
             AreThereAcesArrayRow[i] = "used ace";
-            
-            
         }
     }
     if(totalAllCardsPlayedBeforeShuffle >= ((AMTOFCARDS )/2))
     {
-    
         shuffleTheDeck();
-        
     }
 }
 function noPoints()
 {
-    
 }
 function playWave()
 {
     const music = new Audio('adf.wav');
-    
     music.play();
 }
 //changes bttons depending on if either flag was set for: blackjack,player bust, or five card charlie.
@@ -1171,12 +972,9 @@ function checkEndOfHands()
 {
     if(isThereASecondDeal)
     {
-      
         console.log("a", FirstDealIsDoneFlag);
         console.log("b,", SecondDealIsDoneFlag);
         console.log("c", IsASplitFlag);
-        
-        
         //2nd time through this will be true
         if (FirstDealIsDoneFlag && SecondDealIsDoneFlag)
         {
@@ -1184,60 +982,41 @@ function checkEndOfHands()
             drawCardBtnLower.disabled = true;
             drawCardBtnUpper.disabled = true;
             dealCardsBtn.disabled = true;
-            
         }
-        
         //first player hand complete before seconddealisdoneflag
         else if (FirstDealIsDoneFlag)
         {
-            
-            
-            
                 //drawCardBtnLower.disabled = false;
                 drawCardBtnUpper.disabled = true;
                 drawCardBtnLower.disabled = false;
-                
-                
-                
         }
-        
         // second player hand completed before firstdealisdoneflag
         else if(SecondDealIsDoneFlag)
         {
-               
-        
                 //upper button shows
                 drawCardBtnUpper.disabled =false;
                 //bottom button hidden
                 drawCardBtnLower.disabled = true;
-               
         }
-        
     }
     //only one deal, not row 3 (divided deal)
     else if(!isThereASecondDeal)
     {
-        
-    
         if (FirstDealIsDoneFlag == true)
         {
             drawCardBtnUpper.disabled = true;
             newRoundBtn.disabled = false;
             dealCardsBtn.disabled = true;
-           
-            
         }
     }
 }
 //called with timeout
 function shuffleTheDeck2()
 {
-    
 }
 //sets all card usages to zero
 async function shuffleTheDeck()
 {
-   
     document.getElementById('title').textContent = "Shuffling The Deck...";
      //set deck to unused
     deckUseage = 
@@ -1275,7 +1054,6 @@ async function shuffleTheDeck()
     wagerButtonFive.disabled=false;
     wagerButtonFifteen.disabled=false;
     wagerButtonTwentyfive.disabled=false;
-        
 }
 setsUpGame();
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
