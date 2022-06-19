@@ -76,7 +76,7 @@ margin-left: 150px;
 
    /* for small mobile screen*/
    #alternateContainer{
-    border: 10px solid rgb(252, 231, 170);
+    border: 10px solid rgb(0, 0, 0);
     background-color: whitesmoke;
     display:flex;
     flex-direction: row;
@@ -130,7 +130,7 @@ margin-left: 150px;
     
     #container{
         display: block;
-        border: 2px solid rgb(142, 30, 30);
+        border: 2px solid rgb(0, 0, 0);
         max-height:600px;
         
     }
@@ -150,7 +150,7 @@ margin-left: 150px;
         #item{display:none;}
 
         #container{
-            border: 2px solid rgb(7, 187, 100);
+            border: 2px solid rgb(0, 0, 0);
             box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.6);
             max-height: 600px;
           

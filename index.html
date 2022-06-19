@@ -40,7 +40,7 @@
     <div>&nbsp</div>
     
     <div>
-        <canvas id="canvasPlayer1" width="500" height="78"></canvas> 
+        <canvas id="canvasPlayerRow2" width="500" height="78"></canvas> 
         <br>
         <div id = "interfaceRow2">
             
@@ -66,7 +66,7 @@
             
         </div>
     </div>
-    <canvas id="canvasPlayer2" width="500" height="78" ></canvas>
+    <canvas id="canvasPlayerRow3" width="500" height="78" ></canvas>
 
     
         <div id = "messageLower" ><b>-</div>
@@ -93,9 +93,9 @@
 //<div id = "scoreAtTop">10</div> must be changed too.  This is in the beginning html.
 const AMOUNT_OF_STARTING_POINTS = 10;
 
-function dummy()
+function pause()
 {
-  alert("dummy");
+  
 }
 
 
@@ -106,15 +106,15 @@ const AMTOFCARDS = (52*4);
 
 
 //make these buttons vague
-document.getElementById('canvasPlayer2').style.visibility = 'hidden';
+document.getElementById('canvasPlayerRow3').style.visibility = 'hidden';
 document.getElementById('messageLower').style.visibility = 'hidden';
 document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
 document.getElementById('split').style.visibility = 'hidden';
 
 //first through third deals, the third deal is used for division
 var canvasDealer = document.getElementById("canvasDealer");
-let canvasPlayer1 = document.getElementById("canvasPlayer1");
-let canvasPlayer2 = document.getElementById("canvasPlayer2");
+let canvasPlayerRow2 = document.getElementById("canvasPlayerRow2");
+let canvasPlayerRow3 = document.getElementById("canvasPlayerRow3");
 
 let multiplierRow1 = -1;
 let initialXRow1 = 150;
@@ -279,7 +279,7 @@ async function drawDealerCards(){
         }
         newRoundBtn.disabled = true;
         //pauses after each card - uncomment to use
-        await new Promise(dummy => { setTimeout(dummy, 1000); });
+        await new Promise(pause => { setTimeout(pause, 1000); });
         newRoundBtn.disabled = false;
 
     }
@@ -520,7 +520,7 @@ let alternateHandForCharlieRow2 = 0;
 //used for testing
 let counterOfPressedUpperDrawBtn = 0;
 //canvas context
-let ctx2 = canvasPlayer1.getContext("2d");
+let ctx2 = canvasPlayerRow2.getContext("2d");
 
 
 //a count of two sets up divide hand
@@ -697,16 +697,6 @@ function drawPlayerCardRow2()
         dealCardsBtn.disabled = false;
     }
     
-
-    
-        
-
-    
-    
-
-   
-
-    
     //if ace and over 21 change next ace to 1
     if (playerScoreRow2 > 21)
     {
@@ -843,7 +833,7 @@ let alternateHandForCharlieRow3 = 0;
 let counterOfPressedLowerDrawBtn = 0;
 
 //graphical context
-let ctx3 = canvasPlayer2.getContext("2d");
+let ctx3 = canvasPlayerRow3.getContext("2d");
 
 
 
@@ -925,13 +915,13 @@ if(mark === "0"){
 
    
         document.getElementById('messageLower').style.visibility = 'visible';
-        document.getElementById('canvasPlayer2').style.visibility = 'visible';
+        document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
         document.getElementById('drawCardBtnLower').style.visibility = 'visible';
         
    
     multiplierRow3++;
     
-    ctx3 = canvasPlayer2.getContext("2d");
+    ctx3 = canvasPlayerRow3.getContext("2d");
     //graphically draws card
     ctx3.beginPath();
     ctx3.fillStyle='blue';
@@ -982,21 +972,12 @@ if(mark === "0"){
     console.log("2nc2 ", numberOfCardsDeltRow2);
     console.log("2nc3 ", numberOfCardsDeltRow3);
 
-
-
-
-   
     //both hands have two cards and are ready for dealing
     if(numberOfCardsDeltRow2 >= 2 && numberOfCardsDeltRow3 > 1  )
     {
         dealCardsBtn.disabled = false;
     }
 
-
-   
-   
-    
-    
     //check if hand has any aces becaue the hand is over 21, if so change 11 value to 1 
     if (playerScoreRow3 > 21)
     {
@@ -1019,89 +1000,89 @@ if(mark === "0"){
 
     
     
-        //player scores over 21, so player busts and loses
-        if(playerScoreRow3 > 21)
-        {
-           
-                   
-                    pointsHave = pointsHave - pointsWagered;
-                    if(pointsHave < 0)
-                    {
-                        pointsHave = 0;
-                    }
-
-                    let text = "";
-                    if(pointsWagered > 1)
-                    {
-                        text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
-                    }
-                    else
-                    {
-                        text = `BUST!  YOU LOSE ${pointsWagered} POINT`;
-                    }
-
-                    //lowest of two messages
-                    document.getElementById("messageLower").textContent = text;
-                    document.getElementById("scoreAtTop").textContent = pointsHave; 
-                    
-                    console.log("BUST!");
-                    SecondDealIsDoneFlag = true;
-                   
-                    //checks for done flags and alters display of buttons
-                    checkEndOfHands();
- 
-        }
-
-        //player scores over 21, so busts and player loses
-        else if(playerScoreRow3 == 21)
-        {
+    //player scores over 21, so player busts and loses
+    if(playerScoreRow3 > 21)
+    {
         
-        //score
-        pointsHave = pointsHave + (pointsWagered*2);
+                
+                pointsHave = pointsHave - pointsWagered;
+                if(pointsHave < 0)
+                {
+                    pointsHave = 0;
+                }
 
+                let text = "";
+                if(pointsWagered > 1)
+                {
+                    text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
+                }
+                else
+                {
+                    text = `BUST!  YOU LOSE ${pointsWagered} POINT`;
+                }
 
-        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
-        //lowest of two messages
-        document.getElementById("messageLower").textContent = text;
-        document.getElementById("scoreAtTop").textContent = pointsHave; 
-        SecondDealIsDoneFlag = true;
-        
-        //checks for done flags and alters display of buttons
-        checkEndOfHands();
-        }
+                //lowest of two messages
+                document.getElementById("messageLower").textContent = text;
+                document.getElementById("scoreAtTop").textContent = pointsHave; 
+                
+                console.log("BUST!");
+                SecondDealIsDoneFlag = true;
+                
+                //checks for done flags and alters display of buttons
+                checkEndOfHands();
 
-
-        //hand wins becaues it is five cards and isn't over 21
-        else if(alternateHandForCharlieRow3 < 22 && numberOfCardsDeltRow3 == 5)
-        {
-       
-        console.log("5 Card Charlie");
-        pointsHave = pointsHave + (pointsWagered);
-
-        
-        let text = "";
-        if(pointsWagered > 1)
-        {
-            text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
-        }
-        else
-        {
-            text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
-        }
-
-        let text2 = `Total Points: ${pointsHave}.`;
-        //lowest of two messages
-        document.getElementById("messageLower").textContent = text;
-        document.getElementById("scoreAtTop").textContent = pointsHave;
-        SecondDealIsDoneFlag = true;
-       
-        
-        //checks for done flags and alters display of buttons
-        checkEndOfHands();
-       
-        
     }
-            
+
+    //player scores over 21, so busts and player loses
+    else if(playerScoreRow3 == 21)
+    {
+    
+    //score
+    pointsHave = pointsHave + (pointsWagered*2);
+
+
+    let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
+    //lowest of two messages
+    document.getElementById("messageLower").textContent = text;
+    document.getElementById("scoreAtTop").textContent = pointsHave; 
+    SecondDealIsDoneFlag = true;
+    
+    //checks for done flags and alters display of buttons
+    checkEndOfHands();
+    }
+
+
+    //hand wins becaues it is five cards and isn't over 21
+    else if(alternateHandForCharlieRow3 < 22 && numberOfCardsDeltRow3 == 5)
+    {
+    
+    console.log("5 Card Charlie");
+    pointsHave = pointsHave + (pointsWagered);
+
+    
+    let text = "";
+    if(pointsWagered > 1)
+    {
+        text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
+    }
+    else
+    {
+        text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
+    }
+
+    let text2 = `Total Points: ${pointsHave}.`;
+    //lowest of two messages
+    document.getElementById("messageLower").textContent = text;
+    document.getElementById("scoreAtTop").textContent = pointsHave;
+    SecondDealIsDoneFlag = true;
+    
+    
+    //checks for done flags and alters display of buttons
+    checkEndOfHands();
+    
+    
+}
+        
         
     
     
@@ -1288,7 +1269,7 @@ function onDivideHand(){
 
     //sets up buttons visiblity
     document.getElementById('split').style.visibility = 'hidden';
-    document.getElementById('canvasPlayer2').style.visibility = 'visible';
+    document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     document.getElementById('messageLower').style.visibility = 'visible';
 
     document.getElementById('drawCardBtnLower').style.visibility = 'visible';
@@ -1319,7 +1300,7 @@ if (pointsHave <= 0)
     let text = "Out of points, resetting game!"
     document.getElementById('title').textContent = text;
     newRoundBtn.disabled = true;
-    await new Promise(noPoints2 => { setTimeout(noPoints2, 2000); });
+    await new Promise(noPoints => { setTimeout(noPoints, 2000); });
     
    
 
@@ -1333,9 +1314,9 @@ if (pointsHave <= 0)
  globvar = 1;
  
 //clears all 3 canvases
- ctx1.clearRect(0,0,1000,78);
- ctx2.clearRect(0,0,1000,78);
- ctx3.clearRect(0,0,1000,78);
+ ctx1.clearRect(0,0,530,64);
+ ctx2.clearRect(0,0,530,64);
+ ctx3.clearRect(0,0,530,64);
  
  
  //messageLower.disabled = true;
@@ -1531,12 +1512,7 @@ function shuffleTheDeck2()
 //sets all card usages to zero
 async function shuffleTheDeck()
 {
-    
-    //uncertain if useable:
-    //document.getElementById("drawCardBtnUpper").removeEventListener("click", drawPlayerCardRow2);
-    //document.getElementById("dealCardsBtn").removeEventListener("click", drawDealerCards);
-    //document.getElementById("split").removeEventListener("click", onDivideHand);
-    //document.getElementById("newRoundBtn").removeEventListener("click", newRound);
+   
 
     
     document.getElementById('title').textContent = "Shuffling The Deck...";
