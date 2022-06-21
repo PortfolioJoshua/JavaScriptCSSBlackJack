@@ -111,21 +111,22 @@ async function  drawDealerCards(){
         //for testing uncomment counterofpressed... and the first if and else if to test division
         //could also test charlie for example by changing first five values
         /////
+        
         if (counterOfPressedDealerDrawBtn == 1 )
         {
             mark = "A";
         }
         else if (counterOfPressedDealerDrawBtn == 2)
         {
-            mark = "2";
+            mark = "5";
         }
         else if (counterOfPressedDealerDrawBtn == 3)
         {
-            mark = "2";
+            mark = "A";
         }
          if (counterOfPressedDealerDrawBtn == 4 )
         {
-            mark = "2";
+            mark = "A";
         }
         else if (counterOfPressedDealerDrawBtn == 5)
         {
@@ -140,6 +141,7 @@ async function  drawDealerCards(){
             mark = "3";
         }
         /////
+        
         //these are the face cards
         if (mark == "Q" || mark == "K" || mark == "J" || mark == "10")
         {
@@ -367,35 +369,37 @@ function  drawPlayerCardRow2()
     numberOfIterationsRow2++;
     split.disabled=true;
     multiplierRow2++;
-        //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
-        if (counterOfPressedUpperDrawBtn == 1 )
-        {
-            mark = "10";
-        }
-        else if (counterOfPressedUpperDrawBtn == 2)
-        {
-            mark = "10";
-        }
-        else if (counterOfPressedUpperDrawBtn == 3)
-        {
-            mark = "5";
-        }
-        else if (counterOfPressedUpperDrawBtn == 4)
-        {
-            mark = "A";
-        }
-        else if (counterOfPressedUpperDrawBtn == 5)
-        {
-            mark = "A";
-        }
-        else if (counterOfPressedUpperDrawBtn == 6)
-        {
-            mark = "A";
-        }
-        //else
-        {
-           //mark = getMarkOfCard();
-        }
+    //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
+    if (counterOfPressedUpperDrawBtn == 1 )
+    {
+        mark = "10";
+    }
+    else if (counterOfPressedUpperDrawBtn == 2)
+    {
+        mark = "10";
+    }
+    
+    else if (counterOfPressedUpperDrawBtn == 3)
+    {
+        mark = "5";
+    }
+    else if (counterOfPressedUpperDrawBtn == 4)
+    {
+        mark = "A";
+    }
+    else if (counterOfPressedUpperDrawBtn == 5)
+    {
+        mark = "A";
+    }
+    else if (counterOfPressedUpperDrawBtn == 6)
+    {
+        mark = "A";
+    }
+    
+    else
+    {
+        mark = getMarkOfCard();
+    }
     //draw the card, graphically
     ctx2.beginPath();
     ctx2.fillStyle='blue';
@@ -589,10 +593,12 @@ function  drawPlayerCardRow3(mark)
     //left this for any need of testing to set cards with values that take place of mark
     //for two tens which needs to divide. Don't uncomment first if then statement and set as ten.
     //Iterate value in if then right above there.
+    
     if (counterOfPressedLowerDrawBtn == 1 )
     {
         mark = "10";
     }
+    
     else if (counterOfPressedLowerDrawBtn == 2)
     {
         mark = "2";
@@ -613,6 +619,7 @@ function  drawPlayerCardRow3(mark)
     {
         mark = "2";
     }
+    
     document.getElementById('messageLower').style.visibility = 'visible';
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     drawCardBtnLower.disabled = false;
