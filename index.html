@@ -63,8 +63,8 @@ const AMTOFCARDS = (52*4);
 //make these buttons vague
 document.getElementById('canvasPlayerRow3').style.visibility = 'hidden';
 document.getElementById('messageLower').style.visibility = 'hidden';
-document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
-document.getElementById('split').style.visibility = 'hidden';
+drawCardBtnLower.disabled = true;
+split.disabled=true;
 //first through third deals, the third deal is used for division
 var canvasDealer = document.getElementById("canvasDealer");
 let canvasPlayerRow2 = document.getElementById("canvasPlayerRow2");
@@ -92,7 +92,6 @@ async function  drawDealerCards(){
         return (-1);
     }
     dealCardsBtn.disabled = true;
-    document.getElementById('drawCardBtnLower').style.visibility = 'hidden';
     drawCardBtnUpper.disabled = true;
     drawCardBtnLower.disabled = true;
     newRoundBtn.disabled = false;
@@ -366,7 +365,7 @@ function  drawPlayerCardRow2()
     //for debugging
     counterOfPressedUpperDrawBtn++;
     numberOfIterationsRow2++;
-    document.getElementById('split').style.visibility = 'hidden';
+    split.disabled=true;
     multiplierRow2++;
         //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
         if (counterOfPressedUpperDrawBtn == 1 )
@@ -454,12 +453,12 @@ function  drawPlayerCardRow2()
         //remove second ten
         numberOfCardsDeltRow2--;
         //numberOfCardsDeltRow3++;
-        document.getElementById('split').style.visibility = 'visible';
+        split.disabled=false;
         tenCounter = 0;
     }
     else
     {
-        document.getElementById('split').style.visibility = 'hidden';
+        split.disabled=true;
     }
     //there is no divide and two cards have been played
     if (numberOfCardsDeltRow2 == 2 && numberOfCardsDeltRow3 == 0)
@@ -616,7 +615,7 @@ function  drawPlayerCardRow3(mark)
     }
     document.getElementById('messageLower').style.visibility = 'visible';
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
-    document.getElementById('drawCardBtnLower').style.visibility = 'visible';
+    drawCardBtnLower.disabled = false;
     multiplierRow3++;
     ctx3 = canvasPlayerRow3.getContext("2d");
     //graphically draws card
@@ -873,11 +872,10 @@ function  onDivideHand(){
     IsASplitFlag = true;
     WasASplitFlag = true;
     //sets up buttons visiblity
-    document.getElementById('split').style.visibility = 'hidden';
+    split.disabled=true;
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     document.getElementById('messageLower').style.visibility = 'visible';
-        document.getElementById('drawCardBtnLower').style.visibility = 'visible';
-        dealCardsBtn.disabled = true;
+    dealCardsBtn.disabled = true;
     drawCardBtnLower.disabled =  false;
     isThereASecondDeal = true;
     //for draeing both decks wgeb split button was pressed
@@ -1018,7 +1016,7 @@ function  checkEndOfHands()
         {
                 //upper button shows
                 drawCardBtnUpper.disabled =false;
-                //bottom button hidden
+                //bottom button doesnt show
                 drawCardBtnLower.disabled = true;
         }
     }
