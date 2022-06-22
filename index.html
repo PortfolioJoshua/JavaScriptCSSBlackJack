@@ -329,12 +329,13 @@ function drawPlayerCardRow2() {
     multiplierRow2++;
     //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
     //Also, set value of 10 in drawplayercardrow3.
-    /*
+    
     if (counterOfPressedUpperDrawBtn == 1) {
         mark = "10";
     } else if (counterOfPressedUpperDrawBtn == 2) {
         mark = "10";
-    } 
+    }
+    /* 
     else if (counterOfPressedUpperDrawBtn == 3) {
         mark = "3";
     } else if (counterOfPressedUpperDrawBtn == 4) {
@@ -345,9 +346,9 @@ function drawPlayerCardRow2() {
         mark = "A";
         
     }*/ 
-    //else{
+    else{
         mark = getMarkOfCard();
-    //}
+    }
     //draw the card, graphically
     ctx2.beginPath();
     ctx2.fillStyle = 'blue';
@@ -516,10 +517,10 @@ function drawPlayerCardRow3(mark) {
     //left this for any need of testing to set cards with values that take place of mark.
     //For two tens which needs to divide don't uncomment first if then statement and set as ten.
     //Iterate value in if then right above there.  Also set two 10 values in drawplayercardrow2.
-    /*
+    
     if (counterOfPressedLowerDrawBtn == 1) {
         mark = "10";
-    }else if (counterOfPressedLowerDrawBtn == 2) {
+    }/*else if (counterOfPressedLowerDrawBtn == 2) {
         mark = "2";
     } else if (counterOfPressedLowerDrawBtn == 3) {
         mark = "A";

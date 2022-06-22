@@ -6,6 +6,9 @@ body {
     margin-bottom: 0;
 }
 #container {
+    background-color: whitesmoke;
+    display: block;
+    max-height: 540px;
     border: 2px solid rgb(0, 0, 0);
     height: 85%;
     width: 50%;
@@ -62,9 +65,6 @@ body {
     #container {
         display: none;
     }
-    #alternateContainer {
-        display: flex;
-    }
     #forFlex {
         display: none;
     }
@@ -76,12 +76,6 @@ body {
 @media screen and (max-height: 2300px) and (min-height: 608px) {
     #alternateContainer {
         display: none;
-    }
-    #container {
-        background-color: whitesmoke;
-        display: block;
-        border: 2px solid rgb(0, 0, 0);
-        max-height: 540px;
     }
 }
 @media screen and (max-width: 1139px) {
