@@ -856,6 +856,7 @@ async function newRound() {
     }
     if (totalAllCardsPlayedBeforeShuffle >= ((AMTOFCARDS) / 2)) {
         shuffleTheDeck();
+        totalAllCardsPlayedBeforeShuffle = 0;
     }
 }
 
