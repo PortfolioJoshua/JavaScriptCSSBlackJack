@@ -111,7 +111,7 @@ async function drawDealerCards() {
         //for testing uncomment counterofpressed... and the first if and else if to test division
         //could also test charlie for example by changing first five values
         /////
-
+        /*
         if (counterOfPressedDealerDrawBtn == 1) {
             mark = "A";
         } else if (counterOfPressedDealerDrawBtn == 2) {
@@ -129,7 +129,7 @@ async function drawDealerCards() {
             mark = "3";
         }
         /////
-
+        */
         //these are the face cards
         if (mark == "Q" || mark == "K" || mark == "J" || mark == "10") {
             mark = "10";
@@ -328,19 +328,23 @@ function drawPlayerCardRow2() {
     split.disabled = true;
     multiplierRow2++;
     //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
+    
     if (counterOfPressedUpperDrawBtn == 1) {
         mark = "10";
     } else if (counterOfPressedUpperDrawBtn == 2) {
         mark = "10";
-    } else if (counterOfPressedUpperDrawBtn == 3) {
-        mark = "5";
+    } 
+    else if (counterOfPressedUpperDrawBtn == 3) {
+        mark = "3";
     } else if (counterOfPressedUpperDrawBtn == 4) {
-        mark = "A";
+        mark = "3";
     } else if (counterOfPressedUpperDrawBtn == 5) {
         mark = "A";
     } else if (counterOfPressedUpperDrawBtn == 6) {
         mark = "A";
-    } else {
+        
+    } 
+    else{
         mark = getMarkOfCard();
     }
     //draw the card, graphically
@@ -514,7 +518,7 @@ function drawPlayerCardRow3(mark) {
 
     if (counterOfPressedLowerDrawBtn == 1) {
         mark = "10";
-    } else if (counterOfPressedLowerDrawBtn == 2) {
+    }  /*else if (counterOfPressedLowerDrawBtn == 2) {
         mark = "2";
     } else if (counterOfPressedLowerDrawBtn == 3) {
         mark = "A";
@@ -525,7 +529,7 @@ function drawPlayerCardRow3(mark) {
     } else if (counterOfPressedLowerDrawBtn == 6) {
         mark = "2";
     }
-
+    */
     document.getElementById('messageLower').style.visibility = 'visible';
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     drawCardBtnLower.disabled = false;
