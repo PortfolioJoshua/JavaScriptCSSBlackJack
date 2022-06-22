@@ -108,7 +108,7 @@ async function drawDealerCards() {
         }
         multiplierRow1++;
         let mark = getMarkOfCard();
-        //for testing uncomment counterofpressed... and the first if and else if to test division
+        //for testing uncomment counterofpressed... and ifs to test
         //could also test charlie for example by changing first five values
         /////
         /*
@@ -328,7 +328,7 @@ function drawPlayerCardRow2() {
     split.disabled = true;
     multiplierRow2++;
     //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
-    
+    /*
     if (counterOfPressedUpperDrawBtn == 1) {
         mark = "10";
     } else if (counterOfPressedUpperDrawBtn == 2) {
@@ -343,10 +343,10 @@ function drawPlayerCardRow2() {
     } else if (counterOfPressedUpperDrawBtn == 6) {
         mark = "A";
         
-    } 
-    else{
+    }*/ 
+    //else{
         mark = getMarkOfCard();
-    }
+    //}
     //draw the card, graphically
     ctx2.beginPath();
     ctx2.fillStyle = 'blue';
@@ -515,10 +515,10 @@ function drawPlayerCardRow3(mark) {
     //left this for any need of testing to set cards with values that take place of mark
     //for two tens which needs to divide. Don't uncomment first if then statement and set as ten.
     //Iterate value in if then right above there.
-
+    /*
     if (counterOfPressedLowerDrawBtn == 1) {
         mark = "10";
-    }  /*else if (counterOfPressedLowerDrawBtn == 2) {
+    }else if (counterOfPressedLowerDrawBtn == 2) {
         mark = "2";
     } else if (counterOfPressedLowerDrawBtn == 3) {
         mark = "A";
