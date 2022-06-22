@@ -34,10 +34,6 @@ body {
     margin-bottom: 15px;
     margin-top: 22px;
 }
-#scoreHere {
-    font-size: 60px;
-    color: red;
-}
 #scoreAtTop {
     width: 50%;
     font-size: 30px;
