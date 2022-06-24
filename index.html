@@ -54,7 +54,7 @@
             <div id="messageLower"><b>&nbsp</div>
             <br>
             <input id="drawCardBtnLower" type="button" value="Draw Card" onclick="drawPlayerCardRow3('0')" ;>
-            <input id="split" type="button" value="Divide Hand">
+            <input id="divide" type="button" value="Divide Hand">
         </div>
     </div>
 <script>
@@ -69,7 +69,7 @@ const AMTOFCARDS = (52 * 4);
 document.getElementById('canvasPlayerRow3').style.visibility = 'hidden';
 document.getElementById('messageLower').style.visibility = 'hidden';
 drawCardBtnLower.disabled = true;
-split.disabled = true;
+divide.disabled = true;
 //Three deals, the third deal is used for 'division of hand.'
 var canvasDealer = document.getElementById("canvasDealer");
 let canvasPlayerRow2 = document.getElementById("canvasPlayerRow2");
@@ -171,7 +171,7 @@ async function drawDealerCards() {
         });
         newRoundBtn.disabled = false;
     }
-    //If true, check cards for bust, charlie, or blackjacke.  Isn't a division (split of tens) 
+    //If true, check cards for bust, charlie, or blackjacke.  Isn't a division (divide of tens) 
     //to make two deals instead of one. There are at least two cards.  This function may be
     //called with first or second player hand already completed, so checks here.
     if (SecondDealIsDoneFlag == false && isThereASecondDeal) {
@@ -320,7 +320,7 @@ function drawPlayerCardRow2() {
     //For debugging.
     counterOfPressedUpperDrawBtn++;
     numberOfIterationsRow2++;
-    split.disabled = true;
+    divide.disabled = true;
     multiplierRow2++;
     //left for any need to test, for testing divide, uncomment first two conditions with tens
     //and uncomment counterofpressedupperdrawbtn iterator. Also, set value of 10 in first 'if' 
@@ -397,10 +397,10 @@ function drawPlayerCardRow2() {
         dealCardsBtn.disabled = false;
         //Remove second ten.
         numberOfCardsDeltRow2--;
-        split.disabled = false;
+        divide.disabled = false;
         tenCounter = 0;
     } else {
-        split.disabled = true;
+        divide.disabled = true;
     }
     //There is no divide and two cards have been played.
     if (numberOfCardsDeltRow2 == 2 && numberOfCardsDeltRow3 == 0) {
@@ -742,9 +742,8 @@ function wager(points_Wagered) {
 }
 function onDivideHand() {
     IsADivideFlag = true;
-    WasASplitFlag = true;
-    //Sets up buttons visiblity/disablement.
-    split.disabled = true;
+   //Sets up buttons visiblity/disablement.
+    divide.disabled = true;
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     document.getElementById('messageLower').style.visibility = 'visible';
     dealCardsBtn.disabled = true;
@@ -921,7 +920,7 @@ async function shuffleTheDeck() {
 setsUpGame();
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
 document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
-document.getElementById("split").addEventListener("click", onDivideHand);
+document.getElementById("divide").addEventListener("click", onDivideHand);
 document.getElementById("newRoundBtn").addEventListener("click", newRound);
 </script>
 </body>
