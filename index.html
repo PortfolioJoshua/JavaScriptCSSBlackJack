@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +7,22 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body onunload="deleteArray()">
     <!-- Script -->
     <script src="script.js"></script>
     <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js> </script> <script
         src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
-    <div id="alternateContainer">
-        <h1>Your display is to small for this site.</h1>
+    <div id="flex">
+    <div id="alternateContainer"  display: flex;
+    width: 50%;
+    height: 200px;
+    margin: auto;
+    border-radius: 10px;
+    border: 3px dashed #1c87c9;
+    align-items:center;
+    justify-content:center;>
+        <h1>Your display is to short or narrow for this site.</h1>
+    </div>
     </div>
     <div id="forFlex">
         <div id="container">
@@ -53,8 +60,6 @@
 <script>
 //<div id = "scoreAtTop">10</div> must be changed too.  This is in the beginning html.
 const AMOUNT_OF_STARTING_POINTS = 10;
-
-
 function pause() {}
 //amt of space between cards 
 const CARDGAP = 70;
@@ -86,8 +91,6 @@ let counterOfPressedDealerDrawBtn = 0;
 //get the context to use canvas, is global
 let ctx1 = canvasDealer.getContext("2d");
 let totalAllCardsPlayedBeforeShuffle = 0;
-
-
 async function drawDealerCards() {
     //is set if deal has been busted, charlied, or black jacked - wouldn't need a dealers deal than
     if (FirstDealIsDoneFlag == true && SecondDealIsDoneFlag == true) {
@@ -318,8 +321,6 @@ let IsASplitFlag = false;
 //checks this and alters mid messsgae display - complete!!!
 //this is the second row of cards, first being the dealers
 //and last being the divided hand when applicable
-
-
 function drawPlayerCardRow2() {
     totalAllCardsPlayedBeforeShuffle++;
     //for debugging
@@ -329,7 +330,6 @@ function drawPlayerCardRow2() {
     multiplierRow2++;
     //left for any need to test, for testing divide, uncomment first two conditions with tens and value above with ++
     //Also, set value of 10 in drawplayercardrow3.
-    
     if (counterOfPressedUpperDrawBtn == 1) {
         mark = "10";
     } else if (counterOfPressedUpperDrawBtn == 2) {
@@ -344,7 +344,6 @@ function drawPlayerCardRow2() {
         mark = "A";
     } else if (counterOfPressedUpperDrawBtn == 6) {
         mark = "A";
-        
     }*/ 
     else{
         mark = getMarkOfCard();
@@ -501,8 +500,6 @@ let counterOfPressedLowerDrawBtn = 0;
 //graphical context
 let ctx3 = canvasPlayerRow3.getContext("2d");
 //this is the 3rd row of cards for dividing two tens
-
-
 function drawPlayerCardRow3(mark) {
     totalAllCardsPlayedBeforeShuffle++;
     //used for debugging differen set marks
@@ -517,7 +514,6 @@ function drawPlayerCardRow3(mark) {
     //left this for any need of testing to set cards with values that take place of mark.
     //For two tens which needs to divide don't uncomment first if then statement and set as ten.
     //Iterate value in if then right above there.  Also set two 10 values in drawplayercardrow2.
-    
     if (counterOfPressedLowerDrawBtn == 1) {
         mark = "10";
     }/*else if (counterOfPressedLowerDrawBtn == 2) {
@@ -647,8 +643,6 @@ function drawPlayerCardRow3(mark) {
     }
 }
 //on start, these buttons are disabled, wage buttons will be false (not disabled)
-
-
 function setsUpGame() {
     newRoundBtn.disabled = true;
     drawCardBtnUpper.disabled = true;
@@ -702,8 +696,6 @@ let decks = [
     "A", "Q", "K", "J", "2", "3", "4", "5", "6", "7", "8", "9", "10"
 ];
 //finds a card as long as at least one card remains  - shuffle resets deck when over half way of cards
-
-
 function getMarkOfCard() {
     //used to determine direction of search for a card
     let flagFoundCard = false;
@@ -739,8 +731,6 @@ function getMarkOfCard() {
     }
     return (decks[i]);
 }
-
-
 function wager(points_Wagered) {
     //not enough points to make wager
     if (points_Wagered > pointsHave) {
@@ -754,8 +744,6 @@ function wager(points_Wagered) {
     wagerButtonFifteen.disabled = true;
     wagerButtonTwentyfive.disabled = true;
 }
-
-
 function onDivideHand() {
     IsASplitFlag = true;
     WasASplitFlag = true;
@@ -775,8 +763,6 @@ function onDivideHand() {
     playerScoreRow2 = playerScoreRow2 - 10;
 }
 //reset all values to initial state for next new round
-
-
 async function newRound() {
     numberOfCardsDeltRow2 = 0;
     numberOfCardsDeltRow3 = 0;
@@ -860,19 +846,13 @@ async function newRound() {
         totalAllCardsPlayedBeforeShuffle = 0;
     }
 }
-
-
 function noPoints() {}
-
-
 function playWave() {
     const music = new Audio('adf.wav');
     music.play();
 }
 //changes bttons depending on if either flag was set for: blackjack,player bust, or five card charlie.
 //Works for both row2 and row3, sets buttons.
-
-
 function checkEndOfHands() {
     if (isThereASecondDeal) {
         console.log("a", FirstDealIsDoneFlag);
@@ -909,12 +889,8 @@ function checkEndOfHands() {
     }
 }
 //called with timeout
-
-
 function shuffleTheDeck2() {}
 //sets all card usages to zero
-
-
 async function shuffleTheDeck() {
     document.getElementById('title').textContent = "Shuffling The Deck...";
     //set deck to unused
@@ -962,5 +938,4 @@ document.getElementById("split").addEventListener("click", onDivideHand);
 document.getElementById("newRoundBtn").addEventListener("click", newRound);
 </script>
 </body>
-
 </html>
