@@ -759,6 +759,12 @@ function onDivideHand() {
 }
 //Reset all values to initial state for next new round.
 async function newRound() {
+
+    if(pointsHave >= 1000)
+    {
+        endGame();
+        return(-1);
+    }
     numberOfCardsDeltRow2 = 0;
     numberOfCardsDeltRow3 = 0;
     if (pointsHave <= 0) {
@@ -916,6 +922,17 @@ async function shuffleTheDeck() {
     wagerButtonFive.disabled = false;
     wagerButtonFifteen.disabled = false;
     wagerButtonTwentyfive.disabled = false;
+}
+function endGame()
+{
+    wagerButtonOne.disabled = true;
+    wagerButtonFive.disabled = true;
+    wagerButtonFifteen.disabled = true;
+    wagerButtonTwentyfive.disabled = true;
+    newRoundBtn.disabled = true;
+    let text = "You have one the game!";
+    document.getElementById('title').textContent = text;
+    return(1);
 }
 setsUpGame();
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
