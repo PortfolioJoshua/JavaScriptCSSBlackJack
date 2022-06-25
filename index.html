@@ -190,9 +190,9 @@ async function drawDealerCards() {
             pointsHave = pointsHave + (pointsWagered);
             let text = "";
             if (pointsWagered > 1) {
-                text = `YOU WIN!  ${pointsWagered} POINTS`;
+                text = `YOU WIN ${pointsWagered} POINTS`;
             } else {
-                text = `YOU WIN!  ${pointsWagered} POINT`;
+                text = `YOU WIN ${pointsWagered} POINT`;
             }
             //lowest of two messages 
             document.getElementById("messageLower").textContent = text;
@@ -210,9 +210,9 @@ async function drawDealerCards() {
             }
             let text = "";
             if (pointsWagered > 1) {
-                text = `YOU LOSE  ${pointsWagered} POINTS`;
+                text = `YOU LOSE ${pointsWagered} POINTS`;
             } else {
-                text = `YOU LOSE  ${pointsWagered} POINT`;
+                text = `YOU LOSE ${pointsWagered} POINT`;
             }
             //bottom most text, there are two spots
             document.getElementById("messageLower").textContent = text;
