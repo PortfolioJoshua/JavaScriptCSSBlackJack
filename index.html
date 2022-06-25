@@ -934,7 +934,7 @@ function endGame()
     newRoundBtn.disabled = true;
     let text = "You have won the game!";
     document.getElementById('title').textContent = text;
-    return(1);
+    return(-1);
 }
 setsUpGame();
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
