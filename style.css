@@ -118,5 +118,7 @@ body {
     #alternateContainer {
         display: none;
     }
-    
+    #container {
+       max-width: 600px;
+    }
 }
