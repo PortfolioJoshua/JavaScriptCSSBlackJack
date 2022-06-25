@@ -304,66 +304,9 @@ function drawPlayerCardRow2() {
     else if (numberOfCardsDeltRow2 > 1 && numberOfCardsDeltRow3 > 1) {
         dealCardsBtn.disabled = false;
     }
-    //If there is an ace and deal is over 21 change next ace to a one.
-    if (playerScoreRow2 > 21) {
-        for (let i = 0; i < AMTOFCARDS; i++) {
-            if (AreThereAcesArrayRow[i] == "is row2 ace") {
-                AreThereAcesArrayRow[i] = "used ace";
-                playerScoreRow2 = playerScoreRow2 - 10;
-                break;
-            }
-        }
-    }
-    console.log("3:", playerScoreRow2);
-    //Player scores over 21, so busts.
-    if (playerScoreRow2 > 21) {
-        pointsHave = pointsHave - pointsWagered;
-        if (pointsHave < 0) {
-            pointsHave = 0;
-        }
-        let text = "";
-        if (pointsWagered > 1) {
-            text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
-        } else {
-            text = `BUST!  YOU LOSE ${pointsWagered} POINT`;
-        }
-        //Top of two messages.
-        document.getElementById("messageUnderRow2").textContent = text;
-        document.getElementById("scoreAtTop").textContent = pointsHave;
-        console.log("BUST!");
-        FirstDealIsDoneFlag = true;
-        //Check for firstdealisdoneflag to change display buttons.
-        checkEndOfHands();
-    }
-    //Player scores blackjack.
-    else if (playerScoreRow2 == 21) {
-        pointsHave = pointsHave + (pointsWagered * 2)
-        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
-        //top of two messages
-        document.getElementById("messageUnderRow2").textContent = text;
-        document.getElementById("scoreAtTop").textContent = pointsHave;
-        FirstDealIsDoneFlag = true;
-        drawCardBtnUpper.disabled = true;
-        //Check for firstdealisdoneflag to change display buttons.
-        checkEndOfHands();
-    }
-    //Five cards wins, alternatehandforcharlie is a count with aces counting as one not eleven.
-    else if (alternateHandForCharlieRow2 < 22 && numberOfCardsDeltRow2 == 5) {
-        console.log("5 Card Charlie");
-        pointsHave = pointsHave + (pointsWagered);
-        let text = "";
-        if (pointsWagered > 1) {
-            text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
-        } else {
-            text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
-        }
-        //Top of two messages.
-        document.getElementById("messageUnderRow2").textContent = text;
-        document.getElementById("scoreAtTop").textContent = pointsHave;
-        FirstDealIsDoneFlag = true;
-        //checks for deals done to display buttons when firstdealisdoneflag is true.
-        checkEndOfHands();
-    }
+    
+    checkPlayerRow2ForCompleteness();
+
     //Size of mark needs to be centered on card.  One is smaller with more space, so left adjustment is needed. 
     if (mark == "10") {
         ctx2.fillText(mark, (initialXRow2) + (multiplierRow2 * CARDGAP) - 5, 57);
@@ -462,67 +405,10 @@ function drawPlayerCardRow3(mark) {
     if (numberOfCardsDeltRow2 > 1 && numberOfCardsDeltRow3 > 1) {
         dealCardsBtn.disabled = false;
     }
-    //Check if hand has any aces, and because the hand is over twenty-one, change eleven value to one. 
-    if (playerScoreRow3 > 21) {
-        for (let i = 0; i < AMTOFCARDS; i++) {
-            if (AreThereAcesArrayRow[i] == "is row3 ace") {
-                AreThereAcesArrayRow[i] = "used ace";
-                playerScoreRow3 = playerScoreRow3 - 10;
-                break;
-            }
-        }
-    }
-    console.log("playerScoreRow3a", playerScoreRow3);
-    //Player scores over twenty-one, so player busts and loses.
-    if (playerScoreRow3 > 21) {
-        pointsHave = pointsHave - pointsWagered;
-        if (pointsHave < 0) {
-            pointsHave = 0;
-        }
-        let text = "";
-        if (pointsWagered > 1) {
-            text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
-        } else {
-            text = `BUST!  YOU LOSE ${pointsWagered} POINT`;
-        }
-        //Lowest of two messages, on row three because there was a divide.
-        document.getElementById("messageLower").textContent = text;
-        document.getElementById("scoreAtTop").textContent = pointsHave;
-        console.log("BUST!");
-        SecondDealIsDoneFlag = true;
-        //Checks for done flags and alters display of buttons.
-        checkEndOfHands();
-    }
-    //player scores over twenty-one, so player busts and player loses.
-    else if (playerScoreRow3 == 21) {
-        //Score
-        pointsHave = pointsHave + (pointsWagered * 2);
-        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
-        //lowest of two messages for third deal because divide happened. 
-        document.getElementById("messageLower").textContent = text;
-        document.getElementById("scoreAtTop").textContent = pointsHave;
-        SecondDealIsDoneFlag = true;
-        //Checks for done flags and alters display of buttons.
-        checkEndOfHands();
-    }
-    //Hand wins becaues it is five cards and is under twenty-one.
-    else if (alternateHandForCharlieRow3 < 22 && numberOfCardsDeltRow3 == 5) {
-        console.log("5 Card Charlie");
-        pointsHave = pointsHave + (pointsWagered);
-        let text = "";
-        if (pointsWagered > 1) {
-            text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
-        } else {
-            text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
-        }
-        let text2 = `Total Points: ${pointsHave}.`;
-        //lowest of two messages, becuase there was a third row from a 'divide.''
-        document.getElementById("messageLower").textContent = text;
-        document.getElementById("scoreAtTop").textContent = pointsHave;
-        SecondDealIsDoneFlag = true;
-        //Checks for done flags and alters display of buttons.
-        checkEndOfHands();
-    }
+
+    checkPlayerRow3ForCompleteness();
+
+
     //different fit on ten card when one is used, because it has more space on left and right,
     //so a left adjustment is needed.
     if (mark == "10") {
@@ -955,6 +841,142 @@ if (FirstDealIsDoneFlag == false) {
     }
     return(1);
 }
+
+
+function checkPlayerRow2ForCompleteness()
+{
+//If there is an ace and deal is over 21 change next ace to a one.
+if (playerScoreRow2 > 21) {
+        for (let i = 0; i < AMTOFCARDS; i++) {
+            if (AreThereAcesArrayRow[i] == "is row2 ace") {
+                AreThereAcesArrayRow[i] = "used ace";
+                playerScoreRow2 = playerScoreRow2 - 10;
+                break;
+            }
+        }
+    }
+    console.log("3:", playerScoreRow2);
+    //Player scores over 21, so busts.
+    if (playerScoreRow2 > 21) {
+        pointsHave = pointsHave - pointsWagered;
+        if (pointsHave < 0) {
+            pointsHave = 0;
+        }
+        let text = "";
+        if (pointsWagered > 1) {
+            text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
+        } else {
+            text = `BUST!  YOU LOSE ${pointsWagered} POINT`;
+        }
+        //Top of two messages.
+        document.getElementById("messageUnderRow2").textContent = text;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
+        console.log("BUST!");
+        FirstDealIsDoneFlag = true;
+        //Check for firstdealisdoneflag to change display buttons.
+        checkEndOfHands();
+    }
+    //Player scores blackjack.
+    else if (playerScoreRow2 == 21) {
+        pointsHave = pointsHave + (pointsWagered * 2)
+        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
+        //top of two messages
+        document.getElementById("messageUnderRow2").textContent = text;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
+        FirstDealIsDoneFlag = true;
+        drawCardBtnUpper.disabled = true;
+        //Check for firstdealisdoneflag to change display buttons.
+        checkEndOfHands();
+    }
+    //Five cards wins, alternatehandforcharlie is a count with aces counting as one not eleven.
+    else if (alternateHandForCharlieRow2 < 22 && numberOfCardsDeltRow2 == 5) {
+        console.log("5 Card Charlie");
+        pointsHave = pointsHave + (pointsWagered);
+        let text = "";
+        if (pointsWagered > 1) {
+            text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
+        } else {
+            text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
+        }
+        //Top of two messages.
+        document.getElementById("messageUnderRow2").textContent = text;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
+        FirstDealIsDoneFlag = true;
+        //checks for deals done to display buttons when firstdealisdoneflag is true.
+        checkEndOfHands();
+    }
+    return(1);
+}
+
+function checkPlayerRow3ForCompleteness()
+{
+
+    //Check if hand has any aces, and because the hand is over twenty-one, change eleven value to one. 
+    if (playerScoreRow3 > 21) {
+        for (let i = 0; i < AMTOFCARDS; i++) {
+            if (AreThereAcesArrayRow[i] == "is row3 ace") {
+                AreThereAcesArrayRow[i] = "used ace";
+                playerScoreRow3 = playerScoreRow3 - 10;
+                break;
+            }
+        }
+    }
+    console.log("playerScoreRow3a", playerScoreRow3);
+    //Player scores over twenty-one, so player busts and loses.
+    if (playerScoreRow3 > 21) {
+        pointsHave = pointsHave - pointsWagered;
+        if (pointsHave < 0) {
+            pointsHave = 0;
+        }
+        let text = "";
+        if (pointsWagered > 1) {
+            text = `BUST!  YOU LOSE ${pointsWagered} POINTS`;
+        } else {
+            text = `BUST!  YOU LOSE ${pointsWagered} POINT`;
+        }
+        //Lowest of two messages, on row three because there was a divide.
+        document.getElementById("messageLower").textContent = text;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
+        console.log("BUST!");
+        SecondDealIsDoneFlag = true;
+        //Checks for done flags and alters display of buttons.
+        checkEndOfHands();
+    }
+    //player scores over twenty-one, so player busts and player loses.
+    else if (playerScoreRow3 == 21) {
+        //Score
+        pointsHave = pointsHave + (pointsWagered * 2);
+        let text = `BLACKJACK!  YOU WIN ${pointsWagered*2} POINTS`;
+        //lowest of two messages for third deal because divide happened. 
+        document.getElementById("messageLower").textContent = text;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
+        SecondDealIsDoneFlag = true;
+        //Checks for done flags and alters display of buttons.
+        checkEndOfHands();
+    }
+    //Hand wins becaues it is five cards and is under twenty-one.
+    else if (alternateHandForCharlieRow3 < 22 && numberOfCardsDeltRow3 == 5) {
+        console.log("5 Card Charlie");
+        pointsHave = pointsHave + (pointsWagered);
+        let text = "";
+        if (pointsWagered > 1) {
+            text = `5 CARDS!  YOU WIN ${pointsWagered} POINTS`;
+        } else {
+            text = `5 CARDS!  YOU WIN ${pointsWagered} POINT`;
+        }
+        let text2 = `Total Points: ${pointsHave}.`;
+        //lowest of two messages, becuase there was a third row from a 'divide.''
+        document.getElementById("messageLower").textContent = text;
+        document.getElementById("scoreAtTop").textContent = pointsHave;
+        SecondDealIsDoneFlag = true;
+        //Checks for done flags and alters display of buttons.
+        checkEndOfHands();
+    }
+}
+
+
+
+
 setsUpGame();
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
 document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
