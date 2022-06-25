@@ -10,9 +10,8 @@
 <body onunload="deleteArray()">
     <!-- Script -->
     <script src="script.js"></script>
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js> </script> <script
-        src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
-    
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js> </script> 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
     <div id="alternateContainer">
         <h1>Your display is to short or narrow for this site.</h1>
     </div>
@@ -384,8 +383,19 @@ function drawPlayerCardRow2() {
     console.log("alternateHandForCharlieRow2", alternateHandForCharlieRow2);
     console.log("nc2 ", numberOfCardsDeltRow2);
     console.log("nc3 ", numberOfCardsDeltRow3);
+    console.log("points have", pointsHave);
+    console.log("tc: ", tenCounter);
+    console.log(wager);
+    console.log(numberOfCardsDeltRow2);
     //Two cards are dealt and both are ten, with one being displayed in players hand, now.
-    if (tenCounter == 2) {
+    //Not enough points to divide hand.
+    if((tenCounter == 2) && (pointsHave < (pointsWagered*2)))
+    {
+        tenCounter = 0;
+        divide.disabled = true;
+    }
+    //Two cards are dealt and both are ten, with one being displayed in players hand, now.
+    else if (tenCounter == 2) {
         dealCardsBtn.disabled = false;
         //Remove second ten.
         numberOfCardsDeltRow2--;
