@@ -162,121 +162,13 @@ async function drawDealerCards() {
         });
         newRoundBtn.disabled = false;
     }
-    //If true, check cards for bust, charlie, or blackjacke.  Isn't a division (divide of tens) 
-    //to make two deals instead of one. There are at least two cards.  This function may be
-    //called with first or second player hand already completed, so checks here.
-    if (SecondDealIsDoneFlag == false && isThereASecondDeal) {
-        //bust
-        if (dealerHandTotal > 21) {
-            //DEALER LOSES
-            pointsHave = pointsHave + (pointsWagered);
-            let text = "";
-            if (pointsWagered > 1) {
-                text = `BUST!  YOU WIN ${pointsWagered} POINTS`;
-            } else {
-                text = `BUST!  YOU WIN ${pointsWagered} POINT`;
-            }
-            //lowest message of two          
-            document.getElementById("messageLower").textContent = text;
-            document.getElementById("scoreAtTop").textContent = pointsHave;
-            SecondDealIsDoneFlag = true;
-            checkEndOfHands();
-        }
-        //Playerscorerow3 will be under 21 , because would have already blackjacked without dealer's deal.
-        //Player wins by points
-        else if (playerScoreRow3 > dealerHandTotal) {
-            //PLAYER WINS
-            pointsHave = pointsHave + (pointsWagered);
-            let text = "";
-            if (pointsWagered > 1) {
-                text = `YOU WIN ${pointsWagered} POINTS`;
-            } else {
-                text = `YOU WIN ${pointsWagered} POINT`;
-            }
-            //lowest of two messages 
-            document.getElementById("messageLower").textContent = text;
-            document.getElementById("scoreAtTop").textContent = pointsHave;
-            SecondDealIsDoneFlag = true;
-            checkEndOfHands();
-        }
-        //Already checked dealer hand greater than 21, so this score means dealer wins by tie or better score
-        //both player and dealer deals are less than 21.
-        else if (playerScoreRow3 <= dealerHandTotal) {
-            //DEALER WINS
-            pointsHave = pointsHave - (pointsWagered);
-            if (pointsHave < 0) {
-                pointsHave = 0;
-            }
-            let text = "";
-            if (pointsWagered > 1) {
-                text = `YOU LOSE ${pointsWagered} POINTS`;
-            } else {
-                text = `YOU LOSE ${pointsWagered} POINT`;
-            }
-            //bottom most text, there are two spots
-            document.getElementById("messageLower").textContent = text;
-            document.getElementById("scoreAtTop").textContent = pointsHave;
-            SecondDealIsDoneFlag = true;
-            checkEndOfHands();
-        }
-    }
-    //player didn't bust, charlie, or blackjack, and still is a first deal that hasn't been completed yet.
-    if (FirstDealIsDoneFlag == false) {
-        if (dealerHandTotal > 21) {
-            //DEALER BUSTS
-            pointsHave = pointsHave + pointsWagered;
-            let text = "";
-            if (pointsWagered > 1) {
-                text = `BUST!  YOU WIN ${pointsWagered} POINTS`;
-            } else {
-                text = `BUST!  YOU WIN ${pointsWagered} POINT`;
-            }
-            //upper message, of two.
-            document.getElementById("messageUnderRow2").textContent = text;
-            document.getElementById("scoreAtTop").textContent = pointsHave;
-            console.log("BUST!");
-            FirstDealIsDoneFlag = true;
-            checkEndOfHands();
-        }
-        //Already checked dealer for blackjack, therefor is less than 21 and has more points than player
-        else if (dealerHandTotal >= playerScoreRow2) {
-            //DEALER WINS
-            pointsHave = pointsHave - pointsWagered;
-            if (pointsHave < 0) {
-                pointsHave = 0;
-            }
-            let text = "";
-            if (pointsWagered > 1) {
-                text = `YOU LOSE ${pointsWagered} POINTS`;
-            } else {
-                text = `YOU LOSE ${pointsWagered} POINT`;
-            }
-            //Upper message of two, right below first player's deal. 
-            document.getElementById("messageUnderRow2").textContent = text;
-            document.getElementById("scoreAtTop").textContent = pointsHave;
-            //console.log("BUST!");
-            FirstDealIsDoneFlag = true;
-            checkEndOfHands();
-        }
-        //player is under 21, because didn't score blackjack before cards dealt (wouldn't be here.)
-        //Dealer is less than 21 too, and player wins by points over dealer.
-        else if (dealerHandTotal < playerScoreRow2) {
-            //PLAYER WINS       
-            pointsHave = pointsHave + pointsWagered;
-            let text = "";
-            if (pointsWagered > 1) {
-                text = `YOU WIN ${pointsWagered} POINTS`;
-            } else {
-                text = `YOU WIN ${pointsWagered} POINT`;
-            }
-            //Upper message of two, counting divide deal.
-            document.getElementById("messageUnderRow2").textContent = text;
-            document.getElementById("scoreAtTop").textContent = pointsHave;
-            console.log("BUST!");
-            FirstDealIsDoneFlag = true;
-            checkEndOfHands();
-        }
-    }
+    
+    
+    checkSecondHandForDealer();
+    checkFirstHandForDealer();
+
+
+    
     //////////////
     isAllDelt = true;
     multiplierRow1 = -1;
@@ -935,6 +827,133 @@ function endGame()
     let text = "You have won the game!";
     document.getElementById('title').textContent = text;
     return(-1);
+}
+
+
+function checkSecondHandForDealer()
+{
+//If true, check cards for bust, charlie, or blackjacke.  Isn't a division (divide of tens) 
+    //to make two deals instead of one. There are at least two cards.  This function may be
+    //called with first or second player hand already completed, so checks here.
+    if (SecondDealIsDoneFlag == false && isThereASecondDeal) {
+        //bust
+        if (dealerHandTotal > 21) {
+            //DEALER LOSES
+            pointsHave = pointsHave + (pointsWagered);
+            let text = "";
+            if (pointsWagered > 1) {
+                text = `BUST!  YOU WIN ${pointsWagered} POINTS`;
+            } else {
+                text = `BUST!  YOU WIN ${pointsWagered} POINT`;
+            }
+            //lowest message of two          
+            document.getElementById("messageLower").textContent = text;
+            document.getElementById("scoreAtTop").textContent = pointsHave;
+            SecondDealIsDoneFlag = true;
+            checkEndOfHands();
+        }
+        //Playerscorerow3 will be under 21 , because would have already blackjacked without dealer's deal.
+        //Player wins by points
+        else if (playerScoreRow3 > dealerHandTotal) {
+            //PLAYER WINS
+            pointsHave = pointsHave + (pointsWagered);
+            let text = "";
+            if (pointsWagered > 1) {
+                text = `YOU WIN ${pointsWagered} POINTS`;
+            } else {
+                text = `YOU WIN ${pointsWagered} POINT`;
+            }
+            //lowest of two messages 
+            document.getElementById("messageLower").textContent = text;
+            document.getElementById("scoreAtTop").textContent = pointsHave;
+            SecondDealIsDoneFlag = true;
+            checkEndOfHands();
+        }
+        //Already checked dealer hand greater than 21, so this score means dealer wins by tie or better score
+        //both player and dealer deals are less than 21.
+        else if (playerScoreRow3 <= dealerHandTotal) {
+            //DEALER WINS
+            pointsHave = pointsHave - (pointsWagered);
+            if (pointsHave < 0) {
+                pointsHave = 0;
+            }
+            let text = "";
+            if (pointsWagered > 1) {
+                text = `YOU LOSE ${pointsWagered} POINTS`;
+            } else {
+                text = `YOU LOSE ${pointsWagered} POINT`;
+            }
+            //bottom most text, there are two spots
+            document.getElementById("messageLower").textContent = text;
+            document.getElementById("scoreAtTop").textContent = pointsHave;
+            SecondDealIsDoneFlag = true;
+            checkEndOfHands();
+        }
+    }
+
+return(1);
+}
+
+function checkFirstHandForDealer()
+{
+//player didn't bust, charlie, or blackjack, and still is a first deal that hasn't been completed yet.
+if (FirstDealIsDoneFlag == false) {
+        if (dealerHandTotal > 21) {
+            //DEALER BUSTS
+            pointsHave = pointsHave + pointsWagered;
+            let text = "";
+            if (pointsWagered > 1) {
+                text = `BUST!  YOU WIN ${pointsWagered} POINTS`;
+            } else {
+                text = `BUST!  YOU WIN ${pointsWagered} POINT`;
+            }
+            //upper message, of two.
+            document.getElementById("messageUnderRow2").textContent = text;
+            document.getElementById("scoreAtTop").textContent = pointsHave;
+            console.log("BUST!");
+            FirstDealIsDoneFlag = true;
+            checkEndOfHands();
+        }
+        //Already checked dealer for blackjack, therefor is less than 21 and has more points than player
+        else if (dealerHandTotal >= playerScoreRow2) {
+            //DEALER WINS
+            pointsHave = pointsHave - pointsWagered;
+            if (pointsHave < 0) {
+                pointsHave = 0;
+            }
+            let text = "";
+            if (pointsWagered > 1) {
+                text = `YOU LOSE ${pointsWagered} POINTS`;
+            } else {
+                text = `YOU LOSE ${pointsWagered} POINT`;
+            }
+            //Upper message of two, right below first player's deal. 
+            document.getElementById("messageUnderRow2").textContent = text;
+            document.getElementById("scoreAtTop").textContent = pointsHave;
+            //console.log("BUST!");
+            FirstDealIsDoneFlag = true;
+            checkEndOfHands();
+        }
+        //player is under 21, because didn't score blackjack before cards dealt (wouldn't be here.)
+        //Dealer is less than 21 too, and player wins by points over dealer.
+        else if (dealerHandTotal < playerScoreRow2) {
+            //PLAYER WINS       
+            pointsHave = pointsHave + pointsWagered;
+            let text = "";
+            if (pointsWagered > 1) {
+                text = `YOU WIN ${pointsWagered} POINTS`;
+            } else {
+                text = `YOU WIN ${pointsWagered} POINT`;
+            }
+            //Upper message of two, counting divide deal.
+            document.getElementById("messageUnderRow2").textContent = text;
+            document.getElementById("scoreAtTop").textContent = pointsHave;
+            console.log("BUST!");
+            FirstDealIsDoneFlag = true;
+            checkEndOfHands();
+        }
+    }
+    return(1);
 }
 setsUpGame();
 document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayerCardRow2);
