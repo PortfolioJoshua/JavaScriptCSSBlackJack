@@ -28,7 +28,7 @@
                 <canvas id="canvasPlayerRow2" width="500" height="78"></canvas>
                 <br>
                 <div id="interfaceRow2">
-                    <div id="messageUnderRow2"><b>&nbsp</div>
+                    <div id="messageUnderRow2"></div>
                     <div id="containsUpperButtons">
                         <input id="drawCardBtnUpper" type="button" value="Draw Card">
                         <input id="dealCardsBtn" type="button" value="Deal">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <canvas id="canvasPlayerRow3" width="500" height="78"></canvas>
-            <div id="messageLower"><b>&nbsp</div>
+            <div id="messageLower"></div>
             <br>
             <input id="drawCardBtnLower" type="button" value="Draw Card" onclick="drawPlayerCardRow3('0')" ;>
             <input id="divide" type="button" value="Divide Hand">
@@ -209,24 +209,26 @@ function drawPlayerCardRow2() {
     //of drawplayercardrow3 and comment out getmarkofcard() below.
     //Otherwise, use to try different hands.  Pay attention to getmarkofcard() below.
     //For regular use, comment out all ifs and uncomment getmarkcards().
+    /*
     if (counterOfPressedUpperDrawBtn == 1) {
         mark = "10";
     } else if (counterOfPressedUpperDrawBtn == 2) {
         mark = "10";
     }
-    /* 
+     
     else if (counterOfPressedUpperDrawBtn == 3) {
-        mark = "3";
+        mark = "2";
     } else if (counterOfPressedUpperDrawBtn == 4) {
-        mark = "3";
+        mark = "A";
     } else if (counterOfPressedUpperDrawBtn == 5) {
         mark = "A";
     } else if (counterOfPressedUpperDrawBtn == 6) {
-        mark = "A";
-    }*/ 
-    else{
+        mark = "5";
+    } 
+    */
+    //else{
         mark = getMarkOfCard();
-    }
+    //}
     //Draw the card, graphically.
     ctx2.beginPath();
     ctx2.fillStyle = 'blue';
@@ -244,7 +246,7 @@ function drawPlayerCardRow2() {
         mark = "10";
         numberOfCardsDeltRow2++;
         //Checks for two tens as first two cards dealt.
-        if (numberOfIterationsRow2 == 1 || numberOfCardsDeltRow2 == 2) {
+        if (numberOfCardsDeltRow2 == 1 || numberOfCardsDeltRow2 == 2) {
             tenCounter++;
         }
         playerScoreRow2 = playerScoreRow2 + 10;
@@ -276,7 +278,6 @@ function drawPlayerCardRow2() {
     console.log("nc3 ", numberOfCardsDeltRow3);
     console.log("points have", pointsHave);
     console.log("tc: ", tenCounter);
-    console.log(wager);
     console.log(numberOfCardsDeltRow2);
     //Two cards are dealt and both are ten, with one being displayed in players hand, now.
     //Not enough points to divide hand.
@@ -342,20 +343,21 @@ function drawPlayerCardRow3(mark) {
     //Make sure counterofpressedlowerdrawbtn is iterating also set two 10 values in 
     //drawplayercardrow2.  Otherwise, just change 'ifs' to whatever mark should be tested.  
     //For regular use, comment all this out. 
-    /*if (counterOfPressedLowerDrawBtn == 1) {
-        mark = "5";
-    }/*else if (counterOfPressedLowerDrawBtn == 2) {
-        mark = "2";
+    /*
+    if (counterOfPressedLowerDrawBtn == 1) {
+        mark = "10";
+    }
+    else if (counterOfPressedLowerDrawBtn == 2) {
+        mark = "10";
     } else if (counterOfPressedLowerDrawBtn == 3) {
-        mark = "A";
+        mark = "10";
     } else if (counterOfPressedLowerDrawBtn == 4) {
-        mark = "A";
+        mark = "5";
     } else if (counterOfPressedLowerDrawBtn == 5) {
         mark = "A";
     } else if (counterOfPressedLowerDrawBtn == 6) {
         mark = "2";
-    }
-    */
+    }*/
     document.getElementById('messageLower').style.visibility = 'visible';
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     drawCardBtnLower.disabled = false;
