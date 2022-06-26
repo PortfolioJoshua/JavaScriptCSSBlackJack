@@ -31,11 +31,15 @@ body {
 }
 
 
+
+
 #headerContainer {
     display: flex;
     
     /*justify-content: space-between;*/
 }
+
+
 
 #title {
     font-size: 30px;
@@ -45,6 +49,7 @@ body {
 }
 
 
+
 #scoreAtTop {
     width: 50%;
     font-size: 30px;
@@ -52,28 +57,38 @@ body {
     align-self: center;
 }
 
+
+
+
+
+
 #messageLower {
-    font-weight: normal;
-    margin-bottom: 10 px;
-   /* margin-bottom: 0;
+    /* margin-bottom: 0;
     margin-top: 0;
     padding-top: 0;
     padding-bottom: 0;*/
 }
 
 
+
+
+
 /* for small mobile screen*/
 #alternateContainer {
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     display: flex;
     height: 100vh;
 }
 
+
+
 #messageUnderRow2 {
     margin-bottom: 10px;
 }
+
+
+
 
 
 @media screen and (max-width: 1139px) {

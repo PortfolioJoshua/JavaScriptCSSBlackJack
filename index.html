@@ -110,7 +110,7 @@ async function drawDealerCards() {
         if (counterOfPressedDealerDrawBtn == 1) {
             mark = "A";
         } else if (counterOfPressedDealerDrawBtn == 2) {
-            mark = "5";
+            mark = "10";
         } else if (counterOfPressedDealerDrawBtn == 3) {
             mark = "A";
         }
@@ -123,8 +123,8 @@ async function drawDealerCards() {
         } else if (counterOfPressedDealerDrawBtn == 7) {
             mark = "3";
         }
-        /////
         */
+        /////
         //These are the face cards with a mark of ten.
         if (mark == "Q" || mark == "K" || mark == "J" || mark == "10") {
             mark = "10";
@@ -209,7 +209,7 @@ function drawPlayerCardRow2() {
     //of drawplayercardrow3 and comment out getmarkofcard() below.
     //Otherwise, use to try different hands.  Pay attention to getmarkofcard() below.
     //For regular use, comment out all ifs and uncomment getmarkcards().
-    /*
+    
     if (counterOfPressedUpperDrawBtn == 1) {
         mark = "10";
     } else if (counterOfPressedUpperDrawBtn == 2) {
@@ -217,17 +217,18 @@ function drawPlayerCardRow2() {
     }
      
     else if (counterOfPressedUpperDrawBtn == 3) {
-        mark = "2";
-    } else if (counterOfPressedUpperDrawBtn == 4) {
+        mark = "A";
+    }
+    else if (counterOfPressedUpperDrawBtn == 4) {
         mark = "A";
     } else if (counterOfPressedUpperDrawBtn == 5) {
         mark = "A";
     } else if (counterOfPressedUpperDrawBtn == 6) {
         mark = "5";
     } 
-    */
+    
     //else{
-        mark = getMarkOfCard();
+    //    mark = getMarkOfCard();
     //}
     //Draw the card, graphically.
     ctx2.beginPath();
@@ -343,21 +344,22 @@ function drawPlayerCardRow3(mark) {
     //Make sure counterofpressedlowerdrawbtn is iterating also set two 10 values in 
     //drawplayercardrow2.  Otherwise, just change 'ifs' to whatever mark should be tested.  
     //For regular use, comment all this out. 
-    /*
+    
     if (counterOfPressedLowerDrawBtn == 1) {
         mark = "10";
     }
     else if (counterOfPressedLowerDrawBtn == 2) {
-        mark = "10";
+        mark = "A";
     } else if (counterOfPressedLowerDrawBtn == 3) {
-        mark = "10";
+        mark = "2";
     } else if (counterOfPressedLowerDrawBtn == 4) {
-        mark = "5";
+        mark = "2";
     } else if (counterOfPressedLowerDrawBtn == 5) {
         mark = "A";
     } else if (counterOfPressedLowerDrawBtn == 6) {
         mark = "2";
-    }*/
+    }
+    
     document.getElementById('messageLower').style.visibility = 'visible';
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     drawCardBtnLower.disabled = false;
