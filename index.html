@@ -66,7 +66,8 @@ var canvasDealer = document.getElementById("canvasDealer");
 let canvasPlayerRow2 = document.getElementById("canvasPlayerRow2");
 let canvasPlayerRow3 = document.getElementById("canvasPlayerRow3");
 let multiplierRow1 = -1;
-const initialXRow1 = 84;
+//Offset for cards dealt.
+const initialXRow = 84;
 let dealerHandTotal = 0;
 let isAllDelt = false;
 let playerScoreRow2 = 0;
@@ -142,18 +143,18 @@ async function drawDealerCards() {
         ctx1.beginPath();
         ctx1.fillStyle = 'red';
         //Draws card's block.
-        ctx1.rect((initialXRow1) + multiplierRow1 * CARDGAP, 7, 50, 64);
+        ctx1.rect((initialXRow) + multiplierRow1 * CARDGAP, 7, 50, 64);
         ctx1.stroke();
         ctx1.font = "50px Arial";
         //The one in ten is smaller with more space around it, so left adjustment needed. 
         if (mark == "10") {
             //Draw's a ten on the card.
-            ctx1.fillText(mark, initialXRow1 + (multiplierRow1 * CARDGAP) - 5, 57);
+            ctx1.fillText(mark, initialXRow + (multiplierRow1 * CARDGAP) - 5, 57);
         }
         
         else {
             //Draws two through ine on card. 
-            ctx1.fillText(mark, initialXRow1 + (multiplierRow1 * CARDGAP) + 11, 57);
+            ctx1.fillText(mark, initialXRow + (multiplierRow1 * CARDGAP) + 11, 57);
         }
         newRoundBtn.disabled = true;
         //Pauses after each card, may uncomment for testing.
@@ -180,8 +181,6 @@ let pointsHave = AMOUNT_OF_STARTING_POINTS;
 let pointsWagered = 0;
 //To position multiple cards.
 let multiplierRow2 = -1;
-//Offset for x dimension 
-const initialXRow2 = 84;
 //Initial setting.
 let counterAcesRow = -1;
 let numberOfIterationsRow2 = 0;
@@ -231,7 +230,7 @@ function drawPlayerCardRow2() {
     //Draw the card, graphically.
     ctx2.beginPath();
     ctx2.fillStyle = 'blue';
-    ctx2.rect((initialXRow2) + (multiplierRow2 * CARDGAP), 7, 50, 64);
+    ctx2.rect((initialXRow) + (multiplierRow2 * CARDGAP), 7, 50, 64);
     ctx2.stroke();
     ctx2.font = "50px Arial";
     //Divide button pressed.
@@ -309,16 +308,14 @@ function drawPlayerCardRow2() {
 
     //Size of mark needs to be centered on card.  One is smaller with more space, so left adjustment is needed. 
     if (mark == "10") {
-        ctx2.fillText(mark, (initialXRow2) + (multiplierRow2 * CARDGAP) - 5, 57);
+        ctx2.fillText(mark, (initialXRow) + (multiplierRow2 * CARDGAP) - 5, 57);
     } else {
         //Move non ten, one digit graphic, right.
-        ctx2.fillText(mark, initialXRow2 + (multiplierRow2 * CARDGAP) + 11, 57);
+        ctx2.fillText(mark, initialXRow + (multiplierRow2 * CARDGAP) + 11, 57);
     }
 }
 //Controls the spacing of the cards.
 let multiplierRow3 = -1;
-//Controls the original horizontal offset of cards.
-const initialXRow3 = 84;
 let totalCardsDeltRow3 = 0;
 let numberOfIterationsRow3 = 0;
 let numberOfCardsDeltRow3 = 0;
@@ -368,7 +365,7 @@ function drawPlayerCardRow3(mark) {
     //graphically draws card
     ctx3.beginPath();
     ctx3.fillStyle = 'blue';
-    ctx3.rect((initialXRow3) + multiplierRow3 * CARDGAP, 7, 50, 64);
+    ctx3.rect((initialXRow) + multiplierRow3 * CARDGAP, 7, 50, 64);
     ctx3.stroke();
     ctx3.font = "50px Arial";
     //A ten value queen, king, jack, or ten. 
@@ -412,10 +409,10 @@ function drawPlayerCardRow3(mark) {
     //different fit on ten card when one is used, because it has more space on left and right,
     //so a left adjustment is needed.
     if (mark == "10") {
-        ctx3.fillText(mark, initialXRow3 + (multiplierRow3 * CARDGAP) - 5, 57);
+        ctx3.fillText(mark, initialXRow + (multiplierRow3 * CARDGAP) - 5, 57);
     } else {
         //Move non ten one digit graphic, right.
-        ctx3.fillText(mark, initialXRow3 + (multiplierRow3 * CARDGAP) + 11, 57);
+        ctx3.fillText(mark, initialXRow + (multiplierRow3 * CARDGAP) + 11, 57);
     }
 }
 //On start, these buttons are disabled (wage buttons will be false (not disabled))
@@ -476,6 +473,7 @@ function getMarkOfCard() {
     //Used to determine direction of search for a card (forward or reverse)
     let flagFoundCard = false;
     let randomNumber = new Math.seedrandom();
+    let index = 0;
     //Random number is between zero and one.
     randomNumber = randomNumber();
     //Changes value to zero through two-hundred-fifty-nine.
@@ -534,7 +532,7 @@ function onDivideHand() {
     multiplierRow2--;
     //Erases second card of row two, a ten!
     //Canvas is zero to fifty-one, this is a width of fifty-two.
-    ctx2.clearRect(initialXRow2 + (CARDGAP) - 1, 0, 52, 78);
+    ctx2.clearRect(initialXRow + (CARDGAP) - 1, 0, 52, 78);
     playerScoreRow2 = playerScoreRow2 - 10;
 }
 //Reset all values to initial state for next new round.
@@ -712,7 +710,7 @@ function endGame()
     newRoundBtn.disabled = true;
     let text = "You have won the game!";
     document.getElementById('title').textContent = text;
-    return(-1);
+    return(1);
 }
 
 
