@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,12 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body onunload="deleteArray()">
     <!-- Script -->
     <script src="script.js"></script>
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js> </script> 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js> </script> <script
+        src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
     <div id="alternateContainer">
         <h1>Your display is to short or narrow for this site.</h1>
     </div>
@@ -48,9 +50,10 @@
             <input id="divide" type="button" value="Divide Hand">
         </div>
     </div>
-<script>
+    <script>
 //<div id = "scoreAtTop">10</div> must be changed too.  This is in the beginning html, for intial display of score.
 const AMOUNT_OF_STARTING_POINTS = 10;
+
 function pause() {}
 //Amt of space between cards. 
 const CARDGAP = 70;
@@ -150,8 +153,7 @@ async function drawDealerCards() {
         if (mark == "10") {
             //Draw's a ten on the card.
             ctx1.fillText(mark, INITIALROW + (multiplierRow1 * CARDGAP) - 5, 57);
-        }
-        else {
+        } else {
             //Draws two through ine on card. 
             ctx1.fillText(mark, INITIALROW + (multiplierRow1 * CARDGAP) + 11, 57);
         }
@@ -221,7 +223,7 @@ function drawPlayerCardRow2() {
     } 
     */
     //else{
-        mark = getMarkOfCard();
+    mark = getMarkOfCard();
     //}
     //Draw the card, graphically.
     ctx2.beginPath();
@@ -275,8 +277,7 @@ function drawPlayerCardRow2() {
     console.log(numberOfCardsDeltRow2);
     //Two cards are dealt and both are ten, with one being displayed in players hand, now.
     //Not enough points to divide hand.
-    if((tenCounter == 2) && (pointsHave < (pointsWagered*2)))
-    {
+    if ((tenCounter == 2) && (pointsHave < (pointsWagered * 2))) {
         tenCounter = 0;
         divide.disabled = true;
     }
@@ -497,6 +498,7 @@ function getMarkOfCard() {
     }
     return (decks[i]);
 }
+
 function wager(points_Wagered) {
     //Not enough points to make wager.
     if (points_Wagered > pointsHave) {
@@ -510,9 +512,10 @@ function wager(points_Wagered) {
     wagerButtonFifteen.disabled = true;
     wagerButtonTwentyfive.disabled = true;
 }
+
 function onDivideHand() {
     IsADivideFlag = true;
-   //Sets up buttons visiblity/disablement.
+    //Sets up buttons visiblity/disablement.
     divide.disabled = true;
     document.getElementById('canvasPlayerRow3').style.visibility = 'visible';
     document.getElementById('messageLower').style.visibility = 'visible';
@@ -529,10 +532,9 @@ function onDivideHand() {
 }
 //Reset all values to initial state for next new round.
 async function newRound() {
-    if(pointsHave >= 1000)
-    {
+    if (pointsHave >= 1000) {
         endGame();
-        return(-1);
+        return (-1);
     }
     numberOfCardsDeltRow2 = 0;
     numberOfCardsDeltRow3 = 0;
@@ -692,8 +694,8 @@ async function shuffleTheDeck() {
     wagerButtonFifteen.disabled = false;
     wagerButtonTwentyfive.disabled = false;
 }
-function endGame()
-{
+
+function endGame() {
     wagerButtonOne.disabled = true;
     wagerButtonFive.disabled = true;
     wagerButtonFifteen.disabled = true;
@@ -701,11 +703,11 @@ function endGame()
     newRoundBtn.disabled = true;
     let text = "You have won the game!";
     document.getElementById('title').textContent = text;
-    return(1);
+    return (1);
 }
-function checkSecondHandForDealer()
-{
-//If true, check cards for bust, charlie, or blackjacke.  Isn't a division (divide of tens) 
+
+function checkSecondHandForDealer() {
+    //If true, check cards for bust, charlie, or blackjacke.  Isn't a division (divide of tens) 
     //to make two deals instead of one. There are at least two cards.  This function may be
     //called with first or second player hand already completed, so checks here.
     if (SecondDealIsDoneFlag == false && isThereASecondDeal) {
@@ -763,12 +765,12 @@ function checkSecondHandForDealer()
             checkEndOfHands();
         }
     }
-return(1);
+    return (1);
 }
-function checkFirstHandForDealer()
-{
-//player didn't bust, charlie, or blackjack, and still is a first deal that hasn't been completed yet.
-if (FirstDealIsDoneFlag == false) {
+
+function checkFirstHandForDealer() {
+    //player didn't bust, charlie, or blackjack, and still is a first deal that hasn't been completed yet.
+    if (FirstDealIsDoneFlag == false) {
         if (dealerHandTotal > 21) {
             //DEALER BUSTS
             pointsHave = pointsHave + pointsWagered;
@@ -824,12 +826,12 @@ if (FirstDealIsDoneFlag == false) {
             checkEndOfHands();
         }
     }
-    return(1);
+    return (1);
 }
-function checkPlayerRow2ForCompleteness()
-{
-//If there is an ace and deal is over 21 change next ace to a one.
-if (playerScoreRow2 > 21) {
+
+function checkPlayerRow2ForCompleteness() {
+    //If there is an ace and deal is over 21 change next ace to a one.
+    if (playerScoreRow2 > 21) {
         for (let i = 0; i < AMTOFCARDS; i++) {
             if (AreThereAcesArrayRow[i] == "is row2 ace") {
                 AreThereAcesArrayRow[i] = "used ace";
@@ -888,10 +890,10 @@ if (playerScoreRow2 > 21) {
         //checks for deals done to display buttons when firstdealisdoneflag is true.
         checkEndOfHands();
     }
-    return(1);
+    return (1);
 }
-function checkPlayerRow3ForCompleteness()
-{
+
+function checkPlayerRow3ForCompleteness() {
     //Check if hand has any aces, and because the hand is over twenty-one, change eleven value to one. 
     if (playerScoreRow3 > 21) {
         for (let i = 0; i < AMTOFCARDS; i++) {
@@ -959,6 +961,7 @@ document.getElementById("drawCardBtnUpper").addEventListener("click", drawPlayer
 document.getElementById("dealCardsBtn").addEventListener("click", drawDealerCards);
 document.getElementById("divide").addEventListener("click", onDivideHand);
 document.getElementById("newRoundBtn").addEventListener("click", newRound);
-</script>
+    </script>
 </body>
+
 </html>
