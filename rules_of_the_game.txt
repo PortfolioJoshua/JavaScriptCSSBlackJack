@@ -1,6 +1,5 @@
 6/27/22
-6/16/22
-Blackjack 5 Card Dealer
+Blackjack 5 Card Dealer:
 
 Rules of the game:
 
